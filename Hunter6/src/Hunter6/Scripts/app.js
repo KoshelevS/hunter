@@ -2,6 +2,7 @@
     'use strict';
 
     angular.module('projectsApp', [
-        'projectsService'
+        'projectsService',
+        'ui.grid'
     ]);
 })();

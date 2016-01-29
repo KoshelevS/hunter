@@ -18,7 +18,6 @@ namespace Hunter6.Controllers
         public IEnumerable<Project> Get()
         {
             ProjectManager pm = new ProjectManager();
-            Thread.Sleep(new TimeSpan(0,0,5));
             return pm.GetAll;
         }
 

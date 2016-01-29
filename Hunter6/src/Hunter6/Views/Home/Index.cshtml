@@ -4,19 +4,12 @@
 <div ng-cloak>
     <div ng-controller="projectsController">
         <h1>Projects</h1>
-        <table>
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr ng-repeat="project in Projects">
-                    <td>{{project.ID}}</td>
-                    <td>{{project.Name}}</td>
-                </tr>
-            </tbody>
-        </table>
+        <style>
+            .grid {
+              width: 500px;
+              height: 250px;
+            }
+        </style>
+        <div ui-grid="{ data: Projects }" class="grid"></div>
     </div>
 </div>
