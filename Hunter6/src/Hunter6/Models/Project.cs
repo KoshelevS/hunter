@@ -9,5 +9,7 @@ namespace Hunter6.Models
     {
         public int ID { get; set; }
         public string Name { get; set; }
+        public List<Vacancy> Vacancies { get; set; }
+
     }
 }

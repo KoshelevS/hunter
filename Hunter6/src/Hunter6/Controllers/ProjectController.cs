@@ -1,32 +1,32 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Microsoft.AspNet.Mvc;
 using Hunter6.Models;
-using System.Threading;
-
-// For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace Hunter6.Controllers
 {
     [Route("api/[controller]")]
     public class ProjectController : Controller
     {
+        private readonly IProjectManager _projectService;
+
+        public ProjectController(IProjectManager projectService)
+        {
+            this._projectService = projectService;
+        }
+
         //GET: api/values
         [HttpGet]
         public IEnumerable<Project> Get()
         {
             ProjectManager pm = new ProjectManager();
-            return pm.GetAll;
+            return _projectService.GetAll();
         }
 
         // GET: api/values/2
         [HttpGet("{id}")]
         public Project Get(int id)
         {
-            ProjectManager pm = new ProjectManager();
-            return pm.GetProjectByID(id);
+            return _projectService.GetProjectByID(id);
         }
     }
 }
