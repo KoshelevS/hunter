@@ -2,7 +2,10 @@
 {
     public class Vacancy
     {
-        public int ID { get; set; }
+        public int VacancyId { get; set; }
         public string Name { get; set; }
+
+        public int ProjectId { get; set; }
+        public Project Project { get; set; }
     }
 }

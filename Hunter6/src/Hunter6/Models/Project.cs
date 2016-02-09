@@ -8,8 +8,7 @@ namespace Hunter6.Models
 {
     public class Project
     {
-        public int ID { get; set; }
-        [MaxLength(100)]
+        public int ProjectId { get; set; }
         public string Name { get; set; }
         public List<Vacancy> Vacancies { get; set; }
 
