@@ -48,6 +48,10 @@ namespace Hunter6
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
+            services.AddEntityFramework()
+                .AddSqlServer()
+                .AddDbContext<ProjectContext>(options => options.UseSqlServer(Configuration["Data:DefaultConnection:ConnectionString"]));
+
             services.AddMvc();
 
             // Add application services.
@@ -78,8 +82,8 @@ namespace Hunter6
                     using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>()
                         .CreateScope())
                     {
-                        serviceScope.ServiceProvider.GetService<ApplicationDbContext>()
-                             .Database.Migrate();
+                        serviceScope.ServiceProvider.GetService<ApplicationDbContext>().Database.Migrate();
+                        serviceScope.ServiceProvider.GetService<ProjectContext>().Database.Migrate();
                     }
                 }
                 catch { }
