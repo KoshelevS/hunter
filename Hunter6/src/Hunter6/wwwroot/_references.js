@@ -1,5 +1,4 @@
 ﻿/// <autosync enabled="true" />
-/// <reference path="../gruntfile.js" />
 /// <reference path="../gulpfile.js" />
 /// <reference path="../scripts/app.js" />
 /// <reference path="../scripts/controllers/projectscontroller.js" />
