@@ -8,8 +8,8 @@ using Hunter6.Data;
 namespace Hunter6.Migrations.Project
 {
     [DbContext(typeof(ProjectContext))]
-    [Migration("20160209104235_Project001")]
-    partial class Project001
+    [Migration("20160209155813_Project")]
+    partial class Project
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -19,26 +19,26 @@ namespace Hunter6.Migrations.Project
 
             modelBuilder.Entity("Hunter6.Models.Project", b =>
                 {
-                    b.Property<int>("ProjectId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasAnnotation("MaxLength", 100);
 
-                    b.HasKey("ProjectId");
+                    b.HasKey("Id");
                 });
 
             modelBuilder.Entity("Hunter6.Models.Vacancy", b =>
                 {
-                    b.Property<int>("VacancyId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("Name");
 
-                    b.Property<int>("ProjectId");
+                    b.Property<int?>("ProjectId");
 
-                    b.HasKey("VacancyId");
+                    b.HasKey("Id");
                 });
 
             modelBuilder.Entity("Hunter6.Models.Vacancy", b =>

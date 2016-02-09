@@ -5,7 +5,7 @@ using Microsoft.Data.Entity.Metadata;
 
 namespace Hunter6.Migrations.Project
 {
-    public partial class Project001 : Migration
+    public partial class Project : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -13,32 +13,32 @@ namespace Hunter6.Migrations.Project
                 name: "Project",
                 columns: table => new
                 {
-                    ProjectId = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Project", x => x.ProjectId);
+                    table.PrimaryKey("PK_Project", x => x.Id);
                 });
             migrationBuilder.CreateTable(
                 name: "Vacancy",
                 columns: table => new
                 {
-                    VacancyId = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(nullable: true),
-                    ProjectId = table.Column<int>(nullable: false)
+                    ProjectId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Vacancy", x => x.VacancyId);
+                    table.PrimaryKey("PK_Vacancy", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Vacancy_Project_ProjectId",
                         column: x => x.ProjectId,
                         principalTable: "Project",
-                        principalColumn: "ProjectId",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
         }
 

@@ -13,7 +13,7 @@
         $scope.gridOptions = {
             enableFiltering: true,
             columnDefs: [
-              { name: 'VacancyId', field: 'VacancyId' },
+              { name: 'Id', field: 'Id' },
               { name: 'Name', field: 'Name' },
               { name: 'Vacancies', field: 'Vacancies[0].Name' }
             ]

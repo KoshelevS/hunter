@@ -23,7 +23,7 @@ namespace Hunter6.Migrations
 
             modelBuilder.Entity("Microsoft.AspNet.Identity.EntityFramework.IdentityRole", b =>
                 {
-                    b.Property<string>("VacancyId");
+                    b.Property<string>("Id");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
@@ -34,7 +34,7 @@ namespace Hunter6.Migrations
                     b.Property<string>("NormalizedName")
                         .HasAnnotation("MaxLength", 256);
 
-                    b.HasKey("VacancyId");
+                    b.HasKey("Id");
 
                     b.HasIndex("NormalizedName")
                         .HasAnnotation("Relational:Name", "RoleNameIndex");
@@ -44,7 +44,7 @@ namespace Hunter6.Migrations
 
             modelBuilder.Entity("Microsoft.AspNet.Identity.EntityFramework.IdentityRoleClaim<string>", b =>
                 {
-                    b.Property<int>("VacancyId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("ClaimType");
@@ -53,14 +53,14 @@ namespace Hunter6.Migrations
 
                     b.Property<string>("RoleId");
 
-                    b.HasKey("VacancyId");
+                    b.HasKey("Id");
 
                     b.HasAnnotation("Relational:TableName", "AspNetRoleClaims");
                 });
 
             modelBuilder.Entity("Microsoft.AspNet.Identity.EntityFramework.IdentityUserClaim<string>", b =>
                 {
-                    b.Property<int>("VacancyId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("ClaimType");
@@ -69,7 +69,7 @@ namespace Hunter6.Migrations
 
                     b.Property<string>("UserId");
 
-                    b.HasKey("VacancyId");
+                    b.HasKey("Id");
 
                     b.HasAnnotation("Relational:TableName", "AspNetUserClaims");
                 });
@@ -102,7 +102,7 @@ namespace Hunter6.Migrations
 
             modelBuilder.Entity("Hunter6.Models.ApplicationUser", b =>
                 {
-                    b.Property<string>("VacancyId");
+                    b.Property<string>("Id");
 
                     b.Property<int>("AccessFailedCount");
 
@@ -137,7 +137,7 @@ namespace Hunter6.Migrations
                     b.Property<string>("UserName")
                         .HasAnnotation("MaxLength", 256);
 
-                    b.HasKey("VacancyId");
+                    b.HasKey("Id");
 
                     b.HasIndex("NormalizedEmail")
                         .HasAnnotation("Relational:Name", "EmailIndex");
