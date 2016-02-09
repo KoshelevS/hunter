@@ -65,7 +65,7 @@ namespace Hunter6.Migrations
                         name: "FK_IdentityRoleClaim<string>_IdentityRole_RoleId",
                         column: x => x.RoleId,
                         principalTable: "AspNetRoles",
-                        principalColumn: "Id");
+                        principalColumn: "VacancyId");
                 });
             migrationBuilder.CreateTable(
                 name: "AspNetUserClaims",
@@ -84,7 +84,7 @@ namespace Hunter6.Migrations
                         name: "FK_IdentityUserClaim<string>_ApplicationUser_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id");
+                        principalColumn: "VacancyId");
                 });
             migrationBuilder.CreateTable(
                 name: "AspNetUserLogins",
@@ -102,7 +102,7 @@ namespace Hunter6.Migrations
                         name: "FK_IdentityUserLogin<string>_ApplicationUser_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id");
+                        principalColumn: "VacancyId");
                 });
             migrationBuilder.CreateTable(
                 name: "AspNetUserRoles",
@@ -118,12 +118,12 @@ namespace Hunter6.Migrations
                         name: "FK_IdentityUserRole<string>_IdentityRole_RoleId",
                         column: x => x.RoleId,
                         principalTable: "AspNetRoles",
-                        principalColumn: "Id");
+                        principalColumn: "VacancyId");
                     table.ForeignKey(
                         name: "FK_IdentityUserRole<string>_ApplicationUser_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id");
+                        principalColumn: "VacancyId");
                 });
             migrationBuilder.CreateIndex(
                 name: "RoleNameIndex",

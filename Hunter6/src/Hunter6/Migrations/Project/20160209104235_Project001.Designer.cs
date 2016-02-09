@@ -3,13 +3,13 @@ using Microsoft.Data.Entity;
 using Microsoft.Data.Entity.Infrastructure;
 using Microsoft.Data.Entity.Metadata;
 using Microsoft.Data.Entity.Migrations;
-using Hunter6.Models;
+using Hunter6.Data;
 
 namespace Hunter6.Migrations.Project
 {
     [DbContext(typeof(ProjectContext))]
-    [Migration("20160209092044_test")]
-    partial class test
+    [Migration("20160209104235_Project001")]
+    partial class Project001
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -19,32 +19,33 @@ namespace Hunter6.Migrations.Project
 
             modelBuilder.Entity("Hunter6.Models.Project", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<int>("ProjectId")
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("Name")
-                        .IsRequired();
+                        .IsRequired()
+                        .HasAnnotation("MaxLength", 100);
 
-                    b.HasKey("ID");
+                    b.HasKey("ProjectId");
                 });
 
             modelBuilder.Entity("Hunter6.Models.Vacancy", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<int>("VacancyId")
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("Name");
 
-                    b.Property<int?>("ProjectID");
+                    b.Property<int>("ProjectId");
 
-                    b.HasKey("ID");
+                    b.HasKey("VacancyId");
                 });
 
             modelBuilder.Entity("Hunter6.Models.Vacancy", b =>
                 {
                     b.HasOne("Hunter6.Models.Project")
                         .WithMany()
-                        .HasForeignKey("ProjectID");
+                        .HasForeignKey("ProjectId");
                 });
         }
     }

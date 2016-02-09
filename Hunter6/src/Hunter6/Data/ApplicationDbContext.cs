@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Hunter6.Models;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Data.Entity;
 
-namespace Hunter6.Models
+namespace Hunter6.Data
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
