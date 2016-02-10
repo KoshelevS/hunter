@@ -3,7 +3,7 @@
 var gulp = require("gulp"),
     jshint = require('gulp-jshint'),
     concat = require("gulp-concat"),
-    rename = require('gulp-rename'),
+    sass = require('gulp-sass'),
     cssmin = require("gulp-cssmin"),
     uglify = require("gulp-uglify");
 
@@ -12,7 +12,7 @@ var paths = {
 };
 
 paths.js = "./Scripts/**/*.js";
-paths.css = "./Css/**/*.css";
+paths.css = "./Styles/**/*.scss";
 paths.concatJsDest = paths.webroot + "js/site.js";
 paths.concatCssDest = paths.webroot + "css/site.css";
 paths.concatMinJsDest = paths.webroot + "js/site.min.js";
@@ -32,6 +32,7 @@ gulp.task("concat:js", function () {
 });
 gulp.task("concat:css", function () {
     return gulp.src(paths.css)
+        .pipe(sass().on('error', sass.logError))
         .pipe(concat(paths.concatCssDest))
         .pipe(gulp.dest("."));
 });
@@ -45,6 +46,7 @@ gulp.task("min:js", function () {
 });
 gulp.task("min:css", function () {
     return gulp.src(paths.css)
+        .pipe(sass().on('error', sass.logError))
         .pipe(concat(paths.concatMinCssDest))
         .pipe(cssmin())
         .pipe(gulp.dest("."));
