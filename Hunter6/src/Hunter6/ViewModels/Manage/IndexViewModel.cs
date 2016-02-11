@@ -18,6 +18,6 @@ namespace Hunter6.ViewModels.Manage
 
         public bool BrowserRemembered { get; set; }
 
-        public string Name { get; set; }
+        //public string DisplayName { get; set; }
     }
 }

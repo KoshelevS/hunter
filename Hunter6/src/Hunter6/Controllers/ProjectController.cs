@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Hunter6.Data;
 using Microsoft.AspNet.Mvc;
 using Hunter6.Models;
 
@@ -8,10 +9,12 @@ namespace Hunter6.Controllers
     public class ProjectController : Controller
     {
         private readonly IProjectManager _projectService;
+        private readonly ProjectContext _context;
 
-        public ProjectController(IProjectManager projectService)
+        public ProjectController(IProjectManager projectService, ProjectContext context)
         {
             this._projectService = projectService;
+            _context = context;
         }
 
         //GET: api/values
@@ -27,6 +30,12 @@ namespace Hunter6.Controllers
         public Project Get(int id)
         {
             return _projectService.GetProjectByID(id);
+        }
+
+        [HttpPost]
+        public void Save(Project project)
+        {
+            _context.SaveChanges();
         }
     }
 }

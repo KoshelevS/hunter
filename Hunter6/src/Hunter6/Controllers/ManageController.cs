@@ -58,7 +58,7 @@ namespace Hunter6.Controllers
                 TwoFactor = await _userManager.GetTwoFactorEnabledAsync(user),
                 Logins = await _userManager.GetLoginsAsync(user),
                 BrowserRemembered = await _signInManager.IsTwoFactorClientRememberedAsync(user),
-                Name = await  _userManager.GetUserNameAsync(user),
+                //DisplayName = await  _userManager.GetUserNameAsync(user),
             };
             return View(model);
         }
@@ -316,17 +316,17 @@ namespace Hunter6.Controllers
             return RedirectToAction(nameof(ManageLogins), new { Message = message });
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> SaveName(IndexViewModel model)
-        {
-            var user = await GetCurrentUserAsync();
-            if (user != null)
-            {
-                await _userManager.SetUserNameAsync(user, model.Name);
-            }
-            return View(model);
-        }
+//        [HttpPost]
+//        [ValidateAntiForgeryToken]
+//        public async Task<IActionResult> SaveName(IndexViewModel model)
+//        {
+//            var user = await GetCurrentUserAsync();
+//            if (user != null)
+//            {
+//                await _userManager.SetUserNameAsync(user, model.DisplayName);
+//            }
+//            return View(model);
+//        }
 
         #region Helpers
 
