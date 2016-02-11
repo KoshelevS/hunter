@@ -8,6 +8,10 @@ namespace Hunter6.ViewModels.Account
 {
     public class RegisterViewModel
     {
+        [Display(Name = "User Name")]
+        [DataType(DataType.Text)]
+        public string UserName { get; set; }
+
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]

@@ -13,7 +13,7 @@ namespace Hunter6.Controllers
 
         public ProjectController(IProjectManager projectService, ProjectContext context)
         {
-            this._projectService = projectService;
+            _projectService = projectService;
             _context = context;
         }
 
@@ -33,9 +33,10 @@ namespace Hunter6.Controllers
         }
 
         [HttpPost]
-        public void Save(Project project)
+        public async void Save(Project project)
         {
-            _context.SaveChanges();
+            _context.Update(project);
+            await _context.SaveChangesAsync();
         }
     }
 }

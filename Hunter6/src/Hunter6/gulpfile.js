@@ -1,4 +1,5 @@
-﻿"use strict";
+/// <binding ProjectOpened='default' />
+"use strict";
 
 var gulp = require("gulp"),
     jshint = require('gulp-jshint'),
