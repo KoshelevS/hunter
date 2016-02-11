@@ -17,5 +17,7 @@ namespace Hunter6.ViewModels.Manage
         public bool TwoFactor { get; set; }
 
         public bool BrowserRemembered { get; set; }
+
+        public string Name { get; set; }
     }
 }

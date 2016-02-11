@@ -14,9 +14,7 @@ namespace Hunter6.Data
             builder.Entity<Project>().HasKey(p => p.Id);
             builder.Entity<Project>().Property(p => p.Name).IsRequired().HasMaxLength(100);
 
-            builder.Entity<Vacancy>().HasOne(v => v.Project).WithMany(p => p.Vacancies); // .HasForeignKey(v => v.Id);
-
-            //builder.Entity<Vacancy>().HasOne(v => v.Project).WithMany().HasForeignKey("Id");
+            builder.Entity<Vacancy>().HasOne(v => v.Project).WithMany(p => p.Vacancies);
         }
     }
 }
