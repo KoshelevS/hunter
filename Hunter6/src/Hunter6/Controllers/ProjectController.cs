@@ -2,6 +2,7 @@
 using Hunter6.Data;
 using Microsoft.AspNet.Mvc;
 using Hunter6.Models;
+using Hunter6.ViewModels.Project;
 
 namespace Hunter6.Controllers
 {
@@ -25,11 +26,16 @@ namespace Hunter6.Controllers
             return _projectService.GetAll();
         }
 
-        // GET: api/values/2
         [HttpGet("{id}")]
-        public Project Get(int id)
+        public ProjectViewModel Get(int id)
         {
-            return _projectService.GetProjectByID(id);
+            var project = _projectService.GetProjectByID(id);
+
+            return new ProjectViewModel()
+            {
+                ID = project.Id,
+                Name = project.Name
+            };
         }
 
         [HttpPost]
@@ -37,6 +43,12 @@ namespace Hunter6.Controllers
         {
             _context.Update(project);
             await _context.SaveChangesAsync();
+        }
+
+        [HttpDelete("{id}")]
+        public void Delete(int id)
+        {
+            //Dummy method
         }
     }
 }

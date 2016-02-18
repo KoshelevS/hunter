@@ -3,6 +3,7 @@
 
     angular.module('projectsApp', [
         'projectsService',
-        'ui.grid'
+        'ui.grid',
+        'ui.bootstrap'
     ]);
 })();
