@@ -16,8 +16,7 @@
                 <h3 class="modal-title">Edit Project</h3>
             </div>
             <div class="modal-body">
-                <div>ID: {{project.ID}}</div>
-                <div>Name: {{project.Name}}</div>
+                <input type="text" placeholder="Name" ng-model="project.Name" required />
             </div>
             <div class="modal-footer">
                 <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>

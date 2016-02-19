@@ -38,6 +38,12 @@ namespace Hunter6.Controllers
             };
         }
 
+        [HttpPut("{id}")]
+        public void Update(int id, ProjectViewModel project)
+        {
+            //Dummy method
+        }
+
         [HttpPost]
         public async void Save(Project project)
         {

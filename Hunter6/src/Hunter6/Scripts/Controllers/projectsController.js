@@ -48,7 +48,11 @@
         });
 
         $scope.ok = function () {
-            $uibModalInstance.close();
+            $http.put('/api/project/' + id, $scope.project ).success(function () {
+                alert("The project was updated successfully.");
+
+                $uibModalInstance.close();
+            });
         };
 
         $scope.cancel = function () {
