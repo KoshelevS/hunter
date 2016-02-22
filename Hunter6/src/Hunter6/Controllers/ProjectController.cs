@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using Hunter.Domain.Core;
+using Hunter.Domain.Interfaces;
 using Hunter6.Data;
 using Microsoft.AspNet.Mvc;
 using Hunter6.Models;
@@ -29,7 +31,7 @@ namespace Hunter6.Controllers
         [HttpGet("{id}")]
         public ProjectViewModel Get(int id)
         {
-            var project = _projectService.GetProjectByID(id);
+            var project = _projectService.GetProjectById(id);
 
             return new ProjectViewModel()
             {

@@ -1,5 +1,4 @@
-using System;
-using Hunter6.Models;
+using Hunter.Domain.Core;
 using Microsoft.Data.Entity;
 
 namespace Hunter6.Data

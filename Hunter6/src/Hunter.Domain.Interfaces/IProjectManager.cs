@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
+using Hunter.Domain.Core;
 
-namespace Hunter6.Models
+namespace Hunter.Domain.Interfaces
 {
     public interface IProjectManager
     {
         IEnumerable<Project> GetAll();
-        Project GetProjectByID(int id);
+        Project GetProjectById(int id);
     }
 }

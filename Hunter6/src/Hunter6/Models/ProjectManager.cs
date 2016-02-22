@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using Hunter.Domain.Core;
+using Hunter.Domain.Interfaces;
 
 namespace Hunter6.Models
 {
@@ -31,7 +33,7 @@ namespace Hunter6.Models
         };
         public IEnumerable<Project> GetAll() { return _projects;  }
         
-        public Project GetProjectByID(int id)
+        public Project GetProjectById(int id)
         {
             return _projects.Find(o => o.Id == id);
         }

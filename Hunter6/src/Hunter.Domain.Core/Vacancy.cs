@@ -1,4 +1,4 @@
-﻿namespace Hunter6.Models
+﻿namespace Hunter.Domain.Core
 {
     public class Vacancy
     {
