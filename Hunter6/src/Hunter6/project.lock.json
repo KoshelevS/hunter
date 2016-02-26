@@ -128,9 +128,37 @@
       },
       "Hunter.Domain.Core/1.0.0": {
         "type": "project",
-        "framework": ".NETFramework,Version=v4.5.1"
+        "framework": ".NETFramework,Version=v4.5.1",
+        "dependencies": {
+          "Microsoft.AspNet.Identity.EntityFramework": "3.0.0-rc1-final"
+        }
       },
       "Hunter.Domain.Interfaces/1.0.0": {
+        "type": "project",
+        "framework": ".NETFramework,Version=v4.5.1",
+        "dependencies": {
+          "Hunter.Domain.Core": "1.0.0"
+        }
+      },
+      "Hunter.Infrastructure.Business/1.0.0": {
+        "type": "project",
+        "framework": ".NETFramework,Version=v4.5.1",
+        "dependencies": {
+          "Hunter.Domain.Core": "1.0.0",
+          "Hunter.Services.Interfaces": "1.0.0"
+        }
+      },
+      "Hunter.Infrastructure.Data/1.0.0": {
+        "type": "project",
+        "framework": ".NETFramework,Version=v4.5.1",
+        "dependencies": {
+          "EntityFramework.Core": "7.0.0-rc1-final",
+          "Hunter.Domain.Core": "1.0.0",
+          "Hunter.Domain.Interfaces": "1.0.0",
+          "Microsoft.AspNet.Identity.EntityFramework": "3.0.0-rc1-final"
+        }
+      },
+      "Hunter.Services.Interfaces/1.0.0": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.5.1",
         "dependencies": {
@@ -2172,6 +2200,7 @@
         "type": "project",
         "framework": ".NETPlatform,Version=v5.4",
         "dependencies": {
+          "Microsoft.AspNet.Identity.EntityFramework": "3.0.0-rc1-final",
           "Microsoft.CSharp": "4.0.1-beta-23516",
           "System.Collections": "4.0.11-beta-23516",
           "System.Linq": "4.0.1-beta-23516",
@@ -2180,6 +2209,46 @@
         }
       },
       "Hunter.Domain.Interfaces/1.0.0": {
+        "type": "project",
+        "framework": ".NETPlatform,Version=v5.4",
+        "dependencies": {
+          "Hunter.Domain.Core": "1.0.0",
+          "Microsoft.CSharp": "4.0.1-beta-23516",
+          "System.Collections": "4.0.11-beta-23516",
+          "System.Linq": "4.0.1-beta-23516",
+          "System.Runtime": "4.0.21-beta-23516",
+          "System.Threading": "4.0.11-beta-23516"
+        }
+      },
+      "Hunter.Infrastructure.Business/1.0.0": {
+        "type": "project",
+        "framework": ".NETPlatform,Version=v5.4",
+        "dependencies": {
+          "Hunter.Domain.Core": "1.0.0",
+          "Hunter.Services.Interfaces": "1.0.0",
+          "Microsoft.CSharp": "4.0.1-beta-23516",
+          "System.Collections": "4.0.11-beta-23516",
+          "System.Linq": "4.0.1-beta-23516",
+          "System.Runtime": "4.0.21-beta-23516",
+          "System.Threading": "4.0.11-beta-23516"
+        }
+      },
+      "Hunter.Infrastructure.Data/1.0.0": {
+        "type": "project",
+        "framework": ".NETPlatform,Version=v5.4",
+        "dependencies": {
+          "EntityFramework.Core": "7.0.0-rc1-final",
+          "Hunter.Domain.Core": "1.0.0",
+          "Hunter.Domain.Interfaces": "1.0.0",
+          "Microsoft.AspNet.Identity.EntityFramework": "3.0.0-rc1-final",
+          "Microsoft.CSharp": "4.0.1-beta-23516",
+          "System.Collections": "4.0.11-beta-23516",
+          "System.Linq": "4.0.1-beta-23516",
+          "System.Runtime": "4.0.21-beta-23516",
+          "System.Threading": "4.0.11-beta-23516"
+        }
+      },
+      "Hunter.Services.Interfaces/1.0.0": {
         "type": "project",
         "framework": ".NETPlatform,Version=v5.4",
         "dependencies": {
@@ -4936,9 +5005,37 @@
       },
       "Hunter.Domain.Core/1.0.0": {
         "type": "project",
-        "framework": ".NETFramework,Version=v4.5.1"
+        "framework": ".NETFramework,Version=v4.5.1",
+        "dependencies": {
+          "Microsoft.AspNet.Identity.EntityFramework": "3.0.0-rc1-final"
+        }
       },
       "Hunter.Domain.Interfaces/1.0.0": {
+        "type": "project",
+        "framework": ".NETFramework,Version=v4.5.1",
+        "dependencies": {
+          "Hunter.Domain.Core": "1.0.0"
+        }
+      },
+      "Hunter.Infrastructure.Business/1.0.0": {
+        "type": "project",
+        "framework": ".NETFramework,Version=v4.5.1",
+        "dependencies": {
+          "Hunter.Domain.Core": "1.0.0",
+          "Hunter.Services.Interfaces": "1.0.0"
+        }
+      },
+      "Hunter.Infrastructure.Data/1.0.0": {
+        "type": "project",
+        "framework": ".NETFramework,Version=v4.5.1",
+        "dependencies": {
+          "EntityFramework.Core": "7.0.0-rc1-final",
+          "Hunter.Domain.Core": "1.0.0",
+          "Hunter.Domain.Interfaces": "1.0.0",
+          "Microsoft.AspNet.Identity.EntityFramework": "3.0.0-rc1-final"
+        }
+      },
+      "Hunter.Services.Interfaces/1.0.0": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.5.1",
         "dependencies": {
@@ -7006,9 +7103,37 @@
       },
       "Hunter.Domain.Core/1.0.0": {
         "type": "project",
-        "framework": ".NETFramework,Version=v4.5.1"
+        "framework": ".NETFramework,Version=v4.5.1",
+        "dependencies": {
+          "Microsoft.AspNet.Identity.EntityFramework": "3.0.0-rc1-final"
+        }
       },
       "Hunter.Domain.Interfaces/1.0.0": {
+        "type": "project",
+        "framework": ".NETFramework,Version=v4.5.1",
+        "dependencies": {
+          "Hunter.Domain.Core": "1.0.0"
+        }
+      },
+      "Hunter.Infrastructure.Business/1.0.0": {
+        "type": "project",
+        "framework": ".NETFramework,Version=v4.5.1",
+        "dependencies": {
+          "Hunter.Domain.Core": "1.0.0",
+          "Hunter.Services.Interfaces": "1.0.0"
+        }
+      },
+      "Hunter.Infrastructure.Data/1.0.0": {
+        "type": "project",
+        "framework": ".NETFramework,Version=v4.5.1",
+        "dependencies": {
+          "EntityFramework.Core": "7.0.0-rc1-final",
+          "Hunter.Domain.Core": "1.0.0",
+          "Hunter.Domain.Interfaces": "1.0.0",
+          "Microsoft.AspNet.Identity.EntityFramework": "3.0.0-rc1-final"
+        }
+      },
+      "Hunter.Services.Interfaces/1.0.0": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.5.1",
         "dependencies": {
@@ -9053,6 +9178,7 @@
         "type": "project",
         "framework": ".NETPlatform,Version=v5.4",
         "dependencies": {
+          "Microsoft.AspNet.Identity.EntityFramework": "3.0.0-rc1-final",
           "Microsoft.CSharp": "4.0.1-beta-23516",
           "System.Collections": "4.0.11-beta-23516",
           "System.Linq": "4.0.1-beta-23516",
@@ -9061,6 +9187,46 @@
         }
       },
       "Hunter.Domain.Interfaces/1.0.0": {
+        "type": "project",
+        "framework": ".NETPlatform,Version=v5.4",
+        "dependencies": {
+          "Hunter.Domain.Core": "1.0.0",
+          "Microsoft.CSharp": "4.0.1-beta-23516",
+          "System.Collections": "4.0.11-beta-23516",
+          "System.Linq": "4.0.1-beta-23516",
+          "System.Runtime": "4.0.21-beta-23516",
+          "System.Threading": "4.0.11-beta-23516"
+        }
+      },
+      "Hunter.Infrastructure.Business/1.0.0": {
+        "type": "project",
+        "framework": ".NETPlatform,Version=v5.4",
+        "dependencies": {
+          "Hunter.Domain.Core": "1.0.0",
+          "Hunter.Services.Interfaces": "1.0.0",
+          "Microsoft.CSharp": "4.0.1-beta-23516",
+          "System.Collections": "4.0.11-beta-23516",
+          "System.Linq": "4.0.1-beta-23516",
+          "System.Runtime": "4.0.21-beta-23516",
+          "System.Threading": "4.0.11-beta-23516"
+        }
+      },
+      "Hunter.Infrastructure.Data/1.0.0": {
+        "type": "project",
+        "framework": ".NETPlatform,Version=v5.4",
+        "dependencies": {
+          "EntityFramework.Core": "7.0.0-rc1-final",
+          "Hunter.Domain.Core": "1.0.0",
+          "Hunter.Domain.Interfaces": "1.0.0",
+          "Microsoft.AspNet.Identity.EntityFramework": "3.0.0-rc1-final",
+          "Microsoft.CSharp": "4.0.1-beta-23516",
+          "System.Collections": "4.0.11-beta-23516",
+          "System.Linq": "4.0.1-beta-23516",
+          "System.Runtime": "4.0.21-beta-23516",
+          "System.Threading": "4.0.11-beta-23516"
+        }
+      },
+      "Hunter.Services.Interfaces/1.0.0": {
         "type": "project",
         "framework": ".NETPlatform,Version=v5.4",
         "dependencies": {
@@ -12301,6 +12467,7 @@
         "type": "project",
         "framework": ".NETPlatform,Version=v5.4",
         "dependencies": {
+          "Microsoft.AspNet.Identity.EntityFramework": "3.0.0-rc1-final",
           "Microsoft.CSharp": "4.0.1-beta-23516",
           "System.Collections": "4.0.11-beta-23516",
           "System.Linq": "4.0.1-beta-23516",
@@ -12309,6 +12476,46 @@
         }
       },
       "Hunter.Domain.Interfaces/1.0.0": {
+        "type": "project",
+        "framework": ".NETPlatform,Version=v5.4",
+        "dependencies": {
+          "Hunter.Domain.Core": "1.0.0",
+          "Microsoft.CSharp": "4.0.1-beta-23516",
+          "System.Collections": "4.0.11-beta-23516",
+          "System.Linq": "4.0.1-beta-23516",
+          "System.Runtime": "4.0.21-beta-23516",
+          "System.Threading": "4.0.11-beta-23516"
+        }
+      },
+      "Hunter.Infrastructure.Business/1.0.0": {
+        "type": "project",
+        "framework": ".NETPlatform,Version=v5.4",
+        "dependencies": {
+          "Hunter.Domain.Core": "1.0.0",
+          "Hunter.Services.Interfaces": "1.0.0",
+          "Microsoft.CSharp": "4.0.1-beta-23516",
+          "System.Collections": "4.0.11-beta-23516",
+          "System.Linq": "4.0.1-beta-23516",
+          "System.Runtime": "4.0.21-beta-23516",
+          "System.Threading": "4.0.11-beta-23516"
+        }
+      },
+      "Hunter.Infrastructure.Data/1.0.0": {
+        "type": "project",
+        "framework": ".NETPlatform,Version=v5.4",
+        "dependencies": {
+          "EntityFramework.Core": "7.0.0-rc1-final",
+          "Hunter.Domain.Core": "1.0.0",
+          "Hunter.Domain.Interfaces": "1.0.0",
+          "Microsoft.AspNet.Identity.EntityFramework": "3.0.0-rc1-final",
+          "Microsoft.CSharp": "4.0.1-beta-23516",
+          "System.Collections": "4.0.11-beta-23516",
+          "System.Linq": "4.0.1-beta-23516",
+          "System.Runtime": "4.0.21-beta-23516",
+          "System.Threading": "4.0.11-beta-23516"
+        }
+      },
+      "Hunter.Services.Interfaces/1.0.0": {
         "type": "project",
         "framework": ".NETPlatform,Version=v5.4",
         "dependencies": {
@@ -15455,6 +15662,18 @@
     "Hunter.Domain.Interfaces/1.0.0": {
       "type": "project",
       "path": "../Hunter.Domain.Interfaces/project.json"
+    },
+    "Hunter.Infrastructure.Business/1.0.0": {
+      "type": "project",
+      "path": "../../Hunter.Infrastructure.Business/project.json"
+    },
+    "Hunter.Infrastructure.Data/1.0.0": {
+      "type": "project",
+      "path": "../../Hunter.Infrastructure.Data/project.json"
+    },
+    "Hunter.Services.Interfaces/1.0.0": {
+      "type": "project",
+      "path": "../../Hunter.Services.Interfaces/project.json"
     },
     "EntityFramework.Commands/7.0.0-rc1-final": {
       "type": "package",
@@ -21260,6 +21479,9 @@
       "EntityFramework.MicrosoftSqlServer >= 7.0.0-rc1-final",
       "Hunter.Domain.Core >= 1.0.0-*",
       "Hunter.Domain.Interfaces >= 1.0.0-*",
+      "Hunter.Infrastructure.Business >= 1.0.0-*",
+      "Hunter.Infrastructure.Data >= 1.0.0-*",
+      "Hunter.Services.Interfaces >= 1.0.0-*",
       "Microsoft.AspNet.Authentication.Cookies >= 1.0.0-rc1-final",
       "Microsoft.AspNet.Diagnostics.Entity >= 7.0.0-rc1-final",
       "Microsoft.AspNet.Identity.EntityFramework >= 3.0.0-rc1-final",

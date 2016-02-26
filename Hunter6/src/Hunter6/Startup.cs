@@ -1,5 +1,6 @@
-﻿using Hunter.Domain.Interfaces;
-using Hunter6.Data;
+﻿using Hunter.Domain.Core;
+using Hunter.Domain.Interfaces;
+using Hunter.Infrastructure.Data;
 using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Hosting;
 using Microsoft.AspNet.Identity.EntityFramework;
@@ -7,7 +8,6 @@ using Microsoft.Data.Entity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Hunter6.Models;
 using Hunter6.Services;
 
 namespace Hunter6
@@ -54,7 +54,7 @@ namespace Hunter6
             // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
-            services.AddTransient<IProjectManager, ProjectManager>();
+            services.AddTransient<IRepository<Project>, ProjectRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

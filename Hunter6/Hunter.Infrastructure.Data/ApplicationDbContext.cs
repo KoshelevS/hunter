@@ -1,9 +1,8 @@
-﻿using System;
-using Hunter6.Models;
+﻿using Hunter.Domain.Core;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Data.Entity;
 
-namespace Hunter6.Data
+namespace Hunter.Infrastructure.Data
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {

@@ -1,7 +1,7 @@
 using Hunter.Domain.Core;
 using Microsoft.Data.Entity;
 
-namespace Hunter6.Data
+namespace Hunter.Infrastructure.Data
 {
     public class ProjectContext : DbContext
     {

@@ -1,9 +1,9 @@
 using System;
+using Hunter.Infrastructure.Data;
 using Microsoft.Data.Entity;
 using Microsoft.Data.Entity.Infrastructure;
 using Microsoft.Data.Entity.Metadata;
 using Microsoft.Data.Entity.Migrations;
-using Hunter6.Data;
 
 namespace Hunter6.Migrations.Project
 {

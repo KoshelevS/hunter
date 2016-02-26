@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using Hunter.Domain.Core;
+﻿using System.Collections.Generic;
 using Hunter.Domain.Interfaces;
+using Hunter.Domain.Core;
 
-namespace Hunter6.Models
+namespace Hunter.Infrastructure.Data
 {
-    public class ProjectManager : IProjectManager
+    public class ProjectRepository: IRepository<Project>
     {
         readonly List<Project> _projects = new List<Project>() {
             new Project { Id = 1, Name = "T360",
@@ -31,11 +30,31 @@ namespace Hunter6.Models
             new Project { Id = 4, Name ="Angular"},
             new Project { Id = 5, Name ="M-Packs"},
         };
-        public IEnumerable<Project> GetAll() { return _projects;  }
-        
-        public Project GetProjectById(int id)
+
+        public IEnumerable<Project> GetAll()
+        {
+            return _projects;
+        }
+
+        public Project Get(int id)
         {
             return _projects.Find(o => o.Id == id);
+        }
+
+        public void Create(Project item)
+        {
+            _projects.Add(item);
+        }
+
+        public void Update(Project item)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void Delete(int id)
+        {
+            var project = _projects.Find(o => o.Id == id);
+            _projects.Remove(project);
         }
     }
 }
