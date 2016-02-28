@@ -10,7 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Hunter6.Services;
 
-namespace Hunter6
+namespace Hunter
 {
     public class Startup
     {

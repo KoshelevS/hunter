@@ -15590,15 +15590,15 @@
     },
     "Hunter.Infrastructure.Business/1.0.0": {
       "type": "project",
-      "path": "../../Hunter.Infrastructure.Business/project.json"
+      "path": "../Hunter.Infrastructure.Business/project.json"
     },
     "Hunter.Infrastructure.Data/1.0.0": {
       "type": "project",
-      "path": "../../Hunter.Infrastructure.Data/project.json"
+      "path": "../Hunter.Infrastructure.Data/project.json"
     },
     "Hunter.Services.Interfaces/1.0.0": {
       "type": "project",
-      "path": "../../Hunter.Services.Interfaces/project.json"
+      "path": "../Hunter.Services.Interfaces/project.json"
     },
     "EntityFramework.Commands/7.0.0-rc1-final": {
       "type": "package",
