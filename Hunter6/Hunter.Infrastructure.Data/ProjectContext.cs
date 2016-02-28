@@ -5,6 +5,11 @@ namespace Hunter.Infrastructure.Data
 {
     public class ProjectContext : DbContext
     {
+//        protected ProjectContext() 
+//        {
+//            Database.EnsureCreated();
+//        }
+
         public DbSet<Project> Project { get; set; }
         public DbSet<Vacancy> Vacancy { get; set; }
 

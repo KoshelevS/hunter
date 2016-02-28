@@ -41,9 +41,11 @@ namespace Hunter.Controllers
         }
 
         [HttpPut("{id}")]
-        public void Update(int id, ProjectViewModel project)
+        public void Update(int id, [FromBody] ProjectViewModel project)
         {
-            //Dummy method
+            var projectDto = _projectService.Get(id);
+            projectDto.Name = project.Name;
+
         }
 
         [HttpPost]
