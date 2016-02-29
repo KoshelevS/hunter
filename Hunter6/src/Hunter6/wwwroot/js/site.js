@@ -41,12 +41,19 @@
         $scope.gridOptions = {
             enableFiltering: true,
             columnDefs: [
-              { name: 'ID', field: 'Id' },
-              { name: 'Name', field: 'Name' },
-              { name: 'Vacancies', field: 'Vacancies[0].Name' },
-              { name: 'Actions', enableFiltering: false, cellTemplate: '<div><button ng-click="grid.appScope.edit(row.entity.Id)">Edit</button><button ng-click="grid.appScope.delete(row.entity.Id)">Delete</button></div>', sortable: false }
+                { name: 'ID', field: 'Id' },
+                { name: 'Name', field: 'Name' },
+                { name: 'Vacancies', field: 'Vacancies[0].Name' },
+                {
+                     name: 'Actions',
+                     enableFiltering: false,
+                     cellTemplate: 
+                        '<div><button ng-click="grid.appScope.edit(row.entity.Id)">Edit</button>' +
+                        '<button ng-click="grid.appScope.delete(row.entity.Id)">Delete</button></div>',
+                     sortable: false
+                }
             ]
-        };                        
+        };
 
         $scope.gridOptions.data = "Projects";
     }

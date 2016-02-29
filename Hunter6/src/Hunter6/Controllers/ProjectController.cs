@@ -45,7 +45,7 @@ namespace Hunter.Controllers
         {
             var projectDto = _projectService.Get(id);
             projectDto.Name = project.Name;
-
+            Save(projectDto);
         }
 
         [HttpPost]
