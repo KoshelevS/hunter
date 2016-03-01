@@ -29,6 +29,7 @@ namespace Hunter
 
             builder.AddEnvironmentVariables();
             Configuration = builder.Build();
+            //Configuration = builder.Build().ReloadOnChanged("appsettings.json"); ??
         }
 
         public IConfigurationRoot Configuration { get; set; }
@@ -68,22 +69,22 @@ namespace Hunter
                 app.UseBrowserLink();
                 app.UseDeveloperExceptionPage();
                 app.UseDatabaseErrorPage();
-            }
-            else
-            {
-                app.UseExceptionHandler("/Home/Error");
 
                 // For more details on creating database during deployment see http://go.microsoft.com/fwlink/?LinkID=615859
                 try
                 {
-                    using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>()
-                        .CreateScope())
+                    using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
                     {
                         serviceScope.ServiceProvider.GetService<ApplicationDbContext>().Database.Migrate();
                         serviceScope.ServiceProvider.GetService<ProjectContext>().Database.Migrate();
+                        serviceScope.ServiceProvider.GetService<ProjectContext>().EnsureSeedData();
                     }
                 }
                 catch { }
+            }
+            else
+            {
+                app.UseExceptionHandler("/Home/Error");
             }
 
             app.UseIISPlatformHandler(options => options.AuthenticationDescriptions.Clear());

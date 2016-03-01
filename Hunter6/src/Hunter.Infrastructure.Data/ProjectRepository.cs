@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Hunter.Domain.Interfaces;
 using Hunter.Domain.Core;
 
@@ -6,55 +7,41 @@ namespace Hunter.Infrastructure.Data
 {
     public class ProjectRepository: IRepository<Project>
     {
-        readonly List<Project> _projects = new List<Project>() {
-            new Project { Id = 1, Name = "T360",
-                Vacancies = new List<Vacancy>
-                {
-                    new Vacancy {Id = 1, Name = ".Net"},
-                    new Vacancy {Id = 2, Name = "ASP.Net"},
-                    new Vacancy {Id = 3, Name = "Angular"},
-                    new Vacancy {Id = 4, Name = "MVC6"}
-                } },
-            new Project
-            {
-                Id = 2, Name ="ACE",
-                Vacancies = new List<Vacancy>
-                {
-                    new Vacancy {Id = 1, Name = ".Net"},
-                    new Vacancy {Id = 2, Name = "ASP.Net"},
-                    new Vacancy {Id = 3, Name = "Angular"},
-                    new Vacancy {Id = 4, Name = "MVC6"}
-                }
-            },
-            new Project { Id = 3, Name ="VIACode"},
-            new Project { Id = 4, Name ="Angular"},
-            new Project { Id = 5, Name ="M-Packs"},
-        };
+        private readonly ProjectContext _context;
+
+
+        public ProjectRepository(ProjectContext context)
+        {
+            _context = context;
+        }
 
         public IEnumerable<Project> GetAll()
         {
-            return _projects;
+            return _context.Project.AsEnumerable();
         }
 
         public Project Get(int id)
         {
-            return _projects.Find(o => o.Id == id);
+            return _context.Project.SingleOrDefault(o => o.Id == id);
         }
 
         public void Create(Project item)
         {
-            _projects.Add(item);
+            _context.Project.Add(item);
+            _context.SaveChanges();
         }
 
-        public void Update(Project item)
+        public async void Update(Project item)
         {
-            throw new System.NotImplementedException();
+            _context.Update(item);
+            await _context.SaveChangesAsync();
         }
 
         public void Delete(int id)
         {
-            var project = _projects.Find(o => o.Id == id);
-            _projects.Remove(project);
+            var project = Get(id);
+            _context.Remove(project);
+            _context.SaveChanges();
         }
     }
 }

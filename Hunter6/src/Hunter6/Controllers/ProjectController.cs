@@ -13,12 +13,10 @@ namespace Hunter.Controllers
     public class ProjectController : Controller
     {
         private readonly IRepository<Project> _projectService;
-        private readonly ProjectContext _context;
 
-        public ProjectController(IRepository<Project> projectService, ProjectContext context)
+        public ProjectController(IRepository<Project> projectService)
         {
             _projectService = projectService;
-            _context = context;
         }
 
         //GET: api/values
@@ -45,14 +43,7 @@ namespace Hunter.Controllers
         {
             var projectDto = _projectService.Get(id);
             projectDto.Name = project.Name;
-            Save(projectDto);
-        }
-
-        [HttpPost]
-        public async void Save(Project project)
-        {
-            _context.Update(project);
-            await _context.SaveChangesAsync();
+            _projectService.Update(projectDto);
         }
 
         [HttpDelete("{id}")]
