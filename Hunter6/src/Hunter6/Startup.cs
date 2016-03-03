@@ -70,20 +70,10 @@ namespace Hunter
                 app.UseDeveloperExceptionPage();
                 app.UseDatabaseErrorPage();
 
-                // For more details on creating database during deployment see http://go.microsoft.com/fwlink/?LinkID=615859
-                try
-                {
-                    using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
-                    {
-                        serviceScope.ServiceProvider.GetService<ApplicationDbContext>().Database.Migrate();
-                        serviceScope.ServiceProvider.GetService<ProjectContext>().Database.Migrate();
-                        serviceScope.ServiceProvider.GetService<ProjectContext>().EnsureSeedData();
-                    }
-                }
-                catch { }
             }
             else
             {
+                DbSetup(app);
                 app.UseExceptionHandler("/Home/Error");
             }
 
@@ -101,6 +91,23 @@ namespace Hunter
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+        }
+
+        private static void DbSetup(IApplicationBuilder app)
+        {
+            // For more details on creating database during deployment see http://go.microsoft.com/fwlink/?LinkID=615859
+            try
+            {
+                using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
+                {
+                    serviceScope.ServiceProvider.GetService<ApplicationDbContext>().Database.Migrate();
+                    serviceScope.ServiceProvider.GetService<ProjectContext>().Database.Migrate();
+                    serviceScope.ServiceProvider.GetService<ProjectContext>().EnsureSeedData();
+                }
+            }
+            catch
+            {
+            }
         }
 
         // Entry point for the application.

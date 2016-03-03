@@ -34,7 +34,8 @@ namespace Hunter.Infrastructure.Data
         public async void Update(Project item)
         {
             _context.Update(item);
-            await _context.SaveChangesAsync();
+            //await _context.SaveChangesAsync();
+            _context.SaveChanges();
         }
 
         public void Delete(int id)
