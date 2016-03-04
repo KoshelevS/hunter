@@ -26,7 +26,7 @@
         $scope.edit = function (_id) {
             var modalInstance = $uibModal.open({
                 animation: true,
-                templateUrl: '/static/EditProjectModal.html',
+                templateUrl: '/html/EditProjectModal.html',
                 controller: 'ProjectInstanceCtrl',
                 resolve: {
                     id: function () { return _id; }
