@@ -1,6 +1,4 @@
-﻿using Hunter.Domain.Core;
-using Hunter.Domain.Interfaces;
-using Hunter.Infrastructure.Data;
+using Microsoft.AspNet.Authorization;
 using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Hosting;
 using Microsoft.AspNet.Identity.EntityFramework;
@@ -8,6 +6,11 @@ using Microsoft.Data.Entity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+
+using Hunter.Domain.Core;
+using Hunter.Domain.Interfaces;
+using Hunter.Infrastructure.Data;
+using Hunter.Security;
 using Hunter6.Services;
 
 namespace Hunter
@@ -50,6 +53,8 @@ namespace Hunter
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
+            ConfigureAuthorization(services);
+
             services.AddMvc();
 
             // Add application services.
@@ -59,6 +64,31 @@ namespace Hunter
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+
+        private static void ConfigureAuthorization(IServiceCollection services)
+        {
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("RequireClimePolicyTest", policy =>
+                {
+                    policy.RequireClaim("RequireClimePolicyTest");
+                });
+
+                options.AddPolicy("RequireRolePolicyTest", policy =>
+                {
+                    policy.RequireRole("RequireRolePolicyTest");
+                });
+
+                options.AddPolicy("RequirementBasedPolicyTest", policy =>
+                {
+                    policy.AddRequirements(new TestRequirement());
+                });
+            });
+
+            services.AddSingleton<IAuthorizationHandler, ResourceBasedAuthorizationHandler>();
+            services.AddSingleton<IAuthorizationHandler, RequirementBasedAuthorizationHandler>();
+        }
+
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));

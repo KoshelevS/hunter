@@ -5,7 +5,13 @@
     <form asp-controller="Account" asp-action="LogOff" method="post" id="logoutForm" class="navbar-right">
         <ul class="nav navbar-nav navbar-right">
             <li>
+                <a asp-controller="Users" asp-action="Index">Registered users</a>
+            </li>
+            <li>
                 <a asp-controller="Manage" asp-action="Index" title="Manage">Hello @User.GetUserName()!</a>
+            </li>
+            <li>
+                <a asp-controller="AuthTest" asp-action="Index" title="Authorization tests">Authorization tests</a>
             </li>
             <li>
                 <button type="submit" class="btn btn-link navbar-btn navbar-link">Log off</button>
