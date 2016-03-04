@@ -1,16 +1,16 @@
 using System.Linq;
 using System.Threading.Tasks;
+using Hunter.Domain.Core;
+using Hunter6.ViewModels.Users;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Mvc;
 using Microsoft.Data.Entity;
-using Hunter6.Models;
-using Hunter6.ViewModels.Users;
 
-namespace Hunter6.Controllers
+namespace Hunter.Controllers
 {
     public class UsersController : Controller
     {
-        private UserManager<ApplicationUser> _userManager;
+        private readonly UserManager<ApplicationUser> _userManager;
 
         public UsersController(UserManager<ApplicationUser> userManager)
         {

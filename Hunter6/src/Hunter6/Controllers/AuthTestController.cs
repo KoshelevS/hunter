@@ -1,12 +1,11 @@
-using System.Linq;
 using System.Threading.Tasks;
-using Hunter6.Security;
-using Microsoft.AspNet.Mvc;
-using Microsoft.AspNet.Mvc.Rendering;
-using Microsoft.Data.Entity;
-using Microsoft.AspNet.Authorization;
 
-namespace Hunter6.Controllers
+using Microsoft.AspNet.Authorization;
+using Microsoft.AspNet.Mvc;
+
+using Hunter.Security;
+
+namespace Hunter.Controllers
 {
     public class AuthTestController : Controller
     {
