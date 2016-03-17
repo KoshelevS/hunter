@@ -10,6 +10,18 @@
 (function () {
     'use strict';
 
+    var projectsService = angular.module('projectsService', ['ngResource']);
+    projectsService.factory('Projects', ['$resource',
+        function ($resource) {
+            return $resource('/api/project', {}, {
+                query: { method: 'GET', params: {}, isArray: true }
+            });
+        }
+    ]);
+})();
+(function () {
+    'use strict';
+
     function projectInstanceController($scope, $uibModalInstance, $http, id) {
         $http.get('/api/project/' + id)
             .success(function (data) {
@@ -19,7 +31,6 @@
         $scope.ok = function() {
             $http.put('/api/project/' + id, $scope.project)
                 .success(function() {
-                    //alert("The project was updated successfully.");
                     $uibModalInstance.close();
                 });
         };
@@ -64,8 +75,8 @@
                     name: 'Actions',
                     enableFiltering: false,
                     cellTemplate:
-                        '<div><button ng-click="grid.appScope.edit(row.entity.Id)">Edit</button>' +
-                            '<button ng-click="grid.appScope.delete(row.entity.Id)">Delete</button></div>',
+                        '<div><button class="btn btn-warning" ng-click="grid.appScope.edit(row.entity.Id)"><span class="glyphicon glyphicon-pencil"></span> Edit</button>' +
+                            '<button class="btn btn-danger" ng-click="grid.appScope.delete(row.entity.Id)"><span class="glyphicon glyphicon-remove"></span> Delete</button></div>',
                     sortable: false
                 }
             ]
@@ -83,16 +94,4 @@
     projectInstanceController.$inject = ['$scope', '$uibModalInstance', '$http', 'id'];
 
 
-})();
-(function () {
-    'use strict';
-
-    var projectsService = angular.module('projectsService', ['ngResource']);
-    projectsService.factory('Projects', ['$resource',
-        function ($resource) {
-            return $resource('/api/project', {}, {
-                query: { method: 'GET', params: {}, isArray: true }
-            });
-        }
-    ]);
 })();

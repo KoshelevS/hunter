@@ -10,7 +10,6 @@
         $scope.ok = function() {
             $http.put('/api/project/' + id, $scope.project)
                 .success(function() {
-                    //alert("The project was updated successfully.");
                     $uibModalInstance.close();
                 });
         };
@@ -55,8 +54,8 @@
                     name: 'Actions',
                     enableFiltering: false,
                     cellTemplate:
-                        '<div><button ng-click="grid.appScope.edit(row.entity.Id)">Edit</button>' +
-                            '<button ng-click="grid.appScope.delete(row.entity.Id)">Delete</button></div>',
+                        '<div><button class="btn btn-warning" ng-click="grid.appScope.edit(row.entity.Id)"><span class="glyphicon glyphicon-pencil"></span> Edit</button>' +
+                            '<button class="btn btn-danger" ng-click="grid.appScope.delete(row.entity.Id)"><span class="glyphicon glyphicon-remove"></span> Delete</button></div>',
                     sortable: false
                 }
             ]
