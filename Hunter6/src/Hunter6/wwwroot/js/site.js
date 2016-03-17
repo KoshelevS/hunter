@@ -10,19 +10,24 @@
 (function () {
     'use strict';
 
-    var projectsService = angular.module('projectsService', ['ngResource']);
-    projectsService.factory('Projects', ['$resource',
-        function ($resource) {
-            return $resource('/api/project', {}, {
-                query: { method: 'GET', params: {}, isArray: true }
-            });
-        }
-    ]);
-})();
-(function () {
-    'use strict';
+    function addProjectInstanceController($scope, $uibModalInstance, $http) {
+        $scope.title = 'Add Project';
 
-    function projectInstanceController($scope, $uibModalInstance, $http, id) {
+        $scope.ok = function() {
+            $http.post('/api/project/', $scope.project)
+                .success(function() {
+                    $uibModalInstance.close();
+                });
+        };
+
+        $scope.cancel = function () {
+            $uibModalInstance.dismiss('cancel');
+        };
+    };
+
+    function editProjectInstanceController($scope, $uibModalInstance, $http, id) {
+        $scope.title = 'Edit Project';
+    
         $http.get('/api/project/' + id)
             .success(function (data) {
                 $scope.project = data;
@@ -43,26 +48,57 @@
     function projectsController($scope, $uibModal, $http, Projects) {
         $scope.Projects = Projects.query();
 
+        $scope.alerts =[];
+
+        $scope.closeAlert = function (index) {
+            $scope.alerts.splice(index, 1);
+        };
+
+        $scope.add = function () {
+            var modalInstance = $uibModal.open({
+                animation: true,
+                templateUrl: '/html/EditProjectModal.html',
+                controller: 'AddProjectInstanceCtrl'
+            });
+
+            modalInstance.result.then(function () {
+                $scope.Projects = Projects.query();
+
+                $scope.alerts.push({ type: 'success', msg: 'Project was successfully added' });
+            });
+        };
+
         $scope.edit = function (_id) {
             var modalInstance = $uibModal.open({
                 animation: true,
                 templateUrl: '/html/EditProjectModal.html',
-                controller: 'ProjectInstanceCtrl',
+                controller: 'EditProjectInstanceCtrl',
                 resolve: {
                     id: function () { return _id; }
                 }
             });
+
             modalInstance.result.then(function () {
                 $scope.Projects = Projects.query();
             });
-
         };
 
         $scope.delete = function (_id) {
-            $http.delete('/api/project/' + _id).success(function () {
-                alert("The project was deleted successfully.");
-                $scope.Projects = Projects.query();
-            });
+            $http
+                .delete('/api/project/' + _id)
+                .success(function () {
+                    $scope.alerts.push({
+                        type: 'success', msg: 'Project was deleted successfully'
+                    });
+
+                    $scope.Projects = Projects.query();
+                }).error(function() {
+                    $scope.alerts.push({
+                        type: 'danger', msg: 'Error was occured during the project removal'
+                    });
+
+                    $scope.Projects = Projects.query();
+                });
         };
 
         $scope.gridOptions = {
@@ -88,10 +124,24 @@
     angular
         .module('projectsApp')
         .controller('projectsController', projectsController)
-        .controller('ProjectInstanceCtrl', projectInstanceController);
+        .controller('AddProjectInstanceCtrl', addProjectInstanceController)
+        .controller('EditProjectInstanceCtrl', editProjectInstanceController);
 
     projectsController.$inject = ['$scope', '$uibModal', '$http', 'Projects'];
-    projectInstanceController.$inject = ['$scope', '$uibModalInstance', '$http', 'id'];
+    addProjectInstanceController.$inject =['$scope', '$uibModalInstance', '$http'];
+    editProjectInstanceController.$inject =['$scope', '$uibModalInstance', '$http', 'id'];
 
 
+})();
+(function () {
+    'use strict';
+
+    var projectsService = angular.module('projectsService', ['ngResource']);
+    projectsService.factory('Projects', ['$resource',
+        function ($resource) {
+            return $resource('/api/project', {}, {
+                query: { method: 'GET', params: {}, isArray: true }
+            });
+        }
+    ]);
 })();
