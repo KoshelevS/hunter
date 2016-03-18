@@ -1,11 +1,19 @@
 ﻿using System.Collections.Generic;
+using System.Data;
+using System.Data.Common;
+using System.Diagnostics;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
+//using System.Transactions;
 using Hunter.Domain.Interfaces;
 using Hunter.Domain.Core;
+using Microsoft.Data.Entity;
+using Microsoft.Data.Entity.Storage;
 
 namespace Hunter.Infrastructure.Data
 {
-    public class ProjectRepository: IRepository<Project>
+    public class ProjectRepository : IRepository<Project>
     {
         private readonly ProjectContext _context;
 
@@ -17,7 +25,15 @@ namespace Hunter.Infrastructure.Data
 
         public IEnumerable<Project> GetAll()
         {
-            return _context.Project.AsEnumerable();
+
+            var projects = _context.Project.Include(p => p.Vacancies);
+
+            //            foreach (var v in _context.Project.FirstOrDefault()?.Vacancies)
+            //            {
+            //                    Debug.WriteLine(v.Name);
+            //            }
+
+            return projects.AsEnumerable();
         }
 
         public Project Get(int id)
@@ -31,11 +47,19 @@ namespace Hunter.Infrastructure.Data
             _context.SaveChanges();
         }
 
-        public async void Update(Project item)
+        public void Update(Project item)
         {
             _context.Update(item);
-            //await _context.SaveChangesAsync();
             _context.SaveChanges();
+            //using (var scope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
+            //{
+            //_context.Database.OpenConnection();
+            //IRelationalTransaction t = _context.Database.BeginTransaction(IsolationLevel.ReadCommitted);
+            //_context.Database.UseTransaction(dbContextTransaction.UnderlyingTransaction);
+            //await _context.SaveChangesAsync();
+            //    scope.Complete();
+            //}
+            // see also https://msdn.microsoft.com/en-us/data/dn456843.aspx
         }
 
         public void Delete(int id)

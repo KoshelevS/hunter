@@ -1,6 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
-namespace Hunter6.ViewModels.Project
+namespace Hunter.ViewModels.Project
 {
     public class ProjectViewModel
     {

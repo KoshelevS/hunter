@@ -7,7 +7,10 @@
     "licenseUrl": "",
     "frameworks": {
         "dnx451": { },
-        "dnxcore50": { }
+        "dnxcore50": {
+            "frameworkAssemblies": {
+            }
+        }
     },
     "dependencies": {
         "EntityFramework.Core": "7.0.0-rc1-final",

@@ -54,8 +54,8 @@ namespace Hunter
                 .AddDefaultTokenProviders();
 
             ConfigureAuthorization(services);
-
-            services.AddMvc();
+            services.AddMvc()
+                .AddWebApiConventions();
 
             // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();
@@ -120,6 +120,7 @@ namespace Hunter
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
+                //routes.MapWebApiRoute("DefaultApi", "api/{controller}/{id?}");
             });
         }
 
