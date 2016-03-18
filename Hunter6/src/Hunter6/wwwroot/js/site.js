@@ -11,16 +11,24 @@
     'use strict';
 
     function projectInstanceController($scope, $uibModalInstance, $http, id) {
-        $http.get('/api/project/' + id)
-            .success(function (data) {
-                $scope.project = data;
+        $http.get('/api/project/' + id).then(
+//        $http.get('/api/ProjectsNew/' + id).then(
+            function (data) {
+                $scope.project = data.data;
+            },
+            function (data) {
+                alert(data.statusText);
+                $uibModalInstance.close();
             });
 
-        $scope.ok = function() {
+        $scope.ok = function () {
             $http.put('/api/project/' + id, $scope.project)
-                .success(function() {
-                    //alert("The project was updated successfully.");
+//            $http.put('/api/ProjectsNew/' + id, $scope.project)
+                .success(function () {
                     $uibModalInstance.close();
+                })
+                .error(function (data) {
+                    alert(data.Message);
                 });
         };
 
@@ -57,15 +65,15 @@
         $scope.gridOptions = {
             enableFiltering: true,
             columnDefs: [
-                { name: 'ID', field: 'Id' },
+                { name: '--ID--', field: 'ID' },
                 { name: 'Name', field: 'Name' },
-                { name: 'Vacancies', field: 'Vacancies[0].Name' },
+                { name: 'FirstVacancy', field: 'FirstVacancy' },
                 {
                     name: 'Actions',
                     enableFiltering: false,
                     cellTemplate:
-                        '<div><button ng-click="grid.appScope.edit(row.entity.Id)">Edit</button>' +
-                            '<button ng-click="grid.appScope.delete(row.entity.Id)">Delete</button></div>',
+                        '<div><button ng-click="grid.appScope.edit(row.entity.ID)">Edit</button>' +
+                            '<button ng-click="grid.appScope.delete(row.entity.ID)">Delete</button></div>',
                     sortable: false
                 }
             ]
@@ -91,6 +99,7 @@
     projectsService.factory('Projects', ['$resource',
         function ($resource) {
             return $resource('/api/project', {}, {
+//            return $resource('/api/ProjectsNew', {}, {
                 query: { method: 'GET', params: {}, isArray: true }
             });
         }
