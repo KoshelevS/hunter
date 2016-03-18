@@ -67,17 +67,6 @@ namespace Hunter.Controllers
             _projectService.Create(projectDto);
         }
 
-        [HttpPost]
-        public void Create([FromBody] ProjectViewModel project)
-        {
-            var projectDto = new Project()
-            {
-                Name = project.Name
-            };
-
-            _projectService.Create(projectDto);
-        }
-
         [HttpPut("{id}")]
         public HttpResponseMessage Update(int id, [FromBody] ProjectViewModel project)
         {

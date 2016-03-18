@@ -95,15 +95,15 @@
         $scope.gridOptions = {
             enableFiltering: true,
             columnDefs: [
-                { name: 'ID', field: 'Id' },
+                { name: 'ID', field: 'ID' },
                 { name: 'Name', field: 'Name' },
-                { name: 'Vacancies', field: 'Vacancies[0].Name' },
+                { name: 'Vacancies', field: 'FirstVacancy' },
                 {
                     name: 'Actions',
                     enableFiltering: false,
                     cellTemplate:
-                        '<div><button class="btn btn-warning" ng-click="grid.appScope.edit(row.entity.Id)"><span class="glyphicon glyphicon-pencil"></span> Edit</button>' +
-                            '<button class="btn btn-danger" ng-click="grid.appScope.delete(row.entity.Id)"><span class="glyphicon glyphicon-remove"></span> Delete</button></div>',
+                        '<div><button class="btn btn-warning" ng-click="grid.appScope.edit(row.entity.ID)"><span class="glyphicon glyphicon-pencil"></span> Edit</button>' +
+                            '<button class="btn btn-danger" ng-click="grid.appScope.delete(row.entity.ID)"><span class="glyphicon glyphicon-remove"></span> Delete</button></div>',
                     sortable: false
                 }
             ]
