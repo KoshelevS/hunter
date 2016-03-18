@@ -3,13 +3,30 @@
 }
 <div ng-cloak>
     <div ng-controller="projectsController">
-        <h1>Projects</h1>
+        <h1>Projects <button class="btn btn-info" ng-click="add()"><span class="glyphicon glyphicon-plus"></span> Add</button></h1>
         <style>
             .grid {
                 width: 100%;
                 height: 500px;
             }
+
+            .instant-alert-area {
+                position:fixed;
+                left:5px;
+                bottom:5px;
+                width: 390px;
+                opacity: 0.65;
+            }
+
+            .instant-alert-area .alert {
+                margin-bottom: 5px;
+            }
         </style>
+
         <div ui-grid="gridOptions" external-scopes="clickHandler" class="grid"></div>
+
+        <div class="instant-alert-area">
+            <uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)" dismiss-on-timeout="5000">{{alert.msg}}</uib-alert>
+        </div>
     </div>
 </div>

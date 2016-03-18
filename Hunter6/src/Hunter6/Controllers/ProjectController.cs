@@ -56,6 +56,17 @@ namespace Hunter.Controllers
             return Ok(result);
         }
 
+        [HttpPost]
+        public void Create([FromBody] ProjectViewModel project)
+        {
+            var projectDto = new Project()
+            {
+                Name = project.Name
+            };
+
+            _projectService.Create(projectDto);
+        }
+
         [HttpPut("{id}")]
         public HttpResponseMessage Update(int id, [FromBody] ProjectViewModel project)
         {
@@ -72,7 +83,14 @@ namespace Hunter.Controllers
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
-            //Dummy method
+            if (id % 2 == 0)
+            {
+                _projectService.Delete(id);
+            }
+            else
+            {
+                throw new Exception("Dummy error");
+            }
         }
     }
 }
