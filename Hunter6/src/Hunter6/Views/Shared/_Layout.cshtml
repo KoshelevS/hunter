@@ -77,5 +77,9 @@
         </environment>
 
         @RenderSection("scripts", required: false)
+
+        <div ng-controller="alertsController" class="hunter-alerts">
+            <uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)" dismiss-on-timeout="{{alertDismissTimeout}}">{{alert.message}}</uib-alert>
+        </div>
     </body>
 </html>

@@ -10,6 +10,25 @@
 (function () {
     'use strict';
 
+    function alertsController($scope) {
+        HunterAlerts.setScope($scope);
+
+        $scope.alertDismissTimeout = HunterSettings.getAlertDismissTimeout();
+
+        $scope.closeAlert = function (index) {
+            HunterAlerts.removeAlert(index)
+        };
+    }
+
+    angular
+        .module('projectsApp')
+        .controller('alertsController', alertsController)
+
+    alertsController.$inject = ['$scope'];
+})();
+(function () {
+    'use strict';
+
     function addProjectInstanceController($scope, $uibModalInstance, $http) {
         $scope.title = 'Add Project';
 
@@ -48,12 +67,6 @@
     function projectsController($scope, $uibModal, $http, Projects) {
         $scope.Projects = Projects.query();
 
-        $scope.alerts =[];
-
-        $scope.closeAlert = function (index) {
-            $scope.alerts.splice(index, 1);
-        };
-
         $scope.add = function () {
             var modalInstance = $uibModal.open({
                 animation: true,
@@ -64,7 +77,7 @@
             modalInstance.result.then(function () {
                 $scope.Projects = Projects.query();
 
-                $scope.alerts.push({ type: 'success', msg: 'Project was successfully added' });
+                HunterAlerts.addSuccessAlert('Project was successfully added');
             });
         };
 
@@ -87,15 +100,11 @@
             $http
                 .delete('/api/project/' + _id)
                 .success(function () {
-                    $scope.alerts.push({
-                        type: 'success', msg: 'Project was deleted successfully'
-                    });
+                    HunterAlerts.addSuccessAlert('Project was successfully deleted');
 
                     $scope.Projects = Projects.query();
                 }).error(function() {
-                    $scope.alerts.push({
-                        type: 'danger', msg: 'Error was occured during the project removal'
-                    });
+                    HunterAlerts.addDangerAlert('Error was occured during the project removal');
 
                     $scope.Projects = Projects.query();
                 });
@@ -132,6 +141,57 @@
     editProjectInstanceController.$inject =['$scope', '$uibModalInstance', '$http', 'id'];
 
 
+})();
+var HunterAlerts = (function () {
+    'use strict';
+
+    var alerts = [];
+
+    return {
+        setScope: function(scope) {
+            scope.alerts = alerts;
+        },
+        addSuccessAlert: function (msg) {
+            alerts.push({
+                type: 'success',
+                message: msg
+            });
+        },
+        addInfoAlert: function (msg) {
+            alerts.push({
+                type: 'info',
+                message: msg
+            });
+        },
+        addWarningAlert: function (msg) {
+            alerts.push({
+                type: 'warning',
+                message: msg
+            });
+        },
+        addDangerAlert: function (msg) {
+            alerts.push({
+                type: 'danger',
+                message: msg
+            });
+        },
+        removeAlert: function (index) {
+            alerts.splice(index, 1);
+        }
+    };
+})();
+var HunterSettings = (function () {
+    'use strict';
+
+    var settings = {
+        'alertDismissTimeout' : 5000
+    };
+
+    return {
+        getAlertDismissTimeout: function () {
+            return settings['alertDismissTimeout'];
+        }
+    };
 })();
 (function () {
     'use strict';
