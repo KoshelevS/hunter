@@ -41,12 +41,6 @@
     function projectsController($scope, $uibModal, $http, Projects) {
         $scope.Projects = Projects.query();
 
-        $scope.alerts =[];
-
-        $scope.closeAlert = function (index) {
-            $scope.alerts.splice(index, 1);
-        };
-
         $scope.add = function () {
             var modalInstance = $uibModal.open({
                 animation: true,
@@ -57,7 +51,7 @@
             modalInstance.result.then(function () {
                 $scope.Projects = Projects.query();
 
-                $scope.alerts.push({ type: 'success', msg: 'Project was successfully added' });
+                HunterAlerts.addSuccessAlert('Project was successfully added');
             });
         };
 
@@ -80,15 +74,11 @@
             $http
                 .delete('/api/project/' + _id)
                 .success(function () {
-                    $scope.alerts.push({
-                        type: 'success', msg: 'Project was deleted successfully'
-                    });
+                    HunterAlerts.addSuccessAlert('Project was successfully deleted');
 
                     $scope.Projects = Projects.query();
                 }).error(function() {
-                    $scope.alerts.push({
-                        type: 'danger', msg: 'Error was occured during the project removal'
-                    });
+                    HunterAlerts.addDangerAlert('Error was occured during the project removal');
 
                     $scope.Projects = Projects.query();
                 });

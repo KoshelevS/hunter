@@ -27,3 +27,12 @@ textarea {
 
 .ui-grid-row .btn {
   margin: 5px 0px 5px 5px; }
+
+.hunter-alerts {
+  position: fixed;
+  left: 5px;
+  bottom: 5px;
+  width: 390px;
+  opacity: 0.8; }
+  .hunter-alerts .alert {
+    margin-bottom: 5px; }
