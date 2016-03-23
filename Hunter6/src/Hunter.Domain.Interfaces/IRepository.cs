@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using Hunter.Domain.Core;
 
 namespace Hunter.Domain.Interfaces
 {
@@ -10,5 +11,7 @@ namespace Hunter.Domain.Interfaces
         void Create(T item);
         void Update(T item);
         void Delete(int id);
+        Task<Project> GetAsync(int id);
+        Task UpdateAsync(Project project);
     }
 }

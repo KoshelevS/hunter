@@ -19,13 +19,15 @@
     function editProjectInstanceController($scope, $uibModalInstance, $http, id) {
         $scope.title = 'Edit Project';
     
-        $http.get('/api/project/' + id)
+//        $http.get('/api/project/' + id)
+        $http.get('/api/ProjectsNew/' + id)
             .success(function (data) {
                 $scope.project = data;
             });
 
         $scope.ok = function() {
-            $http.put('/api/project/' + id, $scope.project)
+//            $http.put('/api/project/' + id, $scope.project)
+            $http.put('/api/ProjectsNew/' + id, $scope.project)
                 .success(function() {
                     $uibModalInstance.close();
                 });

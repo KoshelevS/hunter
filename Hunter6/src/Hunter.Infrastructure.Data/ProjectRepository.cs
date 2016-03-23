@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
 using System.Diagnostics;
@@ -41,12 +42,36 @@ namespace Hunter.Infrastructure.Data
             return _context.Project.SingleOrDefault(o => o.Id == id);
         }
 
+        public Task<Project> GetAsync(int id)
+        {
+            return _context.Project.SingleAsync(m => m.Id == id);
+        }
+
         public void Create(Project item)
         {
             _context.Project.Add(item);
             _context.SaveChanges();
         }
 
+        public async Task UpdateAsync(Project project)
+        {
+            _context.Entry(project).State = EntityState.Modified;
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!ProjectExists(project.Id))
+                {
+                    throw new RowNotFoundException();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+        }
         public void Update(Project item)
         {
             _context.Update(item);
@@ -68,5 +93,14 @@ namespace Hunter.Infrastructure.Data
             _context.Remove(project);
             _context.SaveChanges();
         }
+
+        private bool ProjectExists(int id)
+        {
+            return _context.Project.Count(e => e.Id == id) > 0;
+        }
+    }
+
+    public class RowNotFoundException : Exception
+    {
     }
 }
