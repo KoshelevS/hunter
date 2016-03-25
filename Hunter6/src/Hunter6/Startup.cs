@@ -53,7 +53,7 @@ namespace Hunter
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
-            ConfigureAuthorization(services);
+            services.ConfigureAuthorization();
 
             services.AddMvc();
 
@@ -64,30 +64,6 @@ namespace Hunter
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-
-        private static void ConfigureAuthorization(IServiceCollection services)
-        {
-            services.AddAuthorization(options =>
-            {
-                options.AddPolicy("RequireClimePolicyTest", policy =>
-                {
-                    policy.RequireClaim("RequireClimePolicyTest");
-                });
-
-                options.AddPolicy("RequireRolePolicyTest", policy =>
-                {
-                    policy.RequireRole("RequireRolePolicyTest");
-                });
-
-                options.AddPolicy("RequirementBasedPolicyTest", policy =>
-                {
-                    policy.AddRequirements(new TestRequirement());
-                });
-            });
-
-            services.AddSingleton<IAuthorizationHandler, ResourceBasedAuthorizationHandler>();
-            services.AddSingleton<IAuthorizationHandler, RequirementBasedAuthorizationHandler>();
-        }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
