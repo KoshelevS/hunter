@@ -10,12 +10,12 @@ namespace Hunter.Infrastructure.Data
         public DbSet<Project> Project { get; set; }
         public DbSet<Vacancy> Vacancy { get; set; }
 
-        protected override void OnModelCreating(ModelBuilder builder)
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            builder.Entity<Project>().HasKey(p => p.Id);
-            builder.Entity<Project>().Property(p => p.Name).IsRequired().HasMaxLength(100);
+            modelBuilder.Entity<Project>().HasKey(p => p.Id);
+            modelBuilder.Entity<Project>().Property(p => p.Name).IsRequired().HasMaxLength(100);
 
-            builder.Entity<Vacancy>().HasOne(v => v.Project).WithMany(p => p.Vacancies);
+            modelBuilder.Entity<Vacancy>().HasOne(v => v.Project).WithMany(p => p.Vacancies);
         }
 
         public void EnsureSeedData()
@@ -46,7 +46,7 @@ namespace Hunter.Infrastructure.Data
                     },
                     new Project { Name ="VIACode"},
                     new Project { Name ="Angular"},
-                    new Project { Name ="M-Packs"},
+                    new Project { Name ="M-Packs"}
                 });
 
                 SaveChanges();
