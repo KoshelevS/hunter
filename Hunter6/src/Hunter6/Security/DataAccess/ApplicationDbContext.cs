@@ -2,11 +2,11 @@
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Data.Entity;
 
-namespace Hunter.Infrastructure.Data
+namespace Hunter.Security.DataAccess
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
-        protected override void OnModelCreating(ModelBuilder builder) 
+        protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
             // Customize the ASP.NET Identity model and override the defaults if needed.

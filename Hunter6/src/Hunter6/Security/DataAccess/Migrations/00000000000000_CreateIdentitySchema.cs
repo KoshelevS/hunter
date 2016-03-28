@@ -1,11 +1,8 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.Data.Entity.Metadata;
 using Microsoft.Data.Entity.Migrations;
 
-namespace Hunter6.Migrations
+namespace Hunter.Security.DataAccess.Migrations
 {
     public partial class CreateIdentitySchema : Migration
     {

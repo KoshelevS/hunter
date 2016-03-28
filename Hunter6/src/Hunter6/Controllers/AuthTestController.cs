@@ -43,7 +43,7 @@ namespace Hunter.Controllers
         {
             var resource = new TestResource();
 
-            if (!await authorizationService.AuthorizeAsync(User, resource, Operations.Read))
+            if (!await authorizationService.AuthorizeAsync(User, resource, ResourceOperations.Read))
             {
                 return new ChallengeResult();
             }

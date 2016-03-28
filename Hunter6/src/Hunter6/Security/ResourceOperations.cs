@@ -2,7 +2,7 @@
 
 namespace Hunter.Security
 {
-    internal static class Operations
+    internal static class ResourceOperations
     {
         public static OperationAuthorizationRequirement Create = new OperationAuthorizationRequirement { Name = "Create" };
         public static OperationAuthorizationRequirement Read = new OperationAuthorizationRequirement { Name = "Read" };

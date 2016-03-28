@@ -1,17 +1,13 @@
-using System;
-using Hunter.Infrastructure.Data;
 using Microsoft.Data.Entity;
 using Microsoft.Data.Entity.Infrastructure;
 using Microsoft.Data.Entity.Metadata;
-using Microsoft.Data.Entity.Migrations;
 
-namespace Hunter6.Migrations.Project
+namespace Hunter.Infrastructure.Data.Migrations.Project
 {
     [DbContext(typeof(ProjectContext))]
-    [Migration("20160209155813_Project")]
-    partial class Project
+    partial class ProjectContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "7.0.0-rc1-16348")

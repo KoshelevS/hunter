@@ -1,17 +1,14 @@
-using Microsoft.AspNet.Authorization;
-using Microsoft.AspNet.Builder;
-using Microsoft.AspNet.Hosting;
-using Microsoft.AspNet.Identity.EntityFramework;
-using Microsoft.Data.Entity;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-
 using Hunter.Domain.Core;
 using Hunter.Domain.Interfaces;
 using Hunter.Infrastructure.Data;
 using Hunter.Security;
 using Hunter6.Services;
+
+using Microsoft.AspNet.Builder;
+using Microsoft.AspNet.Hosting;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 namespace Hunter
 {
@@ -41,19 +38,15 @@ namespace Hunter
         public void ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
+            string connectionString = Configuration["Data:DefaultConnection:ConnectionString"];
+
             services.AddEntityFramework()
-                .AddSqlServer()
-                .AddDbContext<ApplicationDbContext>(options =>
-                    options.UseSqlServer(Configuration["Data:DefaultConnection:ConnectionString"]))
-                .AddDbContext<ProjectContext>(
-                    options => options.UseSqlServer(Configuration["Data:DefaultConnection:ConnectionString"]));
+                    .AddSqlServer()
+                    .AddSecurityContext(connectionString)
+                    .AddProjectContext(connectionString);
 
+            services.ConfigureAuthorization();
 
-            services.AddIdentity<ApplicationUser, IdentityRole>()
-                .AddEntityFrameworkStores<ApplicationDbContext>()
-                .AddDefaultTokenProviders();
-
-            ConfigureAuthorization(services);
             services.AddMvc();
 
             // Add application services.
@@ -63,30 +56,6 @@ namespace Hunter
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-
-        private static void ConfigureAuthorization(IServiceCollection services)
-        {
-            services.AddAuthorization(options =>
-            {
-                options.AddPolicy("RequireClimePolicyTest", policy =>
-                {
-                    policy.RequireClaim("RequireClimePolicyTest");
-                });
-
-                options.AddPolicy("RequireRolePolicyTest", policy =>
-                {
-                    policy.RequireRole("RequireRolePolicyTest");
-                });
-
-                options.AddPolicy("RequirementBasedPolicyTest", policy =>
-                {
-                    policy.AddRequirements(new TestRequirement());
-                });
-            });
-
-            services.AddSingleton<IAuthorizationHandler, ResourceBasedAuthorizationHandler>();
-            services.AddSingleton<IAuthorizationHandler, RequirementBasedAuthorizationHandler>();
-        }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
@@ -119,7 +88,6 @@ namespace Hunter
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
-                //routes.MapWebApiRoute("DefaultApi", "api/{controller}/{id?}");
             });
         }
 
@@ -130,12 +98,13 @@ namespace Hunter
             {
                 using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
                 {
-                    serviceScope.ServiceProvider.GetService<ApplicationDbContext>().Database.Migrate();
-                    serviceScope.ServiceProvider.GetService<ProjectContext>().Database.Migrate();
-                    serviceScope.ServiceProvider.GetService<ProjectContext>().EnsureSeedData();
+                    serviceScope.MigrateSecurityContext();
+                    serviceScope.MigrateProjectContext();
                 }
             }
+#pragma warning disable RECS0022 // A catch clause that catches System.Exception and has an empty body
             catch
+#pragma warning restore RECS0022 // A catch clause that catches System.Exception and has an empty body
             {
             }
         }

@@ -1,9 +1,7 @@
-using System;
-using System.Collections.Generic;
 using Microsoft.Data.Entity.Migrations;
 using Microsoft.Data.Entity.Metadata;
 
-namespace Hunter6.Migrations.Project
+namespace Hunter.Infrastructure.Data.Migrations.Project
 {
     public partial class Project : Migration
     {

@@ -153,6 +153,7 @@
         "framework": "DNX,Version=v4.5.1",
         "dependencies": {
           "EntityFramework.Core": "7.0.0-rc1-final",
+          "EntityFramework.MicrosoftSqlServer": "7.0.0-rc1-final",
           "Hunter.Domain.Core": "1.0.0",
           "Hunter.Domain.Interfaces": "1.0.0",
           "Microsoft.AspNet.Identity.EntityFramework": "3.0.0-rc1-final"
@@ -2223,6 +2224,7 @@
         "framework": "DNXCore,Version=v5.0",
         "dependencies": {
           "EntityFramework.Core": "7.0.0-rc1-final",
+          "EntityFramework.MicrosoftSqlServer": "7.0.0-rc1-final",
           "Hunter.Domain.Core": "1.0.0",
           "Hunter.Domain.Interfaces": "1.0.0",
           "Microsoft.AspNet.Identity.EntityFramework": "3.0.0-rc1-final"
@@ -5005,6 +5007,7 @@
         "framework": "DNX,Version=v4.5.1",
         "dependencies": {
           "EntityFramework.Core": "7.0.0-rc1-final",
+          "EntityFramework.MicrosoftSqlServer": "7.0.0-rc1-final",
           "Hunter.Domain.Core": "1.0.0",
           "Hunter.Domain.Interfaces": "1.0.0",
           "Microsoft.AspNet.Identity.EntityFramework": "3.0.0-rc1-final"
@@ -7103,6 +7106,7 @@
         "framework": "DNX,Version=v4.5.1",
         "dependencies": {
           "EntityFramework.Core": "7.0.0-rc1-final",
+          "EntityFramework.MicrosoftSqlServer": "7.0.0-rc1-final",
           "Hunter.Domain.Core": "1.0.0",
           "Hunter.Domain.Interfaces": "1.0.0",
           "Microsoft.AspNet.Identity.EntityFramework": "3.0.0-rc1-final"
@@ -9176,6 +9180,7 @@
         "framework": "DNXCore,Version=v5.0",
         "dependencies": {
           "EntityFramework.Core": "7.0.0-rc1-final",
+          "EntityFramework.MicrosoftSqlServer": "7.0.0-rc1-final",
           "Hunter.Domain.Core": "1.0.0",
           "Hunter.Domain.Interfaces": "1.0.0",
           "Microsoft.AspNet.Identity.EntityFramework": "3.0.0-rc1-final"
@@ -12440,6 +12445,7 @@
         "framework": "DNXCore,Version=v5.0",
         "dependencies": {
           "EntityFramework.Core": "7.0.0-rc1-final",
+          "EntityFramework.MicrosoftSqlServer": "7.0.0-rc1-final",
           "Hunter.Domain.Core": "1.0.0",
           "Hunter.Domain.Interfaces": "1.0.0",
           "Microsoft.AspNet.Identity.EntityFramework": "3.0.0-rc1-final"
