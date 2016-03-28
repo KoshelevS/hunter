@@ -7,13 +7,13 @@
         $scope.alertDismissTimeout = HunterSettings.getAlertDismissTimeout();
 
         $scope.closeAlert = function (index) {
-            HunterAlerts.removeAlert(index)
+            HunterAlerts.removeAlert(index);
         };
     }
 
     angular
         .module('projectsApp')
-        .controller('alertsController', alertsController)
+        .controller('alertsController', alertsController);
 
     alertsController.$inject = ['$scope'];
 })();

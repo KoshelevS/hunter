@@ -4,9 +4,9 @@
     function addProjectInstanceController($scope, $uibModalInstance, $http) {
         $scope.title = 'Add Project';
 
-        $scope.ok = function() {
+        $scope.ok = function () {
             $http.post('/api/project/', $scope.project)
-                .success(function() {
+                .success(function () {
                     $uibModalInstance.close();
                 });
         };
@@ -14,29 +14,31 @@
         $scope.cancel = function () {
             $uibModalInstance.dismiss('cancel');
         };
-    };
+    }
 
     function editProjectInstanceController($scope, $uibModalInstance, $http, id) {
         $scope.title = 'Edit Project';
-    
-//        $http.get('/api/project/' + id)
-        $http.get('/api/ProjectsNew/' + id)
+
+        $http.get('/api/project/' + id)
             .success(function (data) {
                 $scope.project = data;
             });
 
-        $scope.ok = function() {
-//            $http.put('/api/project/' + id, $scope.project)
-            $http.put('/api/ProjectsNew/' + id, $scope.project)
-                .success(function() {
+        $scope.ok = function () {
+            $http.put('/api/project/' + id, $scope.project)
+                .success(function () {
                     $uibModalInstance.close();
+                })
+                .error(function () {
+                    $uibModalInstance.close();
+                    HunterAlerts.addDangerAlert("Editor error");
                 });
         };
 
         $scope.cancel = function () {
             $uibModalInstance.dismiss('cancel');
         };
-    };
+    }
 
     function projectsController($scope, $uibModal, $http, Projects) {
         $scope.Projects = Projects.query();
@@ -75,11 +77,10 @@
                 .delete('/api/project/' + _id)
                 .success(function () {
                     HunterAlerts.addSuccessAlert('Project was successfully deleted');
-
                     $scope.Projects = Projects.query();
-                }).error(function() {
+                })
+                .error(function () {
                     HunterAlerts.addDangerAlert('Error was occured during the project removal');
-
                     $scope.Projects = Projects.query();
                 });
         };
@@ -111,8 +112,8 @@
         .controller('EditProjectInstanceCtrl', editProjectInstanceController);
 
     projectsController.$inject = ['$scope', '$uibModal', '$http', 'Projects'];
-    addProjectInstanceController.$inject =['$scope', '$uibModalInstance', '$http'];
-    editProjectInstanceController.$inject =['$scope', '$uibModalInstance', '$http', 'id'];
+    addProjectInstanceController.$inject = ['$scope', '$uibModalInstance', '$http'];
+    editProjectInstanceController.$inject = ['$scope', '$uibModalInstance', '$http', 'id'];
 
 
 })();

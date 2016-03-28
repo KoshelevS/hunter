@@ -1,96 +1,141 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Threading;
-using System.Web.Http;
+using System.Threading.Tasks;
+//using System.Web.Caching;
+
 using Hunter.Domain.Core;
 using Hunter.Domain.Interfaces;
 using Hunter.Infrastructure.Data;
 using Hunter.ViewModels.Project;
+using Microsoft.AspNet.Http;
 using Microsoft.AspNet.Mvc;
+
 namespace Hunter.Controllers
 {
-    [Route("api/[controller]")]
-    public class ProjectController : ApiController
+    [Produces("application/json")]
+    [Route("api/project/")]
+    public class ProjectController : Controller
     {
-        private readonly IRepository<Project> _projectService;
+        private readonly IRepository<Project> _projectRepo;
 
-        public ProjectController(IRepository<Project> projectService)
+        public ProjectController(IRepository<Project> projectRepo)
         {
-            _projectService = projectService;
+            _projectRepo = projectRepo;
         }
 
-        //GET: api/values
+        //public IActionResult /*IEnumerable<object>*/ GetAll()
+        // GET: api/project
         [HttpGet]
-        public IActionResult /*IEnumerable<Project>*/ Get()
+        public async Task<IEnumerable<ProjectViewModel>> GetAll()
         {
             var projects =
-                from p in _projectService.GetAll()
+                from p in _projectRepo.GetAll()
                 let v = p.Vacancies.FirstOrDefault()
-                select new
+                select new ProjectViewModel
                 {
                     ID = p.Id,
                     Name = p.Name,
                     FirstVacancy = v != null ? v.Name : string.Empty
                 };
-            return Ok(projects);
+            //            return Ok(projects);
+            return projects.AsEnumerable();
         }
 
-        [HttpGet("{id}")]
-        public IActionResult Get(int id)
+        // GET: api/project/5
+        [HttpGet("{id}", Name = "Get")]
+        public async Task<IActionResult> Get([FromRoute] int id)
         {
-            var project = _projectService.Get(id);
+            if (!ModelState.IsValid)
+            {
+                return HttpBadRequest(ModelState);
+            }
+
+            //Project project = await _context.Project.SingleAsync(m => m.Id == id);
+            var project = await _projectRepo.GetAsync(id);
+
             if (project == null)
             {
-                return NotFound();
-                //throw new HttpResponseException(HttpStatusCode.NotFound);
+                return HttpNotFound();
             }
-            var result = new ProjectViewModel
-            {
-                ID = project.Id,
-                Name = project.Name,
-            };
-            return Ok(result);
+
+            return Ok(project);
         }
 
-        [HttpPost]
-        public void Create([FromBody] ProjectViewModel project)
-        {
-            var projectDto = new Project()
-            {
-                Name = project.Name
-            };
-
-            _projectService.Create(projectDto);
-        }
-
+        // PUT: api/project/5
         [HttpPut("{id}")]
-        public HttpResponseMessage Update(int id, [FromBody] ProjectViewModel project)
+        public async Task<IActionResult> Update([FromRoute] int id, [FromBody] Project project)
         {
-            var projectDto = _projectService.Get(id);
-            if (projectDto == null)
+            if (!ModelState.IsValid)
             {
-                return Request.CreateErrorResponse(HttpStatusCode.NotFound, "There is no project found");
+                return HttpBadRequest(ModelState);
             }
-            projectDto.Name = project.Name;
-            _projectService.Update(projectDto);
-            return Request.CreateResponse(HttpStatusCode.OK);
+
+            if (id != project.Id || project.Name == "Bad request")
+            {
+                return HttpBadRequest();
+            }
+
+            //_context.Entry(project).State = EntityState.Modified;
+
+            try
+            {
+                await _projectRepo.UpdateAsync(project);
+            }
+            catch (RowNotFoundException)
+            {
+                return HttpNotFound();
+            }
+
+            return new HttpStatusCodeResult(StatusCodes.Status204NoContent);
         }
 
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        // POST: api/project
+        [HttpPost]
+        public async Task<IActionResult> PostProject([FromBody] Project project)
         {
-            if (id % 2 == 0)
+            if (!ModelState.IsValid)
             {
-                _projectService.Delete(id);
+                return HttpBadRequest(ModelState);
             }
-            else
+            try
             {
-                throw new Exception("Dummy error");
+                await _projectRepo.CreateAsync(project);
             }
+            catch (ProjectExistsException)
+            {
+                return new HttpStatusCodeResult(StatusCodes.Status409Conflict);
+            }
+            return CreatedAtRoute("Get", new { id = project.Id }, project);
         }
+
+
+        // DELETE: api/project/5
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteProject([FromRoute] int id)
+        {
+            if (!ModelState.IsValid)
+            {
+                return HttpBadRequest(ModelState);
+            }
+
+            Project project = await _projectRepo.GetAsync(id);
+            if (project == null || project.Name == "Not Found")
+            {
+                return HttpNotFound();
+            }
+
+            await _projectRepo.DeleteAsync(id);
+            return Ok(project);
+        }
+
+        //        protected override void Dispose(bool disposing)
+        //        {
+        //            if (disposing)
+        //            {
+        //                _context.Dispose();
+        //            }
+        //            base.Dispose(disposing);
+        //        }
     }
 }

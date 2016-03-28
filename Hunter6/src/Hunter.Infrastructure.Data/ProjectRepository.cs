@@ -26,31 +26,49 @@ namespace Hunter.Infrastructure.Data
 
         public IEnumerable<Project> GetAll()
         {
-
             var projects = _context.Project.Include(p => p.Vacancies);
-
-            //            foreach (var v in _context.Project.FirstOrDefault()?.Vacancies)
-            //            {
-            //                    Debug.WriteLine(v.Name);
-            //            }
-
             return projects.AsEnumerable();
+        }
+
+        public IAsyncEnumerable<Project> GetAllAsync()
+        {
+            var projects = _context.Project.Include(p => p.Vacancies);
+            return projects.ToAsyncEnumerable();
         }
 
         public Project Get(int id)
         {
-            return _context.Project.SingleOrDefault(o => o.Id == id);
+            return _context.Project.FirstOrDefault(o => o.Id == id);
         }
 
         public Task<Project> GetAsync(int id)
         {
-            return _context.Project.SingleAsync(m => m.Id == id);
+            return _context.Project.FirstAsync(m => m.Id == id);
         }
 
         public void Create(Project item)
         {
             _context.Project.Add(item);
             _context.SaveChanges();
+        }
+        public async Task CreateAsync(Project project)
+        {
+            _context.Project.Add(project);
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateException)
+            {
+                if (ProjectExists(project.Id))
+                {
+                    throw new ProjectExistsException();
+                }
+                else
+                {
+                    throw;
+                }
+            }
         }
 
         public async Task UpdateAsync(Project project)
@@ -94,6 +112,13 @@ namespace Hunter.Infrastructure.Data
             _context.SaveChanges();
         }
 
+        public async Task DeleteAsync(int id)
+        {
+            var project = Get(id);
+            _context.Project.Remove(project);
+            await _context.SaveChangesAsync();
+        }
+
         private bool ProjectExists(int id)
         {
             return _context.Project.Count(e => e.Id == id) > 0;
@@ -101,6 +126,10 @@ namespace Hunter.Infrastructure.Data
     }
 
     public class RowNotFoundException : Exception
+    {
+    }
+
+    public class ProjectExistsException : Exception
     {
     }
 }

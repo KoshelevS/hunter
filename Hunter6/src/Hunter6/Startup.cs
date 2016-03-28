@@ -54,8 +54,7 @@ namespace Hunter
                 .AddDefaultTokenProviders();
 
             ConfigureAuthorization(services);
-            services.AddMvc()
-                .AddWebApiConventions();
+            services.AddMvc();
 
             // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();

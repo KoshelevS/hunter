@@ -6,6 +6,7 @@
 /// <reference path="../scripts/modules/hunter-alerts.js" />
 /// <reference path="../scripts/modules/hunter-settings.js" />
 /// <reference path="../scripts/services/projectsservice.js" />
+/// <reference path="js/site.js" />
 /// <reference path="lib/angular/angular.js" />
 /// <reference path="lib/angular-bootstrap/ui-bootstrap-tpls.js" />
 /// <reference path="lib/angular-ui-grid/ui-grid.js" />

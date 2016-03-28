@@ -11,7 +11,10 @@ namespace Hunter.Domain.Interfaces
         void Create(T item);
         void Update(T item);
         void Delete(int id);
+        IAsyncEnumerable<Project> GetAllAsync();
         Task<Project> GetAsync(int id);
+        Task CreateAsync(Project project);
         Task UpdateAsync(Project project);
+        Task DeleteAsync(int id);
     }
 }

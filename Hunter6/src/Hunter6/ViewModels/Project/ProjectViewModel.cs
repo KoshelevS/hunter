@@ -10,5 +10,7 @@ namespace Hunter.ViewModels.Project
 
         [Required]
         public string Name { get; set; }
+
+        public string FirstVacancy { get; set; }
     }
 }

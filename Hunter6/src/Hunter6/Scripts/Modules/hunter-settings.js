@@ -7,7 +7,7 @@
 
     return {
         getAlertDismissTimeout: function () {
-            return settings['alertDismissTimeout'];
+            return settings.alertDismissTimeout;
         }
     };
 })();
