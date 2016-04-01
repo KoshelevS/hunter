@@ -1,5 +1,4 @@
 ﻿(function () {
-    'use strict';
 
     function addProjectInstanceController($scope, $uibModalInstance, $http) {
         $scope.title = 'Add Project';

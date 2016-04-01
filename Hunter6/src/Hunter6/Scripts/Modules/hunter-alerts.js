@@ -1,5 +1,4 @@
 ﻿var HunterAlerts = (function () {
-    'use strict';
 
     var alerts = [];
 

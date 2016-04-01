@@ -1,5 +1,4 @@
 ﻿(function () {
-    'use strict';
 
     function alertsController($scope) {
         HunterAlerts.setScope($scope);

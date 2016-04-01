@@ -9,6 +9,7 @@ var gulp = require("gulp"),
     uglify = require("gulp-uglify"),
     template = require('gulp-template'),
     rename = require('gulp-rename'),
+    inject = require('gulp-inject-string'),
     appsettings = require("./appsettings.json");
 
 var paths = {
@@ -43,33 +44,24 @@ gulp.task('lint', function () {
 gulp.task("concat:js", function () {
     return gulp.src([paths.js, paths.excludeJs])
         .pipe(concat(paths.concatJsDest))
-        .pipe(gulp.dest("."));
+        .pipe(inject.prepend('"use strict";\n'))
+        .pipe(gulp.dest("."))
+        .pipe(rename(paths.concatMinJsDest))
+        .pipe(uglify())
+        .pipe(gulp.dest('.'));
 });
 
 gulp.task("concat:css", function () {
     return gulp.src(paths.css)
         .pipe(sass().on('error', sass.logError))
         .pipe(concat(paths.concatCssDest))
+        .pipe(gulp.dest("."))
+        .pipe(rename(paths.concatMinCssDest))
+        .pipe(cssmin())
         .pipe(gulp.dest("."));
 });
 gulp.task("concat", ["concat:js", "concat:css"]);
 
-gulp.task("min:js", function () {
-    return gulp.src([paths.js, paths.excludeJs])
-        .pipe(concat(paths.concatMinJsDest))
-        .pipe(uglify())
-        .pipe(gulp.dest("."));
-});
-gulp.task("min:css", function () {
-    return gulp.src(paths.css)
-        .pipe(sass().on('error', sass.logError))
-        .pipe(concat(paths.concatMinCssDest))
-        .pipe(cssmin())
-        .pipe(gulp.dest("."));
-});
-
-gulp.task("min", ["min:js", "min:css"]);
-
 gulp.task('default', function () {
-    gulp.watch([paths.js, paths.css], ['template:js', 'lint', 'concat', 'min']);
+    gulp.watch([paths.js, paths.css], ['template:js','lint', 'concat']);
 });
