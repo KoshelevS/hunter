@@ -39,8 +39,9 @@
         };
     }
 
-    function projectsController($scope, $uibModal, $http, Projects) {
+    function projectsController($scope, $uibModal, $http, Projects, FileUploader) {
         $scope.Projects = Projects.query();
+        $scope.uploader = new FileUploader();
 
         $scope.add = function () {
             var modalInstance = $uibModal.open({
@@ -110,7 +111,7 @@
         .controller('AddProjectInstanceCtrl', addProjectInstanceController)
         .controller('EditProjectInstanceCtrl', editProjectInstanceController);
 
-    projectsController.$inject = ['$scope', '$uibModal', '$http', 'Projects'];
+    projectsController.$inject = ['$scope', '$uibModal', '$http', 'Projects', 'FileUploader'];
     addProjectInstanceController.$inject = ['$scope', '$uibModalInstance', '$http'];
     editProjectInstanceController.$inject = ['$scope', '$uibModalInstance', '$http', 'id'];
 

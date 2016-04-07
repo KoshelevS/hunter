@@ -3,6 +3,7 @@
     angular.module('projectsApp', [
         'projectsService',
         'ui.grid',
-        'ui.bootstrap'
+        'ui.bootstrap',
+        'angularFileUpload'
     ]);
 })();

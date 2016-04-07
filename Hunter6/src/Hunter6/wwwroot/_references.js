@@ -10,6 +10,7 @@
 /// <reference path="js/site.js" />
 /// <reference path="lib/angular/angular.js" />
 /// <reference path="lib/angular-bootstrap/ui-bootstrap-tpls.js" />
+/// <reference path="lib/angular-file-upload/dist/angular-file-upload.min.js" />
 /// <reference path="lib/angular-ui-grid/ui-grid.js" />
 /// <reference path="lib/bootstrap/dist/js/bootstrap.js" />
 /// <reference path="lib/jquery/dist/jquery.js" />
