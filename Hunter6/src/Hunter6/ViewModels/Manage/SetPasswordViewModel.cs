@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Hunter6.ViewModels.Manage
+namespace Hunter.ViewModels.Manage
 {
     public class SetPasswordViewModel
     {

@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Hunter.Domain.Core;
@@ -10,10 +8,10 @@ using Microsoft.AspNet.Mvc;
 using Microsoft.AspNet.Mvc.Rendering;
 using Microsoft.Data.Entity;
 using Microsoft.Extensions.Logging;
-using Hunter6.Services;
-using Hunter6.ViewModels.Account;
+using Hunter.Services;
+using Hunter.ViewModels.Account;
 
-namespace Hunter6.Controllers
+namespace Hunter.Controllers
 {
     [Authorize]
     public class AccountController : Controller

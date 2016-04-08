@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Mvc.Rendering;
 
-namespace Hunter6.ViewModels.Account
+namespace Hunter.ViewModels.Account
 {
     public class SendCodeViewModel
     {

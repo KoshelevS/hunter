@@ -2,7 +2,7 @@
     ViewData["Title"] = "Home Page";
 }
 <div ng-cloak>
-    <div ng-controller="projectsController">
+    <div ng-controller="projectsController" nv-file-drop="" uploader="uploader">
         <h1>Projects <button class="btn btn-info" ng-click="add()"><span class="glyphicon glyphicon-plus"></span> Add</button></h1>
         <style>
             .grid {
@@ -14,8 +14,12 @@
         <div ui-grid="gridOptions" external-scopes="clickHandler" class="grid"></div>
 
         <input type="file" nv-file-select="" uploader="uploader" multiple style="margin-top: 20px"/>
-
-        <div class="col-md-9" style="margin-bottom: 40px">
+        <div ng-show="uploader.isHTML5">
+            <div class="well my-drop-zone" nv-file-over="" uploader="uploader">
+               Drop zone
+            </div>
+        </div>
+        <div class="col-md-9" style="margin-bottom: 40px" nv-file-over="" uploader="uploader">
             <h3>Upload queue</h3>
             <p>Queue length: {{ uploader.queue.length }}</p>
             <table class="table">

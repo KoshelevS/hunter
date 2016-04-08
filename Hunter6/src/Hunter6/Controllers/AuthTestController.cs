@@ -1,5 +1,4 @@
 using System.Threading.Tasks;
-
 using Microsoft.AspNet.Authorization;
 using Microsoft.AspNet.Mvc;
 

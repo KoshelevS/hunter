@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNet.Http.Authentication;
 using Microsoft.AspNet.Identity;
 
-namespace Hunter6.ViewModels.Manage
+namespace Hunter.ViewModels.Manage
 {
     public class ManageLoginsViewModel
     {

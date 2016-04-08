@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using System.Security.Claims;
 using Hunter.Domain.Core;
@@ -8,10 +6,10 @@ using Microsoft.AspNet.Authorization;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Mvc;
 using Microsoft.Extensions.Logging;
-using Hunter6.Services;
-using Hunter6.ViewModels.Manage;
+using Hunter.Services;
+using Hunter.ViewModels.Manage;
 
-namespace Hunter6.Controllers
+namespace Hunter.Controllers
 {
     [Authorize]
     public class ManageController : Controller

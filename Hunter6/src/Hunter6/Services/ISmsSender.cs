@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Hunter6.Services
+namespace Hunter.Services
 {
     public interface ISmsSender
     {
