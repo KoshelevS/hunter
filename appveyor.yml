@@ -2,4 +2,4 @@
 # http://www.appveyor.com/docs/appveyor-yml
 
 before_build:
-  - dnu restore
+  - dnu restore Hunter6/src
