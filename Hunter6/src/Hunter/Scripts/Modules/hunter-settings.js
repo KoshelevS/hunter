@@ -1,9 +1,12 @@
 var HunterSettings = (function () {
-    'use strict';
+    var settings = {"AlertDismissTimeoutInMilliseconds":5000};
+    var result = {};
 
-    return {
-        get alertDismissTimeout () {
-            return 5000;
-        }
-    };
+    for (var settingName in settings) {
+        Object.defineProperty(result, settingName, {
+            value: settings[settingName]
+        });
+    }
+
+    return result;
 })();

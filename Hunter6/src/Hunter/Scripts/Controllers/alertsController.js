@@ -3,7 +3,7 @@
     function alertsController($scope) {
         HunterAlerts.setScope($scope);
 
-        $scope.alertDismissTimeout = HunterSettings.alertDismissTimeout;
+        $scope.alertDismissTimeout = HunterSettings.AlertDismissTimeoutInMilliseconds;
 
         $scope.closeAlert = function (index) {
             HunterAlerts.removeAlert(index);
