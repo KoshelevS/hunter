@@ -7,7 +7,6 @@
 /// <reference path="../scripts/modules/hunter-settings.js" />
 /// <reference path="../scripts/modules/hunter-settings.template.js" />
 /// <reference path="../scripts/services/projectsservice.js" />
-/// <reference path="js/site.js" />
 /// <reference path="lib/angular/angular.js" />
 /// <reference path="lib/angular-bootstrap/ui-bootstrap-tpls.js" />
 /// <reference path="lib/angular-file-upload/dist/angular-file-upload.min.js" />

@@ -1,5 +1,12 @@
 # appveyor file
 # http://www.appveyor.com/docs/appveyor-yml
 
+init:
+  - cd Hunter6 # dnu requires global.json file to be in the current or one of the parent folder, so change folder to global.json file
+  - dnvm install 1.0.0-rc1-update1
+
 before_build:
   - dnu restore
+
+cache:
+  - packages -> **\project.json
