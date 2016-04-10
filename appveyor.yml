@@ -10,6 +10,6 @@ before_build:
 cache:
   - packages -> **\project.json
 
-test_script:
-  - cmd: >-
-    dnx -p Hunter6\test\Hunter.Web.Test test
+test:
+  assemblies:
+    - '**\*.test.dll'
