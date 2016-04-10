@@ -5,8 +5,7 @@ init:
   - dnvm install 1.0.0-rc1-update1
 
 before_build:
-  - cd Hunter6 # dnu requires global.json file to be in the current or one of the parent folder, so change folder to global.json file
-  - dnu restore
+  - dnu restore Hunter6
 
 cache:
   - packages -> **\project.json
