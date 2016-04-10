@@ -34,7 +34,7 @@ Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Hunter.Infrastructure.Busin
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Hunter.Web.Test", "test\Hunter.Web.Test\Hunter.Web.Test.xproj", "{650A5A85-5956-491E-9312-5E25A27D1108}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Hunter.DependencyResolver", "Hunter.DependencyResolver\Hunter.DependencyResolver.xproj", "{20E9F184-B6BE-413D-96D6-19B0F2BBBA12}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Hunter.DependencyResolver", "src\Hunter.DependencyResolver\Hunter.DependencyResolver.xproj", "{20E9F184-B6BE-413D-96D6-19B0F2BBBA12}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
