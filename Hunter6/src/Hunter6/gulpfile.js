@@ -27,7 +27,7 @@ paths.concatMinCssDest = paths.webroot + "css/site.min.css";
 
 gulp.task('template:js', function () {
     gulp.src(paths.templateJs, {base: "./"})
-      .pipe(template(appsettings))
+      .pipe(template({ "SettingsJSON": JSON.stringify(appsettings.Common) }))
       .pipe(rename(function (path) {
           path.basename = path.basename.substring(0, path.basename.lastIndexOf(".template"));
        }))
