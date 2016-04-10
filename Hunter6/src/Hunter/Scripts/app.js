@@ -4,6 +4,7 @@
         'projectsService',
         'ui.grid',
         'ui.bootstrap',
-        'angularFileUpload'
+        'angularFileUpload',
+        'hunterFilters'
     ]);
 })();
