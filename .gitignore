@@ -5,6 +5,9 @@
 *.suo
 *.user
 *.sln.docstates
+.vs/
+project.lock.json
+**/wwwroot/lib
 
 # Build results
 [Dd]ebug/
@@ -187,4 +190,3 @@ FakesAssemblies/
 GeneratedArtifacts/
 _Pvt_Extensions/
 ModelManifest.xml
-/Hunter6/src/Hunter6/wwwroot/lib/angular-bootstrap
