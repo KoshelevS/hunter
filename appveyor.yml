@@ -12,7 +12,7 @@ build:
   verbosity: minimal
 
 cache:
-  - Hunter6\packages -> **\project.json
+  - c:\users\appveyor\.dnx\packages -> **\project.json
 
 test_script:
   - cmd: for /d %%l in ("Hunter6\test\*") do (pushd %%l && dnx test && popd || exit 1)
