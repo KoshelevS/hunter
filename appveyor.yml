@@ -4,12 +4,14 @@
 init:
   - dnvm install 1.0.0-rc1-update1
 
+build:
+  - verbosity: minimal
+
 before_build:
-  - dnu restore Hunter6
+  - dnu restore Hunter6 --quiet
 
 cache:
   - packages -> **\project.json
 
-test:
-  assemblies:
-    - '**\*.test.dll'
+test_script:
+  - test.bat
