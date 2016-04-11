@@ -8,7 +8,7 @@ before_build:
   - dnu restore Hunter6 --quiet
 
 cache:
-  - packages -> **\project.json
+  - Hunter6\packages -> **\project.json
 
 test_script:
-  - test.bat
+  - cmd: for /d %%l in ("Hunter6\test\*") do (pushd %%l && dnx test && popd || exit 1)
