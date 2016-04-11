@@ -4,9 +4,6 @@
 init:
   - dnvm install 1.0.0-rc1-update1
 
-build:
-  - verbosity: minimal
-
 before_build:
   - dnu restore Hunter6 --quiet
 
