@@ -7,6 +7,10 @@ init:
 before_build:
   - dnu restore Hunter6 --quiet
 
+build:
+  parallel: true
+  verbosity: minimal
+
 cache:
   - Hunter6\packages -> **\project.json
 
