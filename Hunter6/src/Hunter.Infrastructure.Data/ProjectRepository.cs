@@ -123,6 +123,19 @@ namespace Hunter.Infrastructure.Data
         {
             return _context.Project.Count(e => e.Id == id) > 0;
         }
+
+        public void Dispose()
+        {
+            Dispose(true);
+        }
+
+        protected void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                _context.Dispose();
+            }
+        }
     }
 
     public class RowNotFoundException : Exception

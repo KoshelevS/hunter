@@ -24,7 +24,8 @@ namespace Hunter.Controllers
         //public IActionResult /*IEnumerable<object>*/ GetAll()
         // GET: api/project
         [HttpGet]
-        public async Task<IEnumerable<ProjectViewModel>> GetAll()
+        [ResponseCache(NoStore = true)]
+        public IEnumerable<ProjectViewModel> GetAll()
         {
             var projects =
                 from p in _projectRepo.GetAll()
@@ -126,13 +127,13 @@ namespace Hunter.Controllers
             return Ok(project);
         }
 
-        //        protected override void Dispose(bool disposing)
-        //        {
-        //            if (disposing)
-        //            {
-        //                _context.Dispose();
-        //            }
-        //            base.Dispose(disposing);
-        //        }
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                _projectRepo.Dispose();
+            }
+            base.Dispose(disposing);
+        }
     }
 }
