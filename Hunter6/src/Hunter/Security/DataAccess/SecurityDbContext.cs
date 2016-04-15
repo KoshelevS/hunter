@@ -4,7 +4,7 @@ using Microsoft.Data.Entity;
 
 namespace Hunter.Security.DataAccess
 {
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
+    public class SecurityDbContext : IdentityDbContext<ApplicationUser>
     {
         protected override void OnModelCreating(ModelBuilder builder)
         {

@@ -8,6 +8,7 @@
 .vs/
 project.lock.json
 **/wwwroot/lib
+**/wwwroot/js
 
 # Build results
 [Dd]ebug/
@@ -190,5 +191,4 @@ FakesAssemblies/
 GeneratedArtifacts/
 _Pvt_Extensions/
 ModelManifest.xml
-/Hunter6/src/Hunter6/wwwroot/js
-/Hunter6/src/Hunter/wwwroot/js
+

@@ -6,7 +6,7 @@ using Microsoft.Data.Entity.Migrations;
 
 namespace Hunter.Security.DataAccess.Migrations
 {
-    [DbContext(typeof(ApplicationDbContext))]
+    [DbContext(typeof(SecurityDbContext))]
     [Migration("00000000000000_CreateIdentitySchema")]
     partial class CreateIdentitySchema
     {

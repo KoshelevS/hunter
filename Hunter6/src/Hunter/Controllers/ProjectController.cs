@@ -127,13 +127,13 @@ namespace Hunter.Controllers
             return Ok(project);
         }
 
-        //        protected override void Dispose(bool disposing)
-        //        {
-        //            if (disposing)
-        //            {
-        //                _context.Dispose();
-        //            }
-        //            base.Dispose(disposing);
-        //        }
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                _projectRepo.Dispose();
+            }
+            base.Dispose(disposing);
+        }
     }
 }
