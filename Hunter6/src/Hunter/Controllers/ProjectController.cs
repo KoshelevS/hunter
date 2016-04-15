@@ -24,7 +24,8 @@ namespace Hunter.Controllers
         //public IActionResult /*IEnumerable<object>*/ GetAll()
         // GET: api/project
         [HttpGet]
-        public async Task<IEnumerable<ProjectViewModel>> GetAll()
+        [ResponseCache(NoStore = true)]
+        public IEnumerable<ProjectViewModel> GetAll()
         {
             var projects =
                 from p in _projectRepo.GetAll()
