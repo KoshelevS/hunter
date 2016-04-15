@@ -16,5 +16,11 @@ namespace Hunter.Web.Test
         {
             Assert.True(true);
         }
+
+        [Fact]
+        public void UniTest2()
+        {
+            Assert.True(false);
+        }
     }
 }
