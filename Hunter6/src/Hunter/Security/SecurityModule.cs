@@ -14,19 +14,19 @@ namespace Hunter.Security
             this EntityFrameworkServicesBuilder builder,
             string connectionString)
         {
-            return builder.AddDbContext<ApplicationDbContext>(
+            return builder.AddDbContext<SecurityDbContext>(
                 options => options.UseSqlServer(connectionString));
         }
 
         public static void MigrateSecurityContext(this IServiceScope serviceScope)
         {
-            serviceScope.ServiceProvider.GetService<ApplicationDbContext>().Database.Migrate();
+            serviceScope.ServiceProvider.GetService<SecurityDbContext>().Database.Migrate();
         }
 
         public static void ConfigureAuthorization(this IServiceCollection services)
         {
             services.AddIdentity<ApplicationUser, IdentityRole>()
-                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddEntityFrameworkStores<SecurityDbContext>()
                 .AddDefaultTokenProviders();
 
             services.AddAuthorization(options =>

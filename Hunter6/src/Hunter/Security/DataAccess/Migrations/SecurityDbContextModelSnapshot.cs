@@ -5,8 +5,8 @@ using Microsoft.Data.Entity.Metadata;
 
 namespace Hunter.Security.DataAccess.Migrations
 {
-    [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(SecurityDbContext))]
+    partial class SecurityDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
