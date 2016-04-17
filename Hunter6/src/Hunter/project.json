@@ -6,18 +6,13 @@
   },
 
   "dependencies": {
-    "EntityFramework.Commands": "7.0.0-rc1-final",
-    "EntityFramework.Core": "7.0.0-rc1-final",
-    "EntityFramework.MicrosoftSqlServer": "7.0.0-rc1-final",
     "Hunter.Domain.Core": "1.0.0-*",
     "Hunter.Domain.Interfaces": "1.0.0-*",
     "Hunter.Infrastructure.Business": "1.0.0-*",
     "Hunter.Infrastructure.Data": "1.0.0-*",
     "Hunter.Security": "1.0.0-*",
     "Hunter.Services.Interfaces": "1.0.0-*",
-    "Microsoft.AspNet.Authentication.Cookies": "1.0.0-rc1-final",
     "Microsoft.AspNet.Diagnostics.Entity": "7.0.0-rc1-final",
-    "Microsoft.AspNet.Identity.EntityFramework": "3.0.0-rc1-final",
     "Microsoft.AspNet.IISPlatformHandler": "1.0.0-rc1-final",
     "Microsoft.AspNet.Mvc": "6.0.0-rc1-final",
     "Microsoft.AspNet.Mvc.TagHelpers": "6.0.0-rc1-final",
