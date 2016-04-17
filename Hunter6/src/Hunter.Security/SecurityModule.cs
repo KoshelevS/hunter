@@ -1,5 +1,6 @@
-﻿using Hunter.Domain.Core;
-using Hunter.Security.DataAccess;
+﻿using Hunter.Security.DataAccess;
+using Hunter.Security.Model;
+
 using Microsoft.AspNet.Authorization;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Data.Entity;
@@ -8,7 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Hunter.Security
 {
-    internal static class SecurityModule
+    public static class SecurityModule
     {
         public static EntityFrameworkServicesBuilder AddSecurityContext(
             this EntityFrameworkServicesBuilder builder,

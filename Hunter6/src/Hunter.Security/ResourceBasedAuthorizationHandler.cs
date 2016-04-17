@@ -4,9 +4,9 @@ using Microsoft.AspNet.Authorization.Infrastructure;
 
 namespace Hunter.Security
 {
-    internal sealed class TestResource
+    public sealed class TestResource
     {
-        
+
     }
 
     internal sealed class ResourceBasedAuthorizationHandler
