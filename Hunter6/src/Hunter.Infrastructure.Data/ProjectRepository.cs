@@ -30,10 +30,10 @@ namespace Hunter.Infrastructure.Data
             return projects.AsEnumerable();
         }
 
-        public IAsyncEnumerable<Project> GetAllAsync()
+        public Task<List<Project>> GetAllAsync()
         {
             var projects = _context.Project.Include(p => p.Vacancies);
-            return projects.ToAsyncEnumerable();
+            return projects.ToListAsync();
         }
 
         public Project Get(int id)
@@ -43,7 +43,7 @@ namespace Hunter.Infrastructure.Data
 
         public Task<Project> GetAsync(int id)
         {
-            return _context.Project.FirstAsync(m => m.Id == id);
+            return _context.Project.FirstOrDefaultAsync(m => m.Id == id);
         }
 
         public void Create(Project item)

@@ -21,14 +21,13 @@ namespace Hunter.Controllers
             _projectRepo = projectRepo;
         }
 
-        //public IActionResult /*IEnumerable<object>*/ GetAll()
         // GET: api/project
         [HttpGet]
         [ResponseCache(NoStore = true)]
-        public IEnumerable<ProjectViewModel> GetAll()
+        public async Task<IEnumerable<ProjectViewModel>> GetAll()
         {
             var projects =
-                from p in _projectRepo.GetAll()
+                from p in await _projectRepo.GetAllAsync()
                 let v = p.Vacancies.FirstOrDefault()
                 select new ProjectViewModel
                 {
@@ -36,12 +35,12 @@ namespace Hunter.Controllers
                     Name = p.Name,
                     FirstVacancy = v != null ? v.Name : string.Empty
                 };
-            //            return Ok(projects);
-            return projects.AsEnumerable();
+            return projects;
         }
 
         // GET: api/project/5
         [HttpGet("{id}", Name = "Get")]
+        [ResponseCache(NoStore = true)]
         public async Task<IActionResult> Get([FromRoute] int id)
         {
             if (!ModelState.IsValid)
@@ -49,7 +48,6 @@ namespace Hunter.Controllers
                 return HttpBadRequest(ModelState);
             }
 
-            //Project project = await _context.Project.SingleAsync(m => m.Id == id);
             var project = await _projectRepo.GetAsync(id);
 
             if (project == null)
