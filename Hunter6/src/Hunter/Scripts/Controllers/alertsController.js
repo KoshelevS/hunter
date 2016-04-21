@@ -11,7 +11,7 @@
     }
 
     angular
-        .module('projectsApp')
+        .module('app')
         .controller('alertsController', alertsController);
 
     alertsController.$inject = ['$scope'];

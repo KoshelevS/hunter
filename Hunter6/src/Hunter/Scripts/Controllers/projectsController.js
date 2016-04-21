@@ -106,7 +106,7 @@
     }
 
     angular
-        .module('projectsApp')
+        .module('app')
         .controller('projectsController', projectsController)
         .controller('AddProjectInstanceCtrl', addProjectInstanceController)
         .controller('EditProjectInstanceCtrl', editProjectInstanceController);

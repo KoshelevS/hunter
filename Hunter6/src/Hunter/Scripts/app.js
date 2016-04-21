@@ -1,6 +1,6 @@
 ﻿(function () {
 
-    angular.module('projectsApp', [
+    angular.module('app', [
         'projectsService',
         'ui.grid',
         'ui.bootstrap',
