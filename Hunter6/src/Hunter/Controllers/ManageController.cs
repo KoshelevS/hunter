@@ -1,11 +1,13 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
 using System.Security.Claims;
-using Hunter.Domain.Core;
+
 using Microsoft.AspNet.Authorization;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Mvc;
 using Microsoft.Extensions.Logging;
+
+using Hunter.Security.Model;
 using Hunter.Services;
 using Hunter.ViewModels.Manage;
 

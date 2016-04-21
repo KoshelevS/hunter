@@ -8,14 +8,14 @@ namespace Hunter.Infrastructure.Data
     {
         public static void MigrateProjectContext(this IServiceScope serviceScope)
         {
-            serviceScope.ServiceProvider.GetService<ProjectContext>().Database.Migrate();
-            serviceScope.ServiceProvider.GetService<ProjectContext>().EnsureSeedData();
+            serviceScope.ServiceProvider.GetService<DomainContext>().Database.Migrate();
+            serviceScope.ServiceProvider.GetService<DomainContext>().EnsureSeedData();
         }
 
-        public static EntityFrameworkServicesBuilder AddProjectContext(
+        public static EntityFrameworkServicesBuilder AddDomainContext(
             this EntityFrameworkServicesBuilder builder, string connectionString)
         {
-            return builder.AddDbContext<ProjectContext>(
+            return builder.AddDbContext<DomainContext>(
                 options => options.UseSqlServer(connectionString));
         }
     }

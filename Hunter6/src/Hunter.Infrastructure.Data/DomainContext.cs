@@ -5,7 +5,7 @@ using Microsoft.Data.Entity;
 
 namespace Hunter.Infrastructure.Data
 {
-    public class ProjectContext : DbContext
+    public class DomainContext : DbContext
     {
         public DbSet<Project> Project { get; set; }
         public DbSet<Vacancy> Vacancy { get; set; }

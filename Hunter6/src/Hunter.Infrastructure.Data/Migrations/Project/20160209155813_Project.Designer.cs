@@ -5,7 +5,7 @@ using Microsoft.Data.Entity.Migrations;
 
 namespace Hunter.Infrastructure.Data.Migrations.Project
 {
-    [DbContext(typeof(ProjectContext))]
+    [DbContext(typeof(DomainContext))]
     [Migration("20160209155813_Project")]
     partial class Project
     {

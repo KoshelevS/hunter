@@ -1,10 +1,12 @@
 using System.Linq;
 using System.Threading.Tasks;
-using Hunter.Domain.Core;
-using Hunter6.ViewModels.Users;
+
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Mvc;
 using Microsoft.Data.Entity;
+
+using Hunter.Security.Model;
+using Hunter6.ViewModels.Users;
 
 namespace Hunter.Controllers
 {
@@ -14,7 +16,7 @@ namespace Hunter.Controllers
 
         public UsersController(UserManager<ApplicationUser> userManager)
         {
-            _userManager = userManager;    
+            _userManager = userManager;
         }
 
         // GET: Users

@@ -16,10 +16,10 @@ namespace Hunter.Infrastructure.Data
 {
     public class ProjectRepository : IRepository<Project>
     {
-        private readonly ProjectContext _context;
+        private readonly DomainContext _context;
 
 
-        public ProjectRepository(ProjectContext context)
+        public ProjectRepository(DomainContext context)
         {
             _context = context;
         }

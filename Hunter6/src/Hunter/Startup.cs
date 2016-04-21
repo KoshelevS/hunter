@@ -42,7 +42,7 @@ namespace Hunter
             services.AddEntityFramework()
                     .AddSqlServer()
                     .AddSecurityContext(connectionString)
-                    .AddProjectContext(connectionString);
+                    .AddDomainContext(connectionString);
 
             services.ConfigureAuthorization();
 

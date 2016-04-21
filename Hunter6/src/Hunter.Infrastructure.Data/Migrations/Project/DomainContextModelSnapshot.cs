@@ -4,8 +4,8 @@ using Microsoft.Data.Entity.Metadata;
 
 namespace Hunter.Infrastructure.Data.Migrations.Project
 {
-    [DbContext(typeof(ProjectContext))]
-    partial class ProjectContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(DomainContext))]
+    partial class DomainContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {

@@ -1,4 +1,4 @@
-﻿using Hunter.Domain.Core;
+﻿using Hunter.Security.Model;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Data.Entity;
 
