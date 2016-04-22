@@ -5,6 +5,7 @@
         'ui.grid',
         'ui.bootstrap',
         'angularFileUpload',
-        'hunterFilters'
+        'hunterFilters',
+        'candidateService'
     ]);
 })();

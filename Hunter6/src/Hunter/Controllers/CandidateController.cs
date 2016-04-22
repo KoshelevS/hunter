@@ -1,6 +1,9 @@
-﻿using Hunter.Domain.Core;
+﻿using System.Threading.Tasks;
+using Hunter.Domain.Core;
 using Hunter.Domain.Interfaces;
+using Hunter.Infrastructure.Data;
 using Microsoft.AspNet.Authorization;
+using Microsoft.AspNet.Http;
 using Microsoft.AspNet.Mvc;
 
 namespace Hunter.Controllers
@@ -22,5 +25,25 @@ namespace Hunter.Controllers
         {
             return View();
         }
+
+        // POST: api/project
+        [HttpPost]
+        public async Task<IActionResult> PostCandidate([FromBody] Applicant item)
+        {
+            if (!ModelState.IsValid)
+            {
+                return HttpBadRequest(ModelState);
+            }
+            try
+            {
+                await _applicantRepo.CreateAsync(item);
+            }
+            catch (ItemAlreadyExistsException)
+            {
+                return new HttpStatusCodeResult(StatusCodes.Status409Conflict);
+            }
+            return CreatedAtRoute("Get", new { id = item.Id }, item);
+        }
+
     }
 }
