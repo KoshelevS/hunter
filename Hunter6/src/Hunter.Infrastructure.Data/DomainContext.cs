@@ -9,6 +9,7 @@ namespace Hunter.Infrastructure.Data
     {
         public DbSet<Project> Project { get; set; }
         public DbSet<Vacancy> Vacancy { get; set; }
+        public DbSet<Applicant> Applicant { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -16,6 +17,7 @@ namespace Hunter.Infrastructure.Data
             modelBuilder.Entity<Project>().Property(p => p.Name).IsRequired().HasMaxLength(100);
 
             modelBuilder.Entity<Vacancy>().HasOne(v => v.Project).WithMany(p => p.Vacancies);
+            modelBuilder.Entity<Applicant>().HasKey(a => a.Id);
         }
 
         public void EnsureSeedData()

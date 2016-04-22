@@ -8,9 +8,10 @@ using Hunter.Infrastructure.Data;
 namespace Hunter.Infrastructure.Data.Migrations.Project
 {
     [DbContext(typeof(DomainContext))]
-    partial class DomainContextModelSnapshot : ModelSnapshot
+    [Migration("20160422112759_Applicant")]
+    partial class Applicant
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "7.0.0-rc1-16348")

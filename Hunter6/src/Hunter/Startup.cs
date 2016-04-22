@@ -66,7 +66,7 @@ namespace Hunter
                 app.UseBrowserLink();
                 app.UseDeveloperExceptionPage();
                 app.UseDatabaseErrorPage();
-
+                DbSetup(app);
             }
             else
             {
