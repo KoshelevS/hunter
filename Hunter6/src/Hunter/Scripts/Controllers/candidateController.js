@@ -4,7 +4,7 @@
         $scope.title = 'Add Candidate';
 
         $scope.ok = function () {
-            $http.post('/api/candidate/', $scope.candidate)
+            $http.post('/api/applicant/', $scope.candidate)
                 .success(function () {
                     $uibModalInstance.close();
                 });
@@ -18,13 +18,13 @@
     function editCandidateInstanceController($scope, $uibModalInstance, $http, id) {
         $scope.title = 'Edit Candidate';
 
-        $http.get('/api/candidate/' + id)
+        $http.get('/api/applicant/' + id)
             .success(function (data) {
                 $scope.candidate = data;
             });
 
         $scope.ok = function () {
-            $http.put('/api/candidate/' + id, $scope.candidate)
+            $http.put('/api/applicant/' + id, $scope.candidate)
                 .success(function () {
                     $uibModalInstance.close();
                 })
@@ -73,7 +73,7 @@
 
         $scope.delete = function (_id) {
             $http
-                .delete('/api/candidate/' + _id)
+                .delete('/api/applicant/' + _id)
                 .success(function () {
                     HunterAlerts.addSuccessAlert('Candidate was successfully deleted');
                     $scope.Candidate = Candidate.query();
