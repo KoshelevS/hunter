@@ -4,6 +4,7 @@ using Hunter.Domain.Core;
 using Hunter.Domain.Interfaces;
 using Hunter.Infrastructure.Data;
 using Hunter.ViewModels.Candidate;
+using Microsoft.AspNet.Authorization;
 using Microsoft.AspNet.Http;
 using Microsoft.AspNet.Mvc;
 using System.Linq;
@@ -13,6 +14,14 @@ namespace Hunter.Controllers
     [Route("api/[controller]")]
     public class ApplicantController : Controller
     {
+        [HttpGet]
+        [Authorize]
+        [Route("[controller]")]
+        public IActionResult Index()
+        {
+            return View();
+        }
+
         private readonly IRepository<Applicant> _applicantRepo;
 
         public ApplicantController(IRepository<Applicant> applicantRepo)
