@@ -6,7 +6,6 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-//using System.Transactions;
 using Hunter.Domain.Interfaces;
 using Hunter.Domain.Core;
 using Microsoft.Data.Entity;
@@ -17,7 +16,6 @@ namespace Hunter.Infrastructure.Data
     public class ProjectRepository : IRepository<Project>
     {
         private readonly DomainContext _context;
-
 
         public ProjectRepository(DomainContext context)
         {
@@ -51,6 +49,7 @@ namespace Hunter.Infrastructure.Data
             _context.Project.Add(item);
             _context.SaveChanges();
         }
+
         public async Task CreateAsync(Project project)
         {
             _context.Project.Add(project);
@@ -62,7 +61,7 @@ namespace Hunter.Infrastructure.Data
             {
                 if (ProjectExists(project.Id))
                 {
-                    throw new ProjectExistsException();
+                    throw new ItemAlreadyExistsException();
                 }
                 else
                 {
@@ -121,7 +120,7 @@ namespace Hunter.Infrastructure.Data
 
         private bool ProjectExists(int id)
         {
-            return _context.Project.Count(e => e.Id == id) > 0;
+            return _context.Project.Any(project => project.Id == id);
         }
 
         public void Dispose()
@@ -142,7 +141,7 @@ namespace Hunter.Infrastructure.Data
     {
     }
 
-    public class ProjectExistsException : Exception
+    public class ItemAlreadyExistsException : Exception
     {
     }
 }

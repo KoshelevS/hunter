@@ -98,7 +98,7 @@ namespace Hunter.Controllers
             {
                 await _projectRepo.CreateAsync(project);
             }
-            catch (ProjectExistsException)
+            catch (ItemAlreadyExistsException)
             {
                 return new HttpStatusCodeResult(StatusCodes.Status409Conflict);
             }

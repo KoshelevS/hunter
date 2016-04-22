@@ -12,10 +12,10 @@ namespace Hunter.Domain.Interfaces
         void Create(T item);
         void Update(T item);
         void Delete(int id);
-        Task<List<Project>> GetAllAsync();
-        Task<Project> GetAsync(int id);
-        Task CreateAsync(Project project);
-        Task UpdateAsync(Project project);
+        Task<List<T>> GetAllAsync();
+        Task<T> GetAsync(int id);
+        Task CreateAsync(T item);
+        Task UpdateAsync(T item);
         Task DeleteAsync(int id);
     }
 }

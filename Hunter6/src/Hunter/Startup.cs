@@ -52,6 +52,7 @@ namespace Hunter
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
             services.AddTransient<IRepository<Project>, ProjectRepository>();
+            services.AddTransient<IRepository<Applicant>, ApplicantRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
