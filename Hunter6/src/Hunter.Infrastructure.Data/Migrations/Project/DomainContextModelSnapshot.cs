@@ -8,7 +8,7 @@ using Hunter.Infrastructure.Data;
 namespace Hunter.Infrastructure.Data.Migrations.Project
 {
     [DbContext(typeof(DomainContext))]
-    partial class DomainContextModelSnapshot : ModelSnapshot
+    internal class DomainContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {

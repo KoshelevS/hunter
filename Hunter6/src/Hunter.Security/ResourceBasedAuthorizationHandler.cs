@@ -50,6 +50,7 @@ namespace Hunter.Security
             return false;
         }
 
+#pragma warning disable RECS0154 // Parameter is never used
         private bool CanRead(ClaimsPrincipal user, TestResource resource)
         {
             return true;
@@ -69,5 +70,6 @@ namespace Hunter.Security
         {
             return false;
         }
+#pragma warning restore RECS0154 // Parameter is never used
     }
 }
