@@ -1,10 +1,10 @@
 ﻿(function () {
 
-    function addCandidateInstanceController($scope, $uibModalInstance, $http) {
-        $scope.title = 'Add Candidate';
+    function addApplicantInstanceController($scope, $uibModalInstance, $http) {
+        $scope.title = 'Add Applicant';
 
         $scope.ok = function () {
-            $http.post('/api/applicant/', $scope.candidate)
+            $http.post('/api/applicant/', $scope.applicant)
                 .success(function () {
                     $uibModalInstance.close();
                 });
@@ -15,16 +15,16 @@
         };
     }
 
-    function editCandidateInstanceController($scope, $uibModalInstance, $http, id) {
-        $scope.title = 'Edit Candidate';
+    function editApplicantInstanceController($scope, $uibModalInstance, $http, id) {
+        $scope.title = 'Edit Applicant';
 
         $http.get('/api/applicant/' + id)
             .success(function (data) {
-                $scope.candidate = data;
+                $scope.applicant = data;
             });
 
         $scope.ok = function () {
-            $http.put('/api/applicant/' + id, $scope.candidate)
+            $http.put('/api/applicant/' + id, $scope.applicant)
                 .success(function () {
                     $uibModalInstance.close();
                 })
@@ -39,35 +39,35 @@
         };
     }
 
-    function candidateController($scope, $uibModal, $http, Candidate) {
-        $scope.Candidate = Candidate.query();
+    function applicantController($scope, $uibModal, $http, Applicant) {
+        $scope.Applicant = Applicant.query();
 
         $scope.add = function () {
             var modalInstance = $uibModal.open({
                 animation: true,
-                templateUrl: '/html/AddCandidateModal.html',
-                controller: 'AddCandidateInstanceCtrl'
+                templateUrl: '/html/AddApplicantModal.html',
+                controller: 'AddApplicantInstanceCtrl'
             });
 
             modalInstance.result.then(function () {
-                $scope.Candidate = Candidate.query();
+                $scope.Applicant = Applicant.query();
 
-                HunterAlerts.addSuccessAlert('Candidate was successfully added');
+                HunterAlerts.addSuccessAlert('Applicant was successfully added');
             });
         };
 
         $scope.edit = function (_id) {
             var modalInstance = $uibModal.open({
                 animation: true,
-                templateUrl: '/html/AddCandidateModal.html',
-                controller: 'EditCandidateInstanceCtrl',
+                templateUrl: '/html/AddApplicantModal.html',
+                controller: 'EditApplicantInstanceCtrl',
                 resolve: {
                     id: function () { return _id; }
                 }
             });
 
             modalInstance.result.then(function () {
-                $scope.candidate = Candidate.query();
+                $scope.applicant = Applicant.query();
             });
         };
 
@@ -75,12 +75,12 @@
             $http
                 .delete('/api/applicant/' + _id)
                 .success(function () {
-                    HunterAlerts.addSuccessAlert('Candidate was successfully deleted');
-                    $scope.Candidate = Candidate.query();
+                    HunterAlerts.addSuccessAlert('Applicant was successfully deleted');
+                    $scope.Applicant = Applicant.query();
                 })
                 .error(function () {
                     HunterAlerts.addDangerAlert('Error was occured during the removal');
-                    $scope.Candidate = Candidate.query();
+                    $scope.Applicant = Applicant.query();
                 });
         };
 
@@ -100,18 +100,18 @@
             ]
         };
 
-        $scope.gridOptions.data = "Candidate";
+        $scope.gridOptions.data = "Applicant";
     }
 
     angular
         .module('app')
-        .controller('candidateController', candidateController)
-        .controller('AddCandidateInstanceCtrl', addCandidateInstanceController)
-        .controller('EditProjectInstanceCtrl', editCandidateInstanceController);
+        .controller('applicantController', applicantController)
+        .controller('AddApplicantInstanceCtrl', addApplicantInstanceController)
+        .controller('EditProjectInstanceCtrl', editApplicantInstanceController);
 
-    candidateController.$inject = ['$scope', '$uibModal', '$http', 'Candidate'];
-    addCandidateInstanceController.$inject = ['$scope', '$uibModalInstance', '$http'];
-    editCandidateInstanceController.$inject = ['$scope', '$uibModalInstance', '$http', 'id'];
+    applicantController.$inject = ['$scope', '$uibModal', '$http', 'Applicant'];
+    addApplicantInstanceController.$inject = ['$scope', '$uibModalInstance', '$http'];
+    editApplicantInstanceController.$inject = ['$scope', '$uibModalInstance', '$http', 'id'];
 
 
 })();

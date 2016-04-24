@@ -1,10 +1,10 @@
 ﻿@{
-    ViewData["Title"] = "Candidates";
+    ViewData["Title"] = "Applicants";
 }
 <div ng-cloak>
-    <div ng-controller="candidateController">
+    <div ng-controller="applicantController">
         <h1>
-            Candidates <button class="btn btn-info" ng-click="add()"><span class="glyphicon glyphicon-plus"></span> Add</button>
+            Applicants <button class="btn btn-info" ng-click="add()"><span class="glyphicon glyphicon-plus"></span> Add</button>
         </h1>
         <div ui-grid="gridOptions" external-scopes="clickHandler" class="grid"></div>
     </div>

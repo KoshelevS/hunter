@@ -6,6 +6,6 @@
         'ui.bootstrap',
         'angularFileUpload',
         'hunterFilters',
-        'candidateService'
+        'applicantService'
     ]);
 })();

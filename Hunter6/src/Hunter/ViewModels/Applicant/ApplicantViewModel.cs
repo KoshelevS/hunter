@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Hunter.ViewModels.Candidate
+namespace Hunter.ViewModels.Applicant
 {
     public class ApplicantViewModel
     {
