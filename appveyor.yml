@@ -16,3 +16,8 @@ cache:
 
 test_script:
   - cmd: for /d %%l in ("Hunter6\test\*") do (pushd %%l && dnx test && popd || exit 1)
+
+notifications:
+  - provider: Slack
+    incoming_webhook:
+      secure: uU6Er/YwcX7IJTbRwDRrQBNAr7HQiqTif1oRE6K6c0BkVczpkqW0RTWZSewMlfiYX4vRK+Xt0VXIj0ob0F4CXzy0rTQKgRTHDZQcKD+pjnI=
