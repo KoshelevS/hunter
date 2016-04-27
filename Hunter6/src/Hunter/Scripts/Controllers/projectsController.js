@@ -46,7 +46,7 @@
         $scope.add = function () {
             var modalInstance = $uibModal.open({
                 animation: true,
-                templateUrl: '/html/EditProjectModal.html',
+                templateUrl: '/html/modal/EditProjectModal.html',
                 controller: 'AddProjectInstanceCtrl'
             });
 
@@ -60,7 +60,7 @@
         $scope.edit = function (_id) {
             var modalInstance = $uibModal.open({
                 animation: true,
-                templateUrl: '/html/EditProjectModal.html',
+                templateUrl: '/html/modal/EditProjectModal.html',
                 controller: 'EditProjectInstanceCtrl',
                 resolve: {
                     id: function () { return _id; }

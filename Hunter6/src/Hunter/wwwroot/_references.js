@@ -4,6 +4,7 @@
 /// <reference path="../scripts/controllers/alertscontroller.js" />
 /// <reference path="../scripts/controllers/applicantcontroller.js" />
 /// <reference path="../scripts/controllers/projectscontroller.js" />
+/// <reference path="../scripts/directives/fileuploader.js" />
 /// <reference path="../scripts/modules/hunter-alerts.js" />
 /// <reference path="../Scripts/Modules/hunter-filters.js" />
 /// <reference path="../scripts/modules/hunter-settings.js" />
