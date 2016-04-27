@@ -111,7 +111,9 @@
                     sortable: false
                 }
             ],
-            data:applicantService.query()
+            data: 'Applicant'
+            //data:applicantService.query()
+            //data:$scope.Applicant
         };
 
         //$scope.gridOptions.data = 'Applicant';
