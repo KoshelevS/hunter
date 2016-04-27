@@ -2,7 +2,10 @@
     <h3 class="modal-title">{{ title }}</h3>
 </div>
 <div class="modal-body">
-    <input type="text" placeholder="Name" ng-model="applicant.Name" required />
+    <div><input type="text" placeholder="Name" ng-model="applicant.Name" required /></div>
+    <div><input type="text" placeholder="Address" ng-model="applicant.Address" required /></div>
+    <div><input type="text" placeholder="Phone" ng-model="applicant.Phone" required /></div>
+    <div><input type="text" placeholder="Enter Birthday" ng-model="applicant.Birthday" required /></div>
 </div>
 <div class="modal-footer">
     <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>

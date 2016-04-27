@@ -1,10 +1,12 @@
 ﻿(function () {
 
-    var applicantService = angular.module('applicantService', ['ngResource']);
-    applicantService.factory('Applicant', ['$resource',
+    var applicantModule = angular.module('applicantModule', ['ngResource']);
+
+    applicantModule.factory('applicantService', ['$resource',
         function ($resource) {
-            return $resource('/api/applicant', {}, {
-                query: { method: 'Get', params: {}, isArray: true }
+            return $resource('/api/applicant/:id', {}, {
+                query: { method: 'Get', params: {id:''}, isArray: true },
+                remove: { method: 'DELETE' }
             });
         }
     ]);

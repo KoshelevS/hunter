@@ -23,12 +23,13 @@ namespace Hunter.Infrastructure.Data
 
         public Applicant Get(int id)
         {
-            throw new System.NotImplementedException();
+            return _context.Applicant.FirstOrDefault(applicant => applicant.Id == id);
         }
 
         public void Create(Applicant item)
         {
-            throw new System.NotImplementedException();
+            _context.Applicant.Add(item);
+            _context.SaveChanges();
         }
 
         public void Update(Applicant item)
@@ -38,7 +39,9 @@ namespace Hunter.Infrastructure.Data
 
         public void Delete(int id)
         {
-            throw new System.NotImplementedException();
+            var item = Get(id);
+            _context.Remove(item);
+            _context.SaveChanges();
         }
 
         public Task<List<Applicant>> GetAllAsync()
@@ -48,7 +51,7 @@ namespace Hunter.Infrastructure.Data
 
         public Task<Applicant> GetAsync(int id)
         {
-            throw new System.NotImplementedException();
+            return _context.Applicant.FirstOrDefaultAsync(applicant => applicant.Id == id);
         }
 
         public async Task CreateAsync(Applicant item)
@@ -76,9 +79,11 @@ namespace Hunter.Infrastructure.Data
             throw new System.NotImplementedException();
         }
 
-        public Task DeleteAsync(int id)
+        public async Task DeleteAsync(int id)
         {
-            throw new System.NotImplementedException();
+            var item = Get(id);
+            _context.Remove(item);
+            await _context.SaveChangesAsync();
         }
 
         public void Dispose()

@@ -33,12 +33,37 @@ namespace Hunter.Controllers
         [ResponseCache(NoStore = true)]
         public async Task<IEnumerable<ApplicantViewModel>> GetAll()
         {
-            return from p in await _applicantRepo.GetAllAsync()
-                   select new ApplicantViewModel
-                   {
-                       ID = p.Id,
-                       Name = p.Name,
-                   };
+            return
+                from p in await _applicantRepo.GetAllAsync()
+                select new ApplicantViewModel
+                {
+                    ID = p.Id,
+                    Name = p.Name,
+                    Address = p.Address,
+                    Phone = p.Phone,
+                    Birthday = p.Birthday,
+                };
+        }
+
+        // GET: http://localhost:55675/api/Applicant/8
+        //[Route("api/[controller]/[action]/{id}")]
+        [HttpGet("{id}", Name = "GetApplicant")]
+        [ResponseCache(NoStore = true)]
+        public async Task<IActionResult> GetApplicant([FromRoute] int id)
+        {
+            if (!ModelState.IsValid)
+            {
+                return HttpBadRequest(ModelState);
+            }
+
+            var applicant = await _applicantRepo.GetAsync(id);
+
+            if (applicant == null)
+            {
+                return HttpNotFound();
+            }
+
+            return Ok(applicant);
         }
 
         [HttpPost]
@@ -58,7 +83,27 @@ namespace Hunter.Controllers
                 return new HttpStatusCodeResult(StatusCodes.Status409Conflict);
             }
 
-            return CreatedAtRoute("Get", new { id = item.Id }, item);
+            return CreatedAtRoute("GetApplicant", new { controller = "Applicant", id = item.Id }, item);
         }
+
+        // DELETE: api/Applicant/5
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteApplicant([FromRoute] int id)
+        {
+            if (!ModelState.IsValid)
+            {
+                return HttpBadRequest(ModelState);
+            }
+
+            var applicant= await _applicantRepo.GetAsync(id);
+            if (applicant == null)
+            {
+                return HttpNotFound();
+            }
+
+            await _applicantRepo.DeleteAsync(id);
+            return Ok(applicant);
+        }
+
     }
 }
