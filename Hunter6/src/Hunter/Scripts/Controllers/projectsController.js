@@ -15,7 +15,7 @@
         };
     }
 
-    function editProjectInstanceController($scope, $uibModalInstance, $http, id) {
+    function editProjectInstanceController($scope, $uibModalInstance, $http, alertService, id) {
         $scope.title = 'Edit Project';
 
         $http.get('/api/project/' + id)
@@ -30,7 +30,7 @@
                 })
                 .error(function () {
                     $uibModalInstance.close();
-                    HunterAlerts.addDangerAlert("Editor error");
+                    alertService.addDangerAlert("Editor error");
                 });
         };
 
@@ -39,7 +39,7 @@
         };
     }
 
-    function projectsController($scope, $uibModal, $http, Projects, FileUploader) {
+    function projectsController($scope, $uibModal, $http, alertService, Projects, FileUploader) {
         $scope.Projects = Projects.query();
         $scope.uploader = new FileUploader();
 
@@ -53,7 +53,7 @@
             modalInstance.result.then(function () {
                 $scope.Projects = Projects.query();
 
-                HunterAlerts.addSuccessAlert('Project was successfully added');
+                alertService.addSuccessAlert('Project was successfully added');
             });
         };
 
@@ -76,11 +76,11 @@
             $http
                 .delete('/api/project/' + _id)
                 .success(function () {
-                    HunterAlerts.addSuccessAlert('Project was successfully deleted');
+                    alertService.addSuccessAlert('Project was successfully deleted');
                     $scope.Projects = Projects.query();
                 })
                 .error(function () {
-                    HunterAlerts.addDangerAlert('Error was occured during the project removal');
+                    alertService.addDangerAlert('Error was occured during the project removal');
                     $scope.Projects = Projects.query();
                 });
         };
@@ -111,9 +111,9 @@
         .controller('AddProjectInstanceCtrl', addProjectInstanceController)
         .controller('EditProjectInstanceCtrl', editProjectInstanceController);
 
-    projectsController.$inject = ['$scope', '$uibModal', '$http', 'Projects', 'FileUploader'];
+    projectsController.$inject = ['$scope', '$uibModal', '$http', 'alertService', 'Projects', 'FileUploader'];
     addProjectInstanceController.$inject = ['$scope', '$uibModalInstance', '$http'];
-    editProjectInstanceController.$inject = ['$scope', '$uibModalInstance', '$http', 'id'];
+    editProjectInstanceController.$inject = ['$scope', '$uibModalInstance', '$http', 'alertService', 'id'];
 
 
 })();
