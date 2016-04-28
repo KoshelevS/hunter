@@ -89,6 +89,7 @@ namespace Hunter.Infrastructure.Data
                 }
             }
         }
+
         public void Update(Project item)
         {
             _context.Update(item);

@@ -15,7 +15,7 @@
         };
     }
 
-    function editApplicantInstanceController($scope, $uibModalInstance, $http, id) {
+    function editApplicantInstanceController($scope, $uibModalInstance, $http, alertService, id) {
         $scope.title = 'Edit Applicant';
 
         $http.get('/api/applicant/' + id)
@@ -30,7 +30,7 @@
                 })
                 .error(function () {
                     $uibModalInstance.close();
-                    HunterAlerts.addDangerAlert("Editor error");
+                    alertService.addDangerAlert("Editor error");
                 });
         };
 
@@ -39,8 +39,8 @@
         };
     }
 
-    function applicantController($scope, $uibModal, $http, Applicant) {
-        $scope.Applicant = Applicant.query();
+    function applicantController($scope, $uibModal, $http, alertService, applicantService) {
+        $scope.Applicant = applicantService.query();
 
         $scope.add = function () {
             var modalInstance = $uibModal.open({
@@ -50,9 +50,9 @@
             });
 
             modalInstance.result.then(function () {
-                $scope.Applicant = Applicant.query();
+                $scope.Applicant = applicantService.query();
 
-                HunterAlerts.addSuccessAlert('Applicant was successfully added');
+                alertService.addSuccessAlert('Applicant was successfully added');
             });
         };
 
@@ -67,28 +67,41 @@
             });
 
             modalInstance.result.then(function () {
-                $scope.applicant = Applicant.query();
+                $scope.applicant = applicantService.query();
             });
         };
 
+        //        $scope.delete = applicantService.remove(_id)
+        //            .success(function() {
+        //                alertService.addSuccessAlert('Applicant was successfully deleted');
+        //                $scope.Applicant = applicantService.query();
+        //            })
+        //            .error(function() {
+        //                alertService.addDangerAlert('Error was occured during the removal');
+        //                $scope.Applicant = applicantService.query();
+        //            });
         $scope.delete = function (_id) {
-            $http
-                .delete('/api/applicant/' + _id)
+            $http.delete('/api/applicant/' + _id)  //applicantService.remove(_id)
                 .success(function () {
-                    HunterAlerts.addSuccessAlert('Applicant was successfully deleted');
-                    $scope.Applicant = Applicant.query();
+                    alertService.addSuccessAlert('Applicant was successfully deleted');
+                    $scope.Applicant = applicantService.query();
                 })
                 .error(function () {
-                    HunterAlerts.addDangerAlert('Error was occured during the removal');
-                    $scope.Applicant = Applicant.query();
+                    alertService.addDangerAlert('Error was occured during the removal');
+                    $scope.Applicant = applicantService.query();
                 });
         };
 
         $scope.gridOptions = {
             enableFiltering: true,
+            enableRowSelection: true,
+            multiSelect: false,
+            enableColumnResize: true,
             columnDefs: [
                 { name: 'ID', field: 'ID' },
                 { name: 'Name', field: 'Name' },
+                { name: 'Phone', field: 'Phone' },
+                { field: 'Birthday', displayName: 'Birthday', type: 'date', cellFilter: 'date:\'yyyy-MM-dd\'' },
                 {
                     name: 'Actions',
                     enableFiltering: false,
@@ -97,10 +110,15 @@
                             '<button class="btn btn-danger" ng-click="grid.appScope.delete(row.entity.ID)"><span class="glyphicon glyphicon-remove"></span> Delete</button></div>',
                     sortable: false
                 }
-            ]
+            ],
+            data: 'Applicant'
+            //data:applicantService.query()
+            //data:$scope.Applicant
         };
 
-        $scope.gridOptions.data = "Applicant";
+        //$scope.gridOptions.data = 'Applicant';
+        //$scope.gridOptions.data = applicantService.query();
+        //$scope.gridOptions.data = $scope.Applicant;
     }
 
     angular
@@ -109,9 +127,9 @@
         .controller('AddApplicantInstanceCtrl', addApplicantInstanceController)
         .controller('EditProjectInstanceCtrl', editApplicantInstanceController);
 
-    applicantController.$inject = ['$scope', '$uibModal', '$http', 'Applicant'];
+    applicantController.$inject = ['$scope', '$uibModal', '$http', 'alertService', 'applicantService'];
     addApplicantInstanceController.$inject = ['$scope', '$uibModalInstance', '$http'];
-    editApplicantInstanceController.$inject = ['$scope', '$uibModalInstance', '$http', 'id'];
+    editApplicantInstanceController.$inject = ['$scope', '$uibModalInstance', '$http', 'alertService', 'id'];
 
 
 })();

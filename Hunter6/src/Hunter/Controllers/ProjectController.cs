@@ -82,8 +82,8 @@ namespace Hunter.Controllers
             {
                 return HttpNotFound();
             }
-
-            return new HttpStatusCodeResult(StatusCodes.Status204NoContent);
+            return new NoContentResult();
+            //return new HttpStatusCodeResult(StatusCodes.Status204NoContent);
         }
 
         // POST: api/project
