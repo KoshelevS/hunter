@@ -1,5 +1,6 @@
 using Hunter.Domain.Core;
 using Hunter.Domain.Interfaces;
+using Hunter.Filters;
 using Hunter.Infrastructure.Data;
 using Hunter.Security;
 using Hunter.Services;
@@ -47,6 +48,8 @@ namespace Hunter
             services.ConfigureAuthorization();
 
             services.AddMvc();
+
+            services.AddScoped<ValidateMimeMultipartContentFilter>();
 
             // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();

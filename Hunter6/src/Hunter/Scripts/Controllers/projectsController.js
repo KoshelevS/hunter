@@ -41,7 +41,9 @@
 
     function projectsController($scope, $uibModal, $http, Projects, FileUploader) {
         $scope.Projects = Projects.query();
-        $scope.uploader = new FileUploader();
+        $scope.uploader = new FileUploader({
+            url: 'api/FileUpload/files'
+        });
 
         $scope.add = function () {
             var modalInstance = $uibModal.open({
