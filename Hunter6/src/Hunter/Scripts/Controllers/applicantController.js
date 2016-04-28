@@ -15,7 +15,7 @@
         };
     }
 
-    function editApplicantInstanceController($scope, $uibModalInstance, $http, id) {
+    function editApplicantInstanceController($scope, $uibModalInstance, $http, alertService, id) {
         $scope.title = 'Edit Applicant';
 
         $http.get('/api/applicant/' + id)
@@ -30,7 +30,7 @@
                 })
                 .error(function () {
                     $uibModalInstance.close();
-                    HunterAlerts.addDangerAlert("Editor error");
+                    alertService.addDangerAlert("Editor error");
                 });
         };
 
@@ -39,7 +39,7 @@
         };
     }
 
-    function applicantController($scope, $uibModal, $http, applicantService) {
+    function applicantController($scope, $uibModal, $http, alertService, applicantService) {
         $scope.Applicant = applicantService.query();
 
         $scope.add = function () {
@@ -52,7 +52,7 @@
             modalInstance.result.then(function () {
                 $scope.Applicant = applicantService.query();
 
-                HunterAlerts.addSuccessAlert('Applicant was successfully added');
+                alertService.addSuccessAlert('Applicant was successfully added');
             });
         };
 
@@ -73,21 +73,21 @@
 
         //        $scope.delete = applicantService.remove(_id)
         //            .success(function() {
-        //                HunterAlerts.addSuccessAlert('Applicant was successfully deleted');
+        //                alertService.addSuccessAlert('Applicant was successfully deleted');
         //                $scope.Applicant = applicantService.query();
         //            })
         //            .error(function() {
-        //                HunterAlerts.addDangerAlert('Error was occured during the removal');
+        //                alertService.addDangerAlert('Error was occured during the removal');
         //                $scope.Applicant = applicantService.query();
         //            });
         $scope.delete = function (_id) {
             $http.delete('/api/applicant/' + _id)  //applicantService.remove(_id)
                 .success(function () {
-                    HunterAlerts.addSuccessAlert('Applicant was successfully deleted');
+                    alertService.addSuccessAlert('Applicant was successfully deleted');
                     $scope.Applicant = applicantService.query();
                 })
                 .error(function () {
-                    HunterAlerts.addDangerAlert('Error was occured during the removal');
+                    alertService.addDangerAlert('Error was occured during the removal');
                     $scope.Applicant = applicantService.query();
                 });
         };
@@ -127,9 +127,9 @@
         .controller('AddApplicantInstanceCtrl', addApplicantInstanceController)
         .controller('EditProjectInstanceCtrl', editApplicantInstanceController);
 
-    applicantController.$inject = ['$scope', '$uibModal', '$http', 'applicantService'];
+    applicantController.$inject = ['$scope', '$uibModal', '$http', 'alertService', 'applicantService'];
     addApplicantInstanceController.$inject = ['$scope', '$uibModalInstance', '$http'];
-    editApplicantInstanceController.$inject = ['$scope', '$uibModalInstance', '$http', 'id'];
+    editApplicantInstanceController.$inject = ['$scope', '$uibModalInstance', '$http', 'alertService', 'id'];
 
 
 })();

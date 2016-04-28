@@ -1,12 +1,12 @@
 ﻿(function () {
 
-    function alertsController($scope) {
-        HunterAlerts.setScope($scope);
+    function alertsController($scope, alertService) {
+        alertService.setScope($scope);
 
         $scope.alertDismissTimeout = HunterSettings.AlertDismissTimeoutInMilliseconds;
 
         $scope.closeAlert = function (index) {
-            HunterAlerts.removeAlert(index);
+            alertService.removeAlert(index);
         };
     }
 
@@ -14,5 +14,5 @@
         .module('app')
         .controller('alertsController', alertsController);
 
-    alertsController.$inject = ['$scope'];
+    alertsController.$inject = ['$scope', 'alertService'];
 })();
