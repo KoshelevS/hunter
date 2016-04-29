@@ -1,13 +1,14 @@
 ﻿(function () {
 
-    function addApplicantInstanceController($scope, $uibModalInstance, $http) {
+    function addApplicantInstanceController($scope, $uibModalInstance, applicantService) {
         $scope.title = 'Add Applicant';
 
         $scope.ok = function () {
-            $http.post('/api/applicant/', $scope.applicant)
-                .success(function () {
+            applicantService.create({ }, $scope.applicant,
+                function (data) {
                     $uibModalInstance.close();
-                });
+                }
+            );
         };
 
         $scope.cancel = function () {
@@ -15,23 +16,25 @@
         };
     }
 
-    function editApplicantInstanceController($scope, $uibModalInstance, $http, alertService, id) {
+    function editApplicantInstanceController($scope, $uibModalInstance, applicantService, alertService, id) {
         $scope.title = 'Edit Applicant';
 
-        $http.get('/api/applicant/' + id)
-            .success(function (data) {
+        applicantService.get({ id: id },
+            function (data) {
                 $scope.applicant = data;
-            });
+            }
+        );
 
         $scope.ok = function () {
-            $http.put('/api/applicant/' + id, $scope.applicant)
-                .success(function () {
+            applicantService.update({ id: id }, $scope.applicant,
+                function (data) {
                     $uibModalInstance.close();
-                })
-                .error(function () {
+                },
+                function (error) {
                     $uibModalInstance.close();
                     alertService.addDangerAlert("Editor error");
-                });
+                }
+            );
         };
 
         $scope.cancel = function () {
@@ -39,7 +42,7 @@
         };
     }
 
-    function applicantController($scope, $uibModal, $http, alertService, applicantService) {
+    function applicantController($scope, $uibModal, alertService, applicantService) {
         $scope.Applicant = applicantService.query();
 
         $scope.add = function () {
@@ -80,16 +83,18 @@
         //                alertService.addDangerAlert('Error was occured during the removal');
         //                $scope.Applicant = applicantService.query();
         //            });
+
         $scope.delete = function (_id) {
-            $http.delete('/api/applicant/' + _id)  //applicantService.remove(_id)
-                .success(function () {
+            applicantService.remove({ id: _id },
+                function (data) {
                     alertService.addSuccessAlert('Applicant was successfully deleted');
                     $scope.Applicant = applicantService.query();
-                })
-                .error(function () {
+                },
+                function (error) {
                     alertService.addDangerAlert('Error was occured during the removal');
                     $scope.Applicant = applicantService.query();
-                });
+                }
+            );
         };
 
         $scope.gridOptions = {
@@ -125,11 +130,11 @@
         .module('app')
         .controller('applicantController', applicantController)
         .controller('AddApplicantInstanceCtrl', addApplicantInstanceController)
-        .controller('EditProjectInstanceCtrl', editApplicantInstanceController);
+        .controller('EditApplicantInstanceCtrl', editApplicantInstanceController);
 
-    applicantController.$inject = ['$scope', '$uibModal', '$http', 'alertService', 'applicantService'];
-    addApplicantInstanceController.$inject = ['$scope', '$uibModalInstance', '$http'];
-    editApplicantInstanceController.$inject = ['$scope', '$uibModalInstance', '$http', 'alertService', 'id'];
+    applicantController.$inject = ['$scope', '$uibModal', 'alertService', 'applicantService'];
+    addApplicantInstanceController.$inject = ['$scope', '$uibModalInstance', 'applicantService'];
+    editApplicantInstanceController.$inject = ['$scope', '$uibModalInstance', 'applicantService', 'alertService', 'id'];
 
 
 })();

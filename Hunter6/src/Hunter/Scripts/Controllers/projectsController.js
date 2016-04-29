@@ -1,13 +1,14 @@
 ﻿(function () {
 
-    function addProjectInstanceController($scope, $uibModalInstance, $http) {
+    function addProjectInstanceController($scope, $uibModalInstance, Projects) {
         $scope.title = 'Add Project';
 
         $scope.ok = function () {
-            $http.post('/api/project/', $scope.project)
-                .success(function () {
+            Projects.create({}, $scope.project,
+                function (data) {
                     $uibModalInstance.close();
-                });
+                }
+            );
         };
 
         $scope.cancel = function () {
@@ -15,23 +16,25 @@
         };
     }
 
-    function editProjectInstanceController($scope, $uibModalInstance, $http, alertService, id) {
+    function editProjectInstanceController($scope, $uibModalInstance, Projects, alertService, id) {
         $scope.title = 'Edit Project';
 
-        $http.get('/api/project/' + id)
-            .success(function (data) {
+        Projects.get({ id: id },
+            function (data) {
                 $scope.project = data;
-            });
+            }
+        );
 
         $scope.ok = function () {
-            $http.put('/api/project/' + id, $scope.project)
-                .success(function () {
+            Projects.update({ id: id }, $scope.project,
+                function (data) {
                     $uibModalInstance.close();
-                })
-                .error(function () {
+                },
+                function (error) {
                     $uibModalInstance.close();
                     alertService.addDangerAlert("Editor error");
-                });
+                }
+            );
         };
 
         $scope.cancel = function () {
@@ -39,7 +42,7 @@
         };
     }
 
-    function projectsController($scope, $uibModal, $http, alertService, Projects, FileUploader) {
+    function projectsController($scope, $uibModal, alertService, Projects, FileUploader) {
         $scope.Projects = Projects.query();
         $scope.uploader = new FileUploader({
             url: 'api/FileUpload/files'
@@ -75,16 +78,16 @@
         };
 
         $scope.delete = function (_id) {
-            $http
-                .delete('/api/project/' + _id)
-                .success(function () {
+            Projects.remove({ id: _id },
+                function (data) {
                     alertService.addSuccessAlert('Project was successfully deleted');
                     $scope.Projects = Projects.query();
-                })
-                .error(function () {
+                },
+                function (error) {
                     alertService.addDangerAlert('Error was occured during the project removal');
                     $scope.Projects = Projects.query();
-                });
+                }
+            );
         };
 
         $scope.gridOptions = {
@@ -113,9 +116,9 @@
         .controller('AddProjectInstanceCtrl', addProjectInstanceController)
         .controller('EditProjectInstanceCtrl', editProjectInstanceController);
 
-    projectsController.$inject = ['$scope', '$uibModal', '$http', 'alertService', 'Projects', 'FileUploader'];
-    addProjectInstanceController.$inject = ['$scope', '$uibModalInstance', '$http'];
-    editProjectInstanceController.$inject = ['$scope', '$uibModalInstance', '$http', 'alertService', 'id'];
+    projectsController.$inject = ['$scope', '$uibModal', 'alertService', 'Projects', 'FileUploader'];
+    addProjectInstanceController.$inject = ['$scope', '$uibModalInstance', 'Projects'];
+    editProjectInstanceController.$inject = ['$scope', '$uibModalInstance', 'Projects', 'alertService', 'id'];
 
 
 })();
