@@ -6,7 +6,8 @@
         'ui.bootstrap',
         'angularFileUpload',
         'hunterFilters',
-        'hunterCommonServices',
+        'common.AlertService',
+        'common.SettingService',
         'applicantModule'
     ]);
 })();
