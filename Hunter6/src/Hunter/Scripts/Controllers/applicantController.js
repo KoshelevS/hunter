@@ -61,7 +61,7 @@
             var modalInstance = $uibModal.open({
                 animation: true,
                 templateUrl: '/html/modal/AddApplicantModal.html',
-                controller: 'EditApplicantInstanceController',
+                controller: 'editApplicantInstanceController',
                 resolve: {
                     id: function () { return _id; }
                 }
@@ -115,7 +115,7 @@
         .module('app')
         .controller('applicantController', applicantController)
         .controller('AddApplicantInstanceCtrl', addApplicantInstanceController)
-        .controller('EditApplicantInstanceCtrl', editApplicantInstanceController);
+        .controller('editApplicantInstanceController', editApplicantInstanceController);
 
     applicantController.$inject = ['$scope', '$uibModal', 'alertService', 'applicantService'];
     addApplicantInstanceController.$inject = ['$scope', '$uibModalInstance', 'applicantService'];

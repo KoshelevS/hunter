@@ -6,6 +6,7 @@
 /// <reference path="../scripts/controllers/projectscontroller.js" />
 /// <reference path="../scripts/directives/fileuploader.js" />
 /// <reference path="../Scripts/Modules/hunter-filters.js" />
+/// <reference path="../Scripts/Modules/hunter-settings.template.js" />
 /// <reference path="../scripts/services/applicantservice.js" />
 /// <reference path="../scripts/services/common/alertservice.js" />
 /// <reference path="../scripts/services/common/settingservice.js" />
