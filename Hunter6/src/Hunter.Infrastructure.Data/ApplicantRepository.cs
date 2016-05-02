@@ -74,9 +74,24 @@ namespace Hunter.Infrastructure.Data
             }
         }
 
-        public Task UpdateAsync(Applicant item)
+        public async Task UpdateAsync(Applicant item)
         {
-            throw new System.NotImplementedException();
+            _context.Entry(item).State = EntityState.Modified;
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!ApplicantExists(item.Id))
+                {
+                    throw new RowNotFoundException();
+                }
+                else
+                {
+                    throw;
+                }
+            }
         }
 
         public async Task DeleteAsync(int id)

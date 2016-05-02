@@ -1,13 +1,31 @@
-﻿<div class="modal-header">
-    <h3 class="modal-title">{{ title }}</h3>
-</div>
-<div class="modal-body">
-    <div><input type="text" placeholder="Name" ng-model="applicant.Name" required /></div>
-    <div><input type="text" placeholder="Address" ng-model="applicant.Address" required /></div>
-    <div><input type="text" placeholder="Phone" ng-model="applicant.Phone" required /></div>
-    <div><input type="text" placeholder="Enter Birthday" ng-model="applicant.Birthday" required /></div>
-</div>
-<div class="modal-footer">
-    <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
-    <button class="btn btn-default" type="button" ng-click="cancel()">Cancel</button>
+﻿<div ng-keypress="$event.keyCode == 13 && ok()">
+    <div class="modal-header">
+        <h3 class="modal-title">{{ title }}</h3>
+    </div>
+    <div class="modal-body">
+        <div>
+            <input type="text" class="form-control" placeholder="Name" ng-model="applicant.Name" required />
+        </div>
+        <div>
+            <input type="text" class="form-control" placeholder="Address" ng-model="applicant.Address" required />
+        </div>
+        <div>
+            <input type="text" class="form-control" placeholder="Phone" ng-model="applicant.Phone" required />
+        </div>
+        <div>
+            <input type="date"
+                   class="form-control"
+                   placeholder="yyyy-MM-dd"
+                   ng-model="applicant.Birthday"
+                   min="1926-01-01"
+                   max="2013-12-31"
+                   value="{{applicant.Birthday | date: 'yyyy-MM-dd'}}"
+                   required />
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary active" type="button" ng-click="ok()">OK</button>
+        <button class="btn btn-default" type="button" ng-click="cancel()">Cancel</button>
+    </div>
+    <!--                   value="{{$filter('date')(applicant.Birthday,'yyyy-MM-dd')}}"-->
 </div>

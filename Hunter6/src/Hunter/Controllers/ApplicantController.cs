@@ -86,6 +86,32 @@ namespace Hunter.Controllers
             return CreatedAtRoute("GetApplicant", new { controller = "Applicant", id = item.Id }, item);
         }
 
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update([FromRoute] int id, [FromBody] Applicant item)
+        {
+            if (!ModelState.IsValid)
+            {
+                return HttpBadRequest(ModelState);
+            }
+
+            if (id != item.Id || item.Name == "Bad request")
+            {
+                return HttpBadRequest();
+            }
+
+            //_context.Entry(project).State = EntityState.Modified;
+
+            try
+            {
+                await _applicantRepo.UpdateAsync(item);
+            }
+            catch (RowNotFoundException)
+            {
+                return HttpNotFound();
+            }
+            return new NoContentResult();
+        }
+
         // DELETE: api/Applicant/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteApplicant([FromRoute] int id)
