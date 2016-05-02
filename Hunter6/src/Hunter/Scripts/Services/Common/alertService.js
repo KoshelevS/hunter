@@ -1,5 +1,5 @@
 ﻿(function () {
-    angular.module('hunterCommonServices', [])
+    angular.module('common.AlertService', [])
         .factory('alertService', function () {
             var alerts = [];
 

@@ -1,13 +1,14 @@
 ﻿(function () {
 
-    function addApplicantInstanceController($scope, $uibModalInstance, $http) {
+    function addApplicantInstanceController($scope, $uibModalInstance, applicantService) {
         $scope.title = 'Add Applicant';
 
         $scope.ok = function () {
-            $http.post('/api/applicant/', $scope.applicant)
-                .success(function () {
+            applicantService.create({ }, $scope.applicant,
+                function (data) {
                     $uibModalInstance.close();
-                });
+                }
+            );
         };
 
         $scope.cancel = function () {
@@ -30,7 +31,8 @@
                 }, function errorCallcack() {
                     $uibModalInstance.close();
                     alertService.addDangerAlert("Editor error");
-                });
+                }
+            );
         };
 
         $scope.cancel = function () {
@@ -38,7 +40,7 @@
         };
     }
 
-    function applicantController($scope, $uibModal, $http, alertService, applicantService) {
+    function applicantController($scope, $uibModal, alertService, applicantService) {
         $scope.Applicant = applicantService.query();
 
         $scope.add = function () {
@@ -113,10 +115,10 @@
         .module('app')
         .controller('applicantController', applicantController)
         .controller('AddApplicantInstanceCtrl', addApplicantInstanceController)
-        .controller('EditApplicantInstanceController', editApplicantInstanceController);
+        .controller('EditApplicantInstanceCtrl', editApplicantInstanceController);
 
-    applicantController.$inject = ['$scope', '$uibModal', '$http', 'alertService', 'applicantService'];
-    addApplicantInstanceController.$inject = ['$scope', '$uibModalInstance', '$http'];
+    applicantController.$inject = ['$scope', '$uibModal', 'alertService', 'applicantService'];
+    addApplicantInstanceController.$inject = ['$scope', '$uibModalInstance', 'applicantService'];
     editApplicantInstanceController.$inject = ['$scope', '$uibModalInstance', 'applicantService', 'alertService', 'id'];
 
 
