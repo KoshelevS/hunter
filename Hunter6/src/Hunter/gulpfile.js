@@ -4,14 +4,14 @@
 var gulp = require("gulp"),
     jshint = require('gulp-jshint'),
     concat = require("gulp-concat"),
-    sass = require('gulp-sass'),
+    //sass = require('gulp-sass'),
     cssmin = require("gulp-cssmin"),
     uglify = require("gulp-uglify"),
     template = require('gulp-template'),
     rename = require('gulp-rename'),
-    inject = require('gulp-inject-string'),
-    appsettings = require("./appsettings.json");
-
+    inject = require('gulp-inject-string')
+    ,appsettings = require('./appsettings.json')
+    ;
 var paths = {
     webroot: "./wwwroot/"
 };

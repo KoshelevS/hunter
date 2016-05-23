@@ -1,15 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.Common;
-using System.Diagnostics;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
+
 using Hunter.Domain.Interfaces;
 using Hunter.Domain.Core;
-using Microsoft.Data.Entity;
-using Microsoft.Data.Entity.Storage;
+using Microsoft.EntityFrameworkCore;
+
 
 namespace Hunter.Infrastructure.Data
 {

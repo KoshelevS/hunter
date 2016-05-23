@@ -1,12 +1,12 @@
 using System.Linq;
 using System.Threading.Tasks;
 
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Mvc;
-using Microsoft.Data.Entity;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore .Mvc;
 
 using Hunter.Security.Model;
 using Hunter6.ViewModels.Users;
+using Microsoft.EntityFrameworkCore;
 
 namespace Hunter.Controllers
 {
@@ -30,13 +30,13 @@ namespace Hunter.Controllers
         {
             if (id == null)
             {
-                return HttpNotFound();
+                return NotFound();
             }
 
             UserViewModel userViewModel = await ToUserViewModel(_userManager.FindByIdAsync(id));
             if (userViewModel == null)
             {
-                return HttpNotFound();
+                return NotFound();
             }
 
             return View(userViewModel);
@@ -47,13 +47,13 @@ namespace Hunter.Controllers
         {
             if (id == null)
             {
-                return HttpNotFound();
+                return NotFound();
             }
 
             UserViewModel userViewModel = await ToUserViewModel(_userManager.FindByIdAsync(id));
             if (userViewModel == null)
             {
-                return HttpNotFound();
+                return NotFound();
             }
 
             return View(userViewModel);
@@ -80,13 +80,13 @@ namespace Hunter.Controllers
         {
             if (id == null)
             {
-                return HttpNotFound();
+                return NotFound();
             }
 
             UserViewModel userViewModel = await ToUserViewModel(_userManager.FindByIdAsync(id));
             if (userViewModel == null)
             {
-                return HttpNotFound();
+                return NotFound();
             }
 
             return View(userViewModel);

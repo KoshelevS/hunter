@@ -2,26 +2,28 @@
     "version": "1.0.0-*",
     "description": "Hunter.Infrastructure.Data Class Library",
     "authors": [ "Vladimir" ],
-    "tags": [ "" ],
-    "projectUrl": "",
-    "licenseUrl": "",
     "frameworks": {
-        "dnx451": { },
-        "dnxcore50": {
-            "frameworkAssemblies": {
-            }
+        "netcoreapp1.0": {
+            "imports": [
+                "dotnet5.6",
+                "dnxcore50",
+                "portable-net45+win8"
+            ]
         }
     },
+
     "dependencies": {
-        "EntityFramework.Commands": "7.0.0-rc1-final",
-        "EntityFramework.Core": "7.0.0-rc1-final",
-        "EntityFramework.MicrosoftSqlServer": "7.0.0-rc1-final",
+        "Microsoft.NETCore.App": {
+            "version": "1.0.0-rc2-3002702",
+            "type": "platform"
+        },
         "Hunter.Domain.Core": "1.0.0-*",
         "Hunter.Domain.Interfaces": "1.0.0-*",
-        "Microsoft.AspNet.Identity.EntityFramework": "3.0.0-rc1-final"
-    },
-    "commands": {
-        "ef": "EntityFramework.Commands"
+        //"Microsoft.EntityFrameworkCore": "1.0.0-rc2-final",
+        //"Microsoft.EntityFrameworkCore.Relational": "1.0.0-rc2-final",
+        "Microsoft.EntityFrameworkCore.SqlServer": "1.0.0-rc2-final",
+        "Microsoft.EntityFrameworkCore": "1.0.0-rc2-final",
+        "EntityFramework.MicrosoftSqlServer": "7.0.0-rc1-final",
+        "Microsoft.EntityFrameworkCore.Relational": "1.0.0-rc2-final"
     }
-
 }

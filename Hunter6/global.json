@@ -3,7 +3,7 @@
     "src",
     "test"
   ],
-  "sdk": {
-    "version": "1.0.0-rc1-update1"
-  }
+    "sdk": {
+        "version": "1.0.0-preview1-002702"
+    }
 }

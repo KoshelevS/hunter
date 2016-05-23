@@ -21,7 +21,8 @@
 
         applicantService.get({ id: id },
             function successCallback(data) {
-                 $scope.applicant = data;
+                $scope.applicant = data;
+                $scope.applicant.Birthday = new Date(data.Birthday);
             });
 
         $scope.ok = function() {
@@ -91,7 +92,8 @@
                 { name: 'ID', field: 'ID' },
                 { name: 'Name', field: 'Name' },
                 { name: 'Phone', field: 'Phone' },
-                { field: 'Birthday', displayName: 'Birthday', type: 'date', cellFilter: 'date:\'yyyy-MM-dd\'' },
+                { name: 'Birthday',field: 'Birthday', displayName: 'Birthday', type: 'date', cellFilter: 'date:\'yyyy-MM-dd\'' },
+                { name: 'B-day',field: 'Birthday', displayName: 'bd'},
                 {
                     name: 'Actions',
                     enableFiltering: false,

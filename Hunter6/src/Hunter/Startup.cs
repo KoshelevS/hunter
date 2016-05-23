@@ -1,11 +1,17 @@
+using System.IO;
 using Hunter.Domain.Core;
 using Hunter.Domain.Interfaces;
 using Hunter.Filters;
 using Hunter.Infrastructure.Data;
 using Hunter.Security;
+using Hunter.Security.DataAccess;
 using Hunter.Services;
-using Microsoft.AspNet.Builder;
-using Microsoft.AspNet.Hosting;
+
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+
+using Microsoft.EntityFrameworkCore;
+
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -18,8 +24,9 @@ namespace Hunter
         {
             // Set up configuration sources.
             var builder = new ConfigurationBuilder()
+                .SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json")
-                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true);
+                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true, reloadOnChange:true);
 
             if (env.IsDevelopment())
             {
@@ -40,11 +47,9 @@ namespace Hunter
             // Add framework services.
             string connectionString = Configuration["Data:DefaultConnection:ConnectionString"];
 
-            services.AddEntityFramework()
-                    .AddSqlServer()
-                    .AddSecurityContext(connectionString)
-                    .AddDomainContext(connectionString);
-
+            services
+                .AddDbContext<SecurityDbContext>(options => options.UseSqlServer(connectionString))
+                .AddDbContext<DomainContext>(options => options.UseSqlServer(connectionString));
             services.ConfigureAuthorization();
 
             services.AddMvc();
@@ -78,7 +83,7 @@ namespace Hunter
                 app.UseExceptionHandler("/Home/Error");
             }
 
-            app.UseIISPlatformHandler(options => options.AuthenticationDescriptions.Clear());
+            //app.UseIISPlatformHandler(options => options.AuthenticationDescriptions.Clear());
 
             app.UseStaticFiles();
 
@@ -101,18 +106,37 @@ namespace Hunter
             {
                 using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
                 {
-                    serviceScope.MigrateSecurityContext();
                     serviceScope.MigrateProjectContext();
                 }
             }
-#pragma warning disable RECS0022 // A catch clause that catches System.Exception and has an empty body
             catch
-#pragma warning restore RECS0022 // A catch clause that catches System.Exception and has an empty body
+            {
+            }
+            try
+            {
+                using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
+                {
+                    serviceScope.MigrateSecurityContext();
+                }
+            }
+            catch
             {
             }
         }
 
         // Entry point for the application.
-        public static void Main(string[] args) => WebApplication.Run<Startup>(args);
+        //public static void Main(string[] args) => WebApplication.Run<Startup>(args);
+        public static void Main(string[] args)
+        {
+            var host = new WebHostBuilder()
+                .UseKestrel()
+                .UseContentRoot(Directory.GetCurrentDirectory())
+                .UseIISIntegration()
+                .UseStartup<Startup>()
+                .Build();
+
+            host.Run();
+        }
+
     }
 }

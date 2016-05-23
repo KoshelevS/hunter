@@ -1,27 +1,28 @@
-﻿using Hunter.Security.DataAccess;
+﻿using System;
+using Hunter.Security.DataAccess;
 using Hunter.Security.Model;
 
-using Microsoft.AspNet.Authorization;
-using Microsoft.AspNet.Identity.EntityFramework;
-using Microsoft.Data.Entity;
-using Microsoft.Data.Entity.Infrastructure;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Hunter.Security
 {
     public static class SecurityModule
     {
-        public static EntityFrameworkServicesBuilder AddSecurityContext(
-            this EntityFrameworkServicesBuilder builder,
-            string connectionString)
-        {
-            return builder.AddDbContext<SecurityDbContext>(
-                options => options.UseSqlServer(connectionString));
-        }
+        // todo moved to startup
+        //public static EntityFrameworkServicesBuilder AddSecurityContext(this EntityFrameworkServicesBuilder builder, string connectionString)
+        //{
+        //    return builder.AddDbContext<SecurityDbContext>(
+        //        options => options.UseSqlServer(connectionString));
+        //}
 
         public static void MigrateSecurityContext(this IServiceScope serviceScope)
         {
-            serviceScope.ServiceProvider.GetService<SecurityDbContext>().Database.Migrate();
+            IServiceProvider serviceProvider = serviceScope.ServiceProvider;
+            SecurityDbContext securityDbContext = serviceProvider.GetService<SecurityDbContext>();
+            securityDbContext.Database.Migrate();
         }
 
         public static void ConfigureAuthorization(this IServiceCollection services)

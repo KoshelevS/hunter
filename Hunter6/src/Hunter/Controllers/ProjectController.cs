@@ -5,8 +5,8 @@ using Hunter.Domain.Core;
 using Hunter.Domain.Interfaces;
 using Hunter.Infrastructure.Data;
 using Hunter.ViewModels.Project;
-using Microsoft.AspNet.Http;
-using Microsoft.AspNet.Mvc;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Hunter.Controllers
 {
@@ -45,14 +45,14 @@ namespace Hunter.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return HttpBadRequest(ModelState);
+                return BadRequest(ModelState);
             }
 
             var project = await _projectRepo.GetAsync(id);
 
             if (project == null)
             {
-                return HttpNotFound();
+                return NotFound();
             }
 
             return Ok(project);
@@ -64,12 +64,12 @@ namespace Hunter.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return HttpBadRequest(ModelState);
+                return BadRequest(ModelState);
             }
 
             if (id != project.Id || project.Name == "Bad request")
             {
-                return HttpBadRequest();
+                return BadRequest();
             }
 
             //_context.Entry(project).State = EntityState.Modified;
@@ -80,7 +80,7 @@ namespace Hunter.Controllers
             }
             catch (RowNotFoundException)
             {
-                return HttpNotFound();
+                return NotFound();
             }
             return new NoContentResult();
             //return new HttpStatusCodeResult(StatusCodes.Status204NoContent);
@@ -92,7 +92,7 @@ namespace Hunter.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return HttpBadRequest(ModelState);
+                return BadRequest(ModelState);
             }
             try
             {
@@ -100,7 +100,7 @@ namespace Hunter.Controllers
             }
             catch (ItemAlreadyExistsException)
             {
-                return new HttpStatusCodeResult(StatusCodes.Status409Conflict);
+                return new StatusCodeResult(StatusCodes.Status409Conflict);
             }
             return CreatedAtRoute("Get", new { id = project.Id }, project);
         }
@@ -112,13 +112,13 @@ namespace Hunter.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return HttpBadRequest(ModelState);
+                return BadRequest(ModelState);
             }
 
             Project project = await _projectRepo.GetAsync(id);
             if (project == null || project.Name == "Not Found")
             {
-                return HttpNotFound();
+                return NotFound();
             }
 
             await _projectRepo.DeleteAsync(id);

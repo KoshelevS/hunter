@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Hunter.Domain.Core;
 using Hunter.Domain.Interfaces;
 using Microsoft.Data.Entity;
+using EntityFrameworkQueryableExtensions = Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions;
 
 namespace Hunter.Infrastructure.Data
 {
@@ -46,12 +47,12 @@ namespace Hunter.Infrastructure.Data
 
         public Task<List<Applicant>> GetAllAsync()
         {
-            return _context.Applicant.ToListAsync();
+            return EntityFrameworkQueryableExtensions.ToListAsync(_context.Applicant);
         }
 
         public Task<Applicant> GetAsync(int id)
         {
-            return _context.Applicant.FirstOrDefaultAsync(applicant => applicant.Id == id);
+            return EntityFrameworkQueryableExtensions.FirstOrDefaultAsync(_context.Applicant, (applicant => applicant.Id == id));
         }
 
         public async Task CreateAsync(Applicant item)
@@ -76,7 +77,8 @@ namespace Hunter.Infrastructure.Data
 
         public async Task UpdateAsync(Applicant item)
         {
-            _context.Entry(item).State = EntityState.Modified;
+            _context.Entry(item).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+
             try
             {
                 await _context.SaveChangesAsync();

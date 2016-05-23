@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Hunter.Domain.Core;
 
 namespace Hunter.Domain.Interfaces
 {

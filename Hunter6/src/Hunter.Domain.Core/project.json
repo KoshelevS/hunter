@@ -2,17 +2,20 @@
     "version": "1.0.0-*",
     "description": "Hunter.Domain.Core Class Library",
     "authors": [ "Vladimir" ],
-    "tags": [ "" ],
-    "projectUrl": "",
-    "licenseUrl": "",
     "frameworks": {
-        "dnx451": {
-            "dependencies": {
-            }
-        },
-        "dnxcore50": { }
+        "netcoreapp1.0": {
+            "imports": [
+                "dotnet5.6",
+                "dnxcore50",
+                "portable-net45+win8"
+            ]
+        }
     },
+
     "dependencies": {
-        "Microsoft.AspNet.Identity.EntityFramework": "3.0.0-rc1-final"
+        "Microsoft.NETCore.App": {
+            "version": "1.0.0-rc2-3002702",
+            "type": "platform"
+        }
     }
 }

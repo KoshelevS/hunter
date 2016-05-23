@@ -1,11 +1,19 @@
-﻿using Hunter.Security.Model;
-using Microsoft.AspNet.Identity.EntityFramework;
-using Microsoft.Data.Entity;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
+using Hunter.Security.Model;
 
 namespace Hunter.Security.DataAccess
 {
     public class SecurityDbContext : IdentityDbContext<ApplicationUser>
     {
+        public SecurityDbContext(DbContextOptions<SecurityDbContext> options)
+            : base(options)
+        {
+        }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);

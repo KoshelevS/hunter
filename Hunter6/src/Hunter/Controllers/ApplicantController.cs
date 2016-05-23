@@ -4,9 +4,9 @@ using Hunter.Domain.Core;
 using Hunter.Domain.Interfaces;
 using Hunter.Infrastructure.Data;
 using Hunter.ViewModels.Applicant;
-using Microsoft.AspNet.Authorization;
-using Microsoft.AspNet.Http;
-using Microsoft.AspNet.Mvc;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 
 namespace Hunter.Controllers
@@ -53,14 +53,14 @@ namespace Hunter.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return HttpBadRequest(ModelState);
+                return BadRequest(ModelState);
             }
 
             var applicant = await _applicantRepo.GetAsync(id);
 
             if (applicant == null)
             {
-                return HttpNotFound();
+                return NotFound();
             }
 
             return Ok(applicant);
@@ -71,7 +71,7 @@ namespace Hunter.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return HttpBadRequest(ModelState);
+                return BadRequest(ModelState);
             }
 
             try
@@ -80,7 +80,7 @@ namespace Hunter.Controllers
             }
             catch (ItemAlreadyExistsException)
             {
-                return new HttpStatusCodeResult(StatusCodes.Status409Conflict);
+                return new StatusCodeResult(StatusCodes.Status409Conflict);
             }
 
             return CreatedAtRoute("GetApplicant", new { controller = "Applicant", id = item.Id }, item);
@@ -91,12 +91,12 @@ namespace Hunter.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return HttpBadRequest(ModelState);
+                return BadRequest(ModelState);
             }
 
             if (id != item.Id || item.Name == "Bad request")
             {
-                return HttpBadRequest();
+                return BadRequest();
             }
 
             //_context.Entry(project).State = EntityState.Modified;
@@ -107,7 +107,7 @@ namespace Hunter.Controllers
             }
             catch (RowNotFoundException)
             {
-                return HttpNotFound();
+                return NotFound();
             }
             return new NoContentResult();
         }
@@ -118,13 +118,13 @@ namespace Hunter.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return HttpBadRequest(ModelState);
+                return BadRequest(ModelState);
             }
 
             var applicant= await _applicantRepo.GetAsync(id);
             if (applicant == null)
             {
-                return HttpNotFound();
+                return NotFound();
             }
 
             await _applicantRepo.DeleteAsync(id);
