@@ -36,7 +36,6 @@ namespace Hunter
 
             builder.AddEnvironmentVariables();
             Configuration = builder.Build();
-            //Configuration = builder.Build().ReloadOnChanged("appsettings.json"); ??
         }
 
         public IConfigurationRoot Configuration { get; set; }

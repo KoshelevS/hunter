@@ -9,6 +9,9 @@ namespace Hunter.Infrastructure.Data
 {
     public class DomainContext : DbContext
     {
+        /// <summary>
+        /// Required for injection
+        /// </summary>
         public DomainContext(DbContextOptions<DomainContext> options) : base(options)
         {
         }
@@ -19,18 +22,13 @@ namespace Hunter.Infrastructure.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Project>().HasKey(p=>p.Id);
+            modelBuilder.Entity<Project>().HasKey(p => p.Id);
             modelBuilder.Entity<Project>().Property(p => p.Name).IsRequired().HasMaxLength(100);
 
             modelBuilder.Entity<Vacancy>().HasOne(v => v.Project).WithMany(p => p.Vacancies);
             modelBuilder.Entity<Applicant>().HasKey(a => a.Id);
             modelBuilder.Entity<Applicant>().Property(a => a.Birthday).HasColumnType("Date");
             base.OnModelCreating(modelBuilder);
-        }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            base.OnConfiguring(optionsBuilder);
         }
 
         public void EnsureSeedData()
@@ -67,5 +65,18 @@ namespace Hunter.Infrastructure.Data
                 SaveChanges();
             }
         }
+
+        // <summary>
+        // Required for migration
+        // </summary>
+        //public static void Main(string[] args) { }
+
+        // <summary>
+        // Required for migration
+        // </summary>
+        //        public DomainContext()
+        //        {
+        //        }
+
     }
 }

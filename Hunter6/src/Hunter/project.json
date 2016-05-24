@@ -6,8 +6,6 @@
             "version": "1.0.0-rc2-3002702",
             "type": "platform"
         },
-
-        //"EntityFramework.Commands": "7.0.0-rc1-final",
         "Hunter.Domain.Core": "1.0.0-*",
         "Hunter.Domain.Interfaces": "1.0.0-*",
         "Hunter.Infrastructure.Business": "1.0.0-*",
@@ -92,15 +90,6 @@
         "preserveCompilationContext": true
     },
 
-
-    //"exclude": [
-    //    "wwwroot",
-    //    "node_modules"
-    //],
-    //"publishExclude": [
-    //    "**.user",
-    //    "**.vspscc"
-    //],
     "runtimeOptions": {
         "gcServer": true
     },

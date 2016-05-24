@@ -12,5 +12,6 @@ namespace Hunter.Domain.Core
         public string Address { get; set; }
         public string Phone { get; set; }
         public DateTime Birthday { get; set; }
+        public string Email { get; set; }
     }
 }
