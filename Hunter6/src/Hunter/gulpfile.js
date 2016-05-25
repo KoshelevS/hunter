@@ -62,6 +62,12 @@ gulp.task("concat:css", function () {
 });
 gulp.task("concat", ["concat:js", "concat:css"]);
 
+gulp.task('copySettings', function () {
+    return gulp
+      .src('appsettings.json')
+      .pipe(gulp.dest('../Hunter.Infrastructure.Data'));
+});
 gulp.task('default', function () {
     gulp.watch([paths.js, paths.css], ['template:js','lint', 'concat']);
+    gulp.watch('appsettings.json', ['copySettings']);
 });

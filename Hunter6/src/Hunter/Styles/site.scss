@@ -20,6 +20,7 @@ textarea {
 /* Carousel */
 .carousel-caption {
     z-index: 10 !important;
+
     p {
         font-size: 20px;
         line-height: 1.4;
@@ -34,16 +35,21 @@ textarea {
 
 .ui-grid-row {
     .btn {
-        margin : 5px 0px 5px 5px;
+        margin: 5px 0px 5px 5px;
         padding-top: 0;
         padding-bottom: 0;
+
+        .glyphicon {
+            top: 2px;
+            line-height: 0;
+        }
     }
 }
 
 .hunter-alerts {
-    position:fixed;
-    left:5px;
-    bottom:5px;
+    position: fixed;
+    left: 5px;
+    bottom: 5px;
     width: 390px;
     opacity: 0.8;
 

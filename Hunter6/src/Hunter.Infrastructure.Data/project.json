@@ -13,7 +13,6 @@
             ]
         }
     },
-    //"buildOptions": { "emitEntryPoint": true },
     "dependencies": {
         "Microsoft.NETCore.App": {
             "version": "1.0.0-rc2-3002702",

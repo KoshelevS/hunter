@@ -65,18 +65,5 @@ namespace Hunter.Infrastructure.Data
                 SaveChanges();
             }
         }
-
-        // <summary>
-        // Required for migration
-        // </summary>
-        //public static void Main(string[] args) { }
-
-        // <summary>
-        // Required for migration
-        // </summary>
-        //        public DomainContext()
-        //        {
-        //        }
-
     }
 }
