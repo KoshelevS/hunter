@@ -1,6 +1,4 @@
-using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using Hunter.Domain.Core;
 using Microsoft.EntityFrameworkCore;
@@ -19,6 +17,7 @@ namespace Hunter.Infrastructure.Data
         public DbSet<Project> Project { get; set; }
         public DbSet<Vacancy> Vacancy { get; set; }
         public DbSet<Applicant> Applicant { get; set; }
+        public DbSet<File> File { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -28,6 +27,9 @@ namespace Hunter.Infrastructure.Data
             modelBuilder.Entity<Vacancy>().HasOne(v => v.Project).WithMany(p => p.Vacancies);
             modelBuilder.Entity<Applicant>().HasKey(a => a.Id);
             modelBuilder.Entity<Applicant>().Property(a => a.Birthday).HasColumnType("Date");
+
+            modelBuilder.Entity<File>().HasKey(a => a.Id);
+
             base.OnModelCreating(modelBuilder);
         }
 

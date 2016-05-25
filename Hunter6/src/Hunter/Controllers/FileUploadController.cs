@@ -1,27 +1,28 @@
 using System.Collections.Generic;
 using System.IO;
+using System.Threading;
 using System.Threading.Tasks;
+using Hunter.Domain.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Hunter.Filters;
-using Microsoft.Net.Http.Headers;
 
 namespace Hunter.Controllers
 {
     [Route("api/FileUpload")]
     public class FileUploadController : Controller
     {
-        //        private readonly IFileRepository _fileRepository;
+        private readonly IRepository<Domain.Core.File> _fileRepository;
 
-        //        public FileUploadController(IFileRepository fileRepository)
-        //        {
-        //            _fileRepository = fileRepository;
-        //        }
+        public FileUploadController(IRepository<Domain.Core.File> fileRepository)
+        {
+            _fileRepository = fileRepository;
+        }
 
         [Route("files")]
         [HttpPost]
         [ServiceFilter(typeof(ValidateMimeMultipartContentFilter))]
-        public async Task<IActionResult> UploadFiles(IList<IFormFile> file)
+        public async Task<IActionResult> UploadFiles(IList<IFormFile> file, CancellationToken cancellationToken)
         {
             if (!ModelState.IsValid)
             {
@@ -30,26 +31,36 @@ namespace Hunter.Controllers
 
             foreach (var f in file)
             {
-                // todo restore 
-                //                if (f.Length > 0)
-                //                {
-                //                    var fileName = ContentDispositionHeaderValue.Parse(f.ContentDisposition).FileName.Trim('"');
-                //                    await f.SaveAsAsync(fileName);
-                //                }
+                if (f.Length <= 0) continue;
+
+                byte[] fileContent;
+                using (var memStream = new MemoryStream())
+                {
+                    await f.CopyToAsync(memStream, cancellationToken);
+                    if (cancellationToken.IsCancellationRequested)
+                        return new EmptyResult();
+                    fileContent = memStream.ToArray();
+                }
+
+                var item = new Domain.Core.File
+                {
+                    Name = f.FileName,
+                    Extension = f.ContentType,
+                    FileContent = fileContent
+                };
+                await _fileRepository.CreateAsync(item);
             }
-            //_fileRepository.AddFileDescriptions(f);
 
             return new StatusCodeResult(200);
         }
 
         [Route("download/{id}")]
         [HttpGet]
-        public FileStreamResult Download(int id)
+        public FileContentResult Download(int id)
         {
-            //var fileDescription = _fileRepository.GetFileDescription(id);
-
-            var stream = new FileStream("", FileMode.Open);
-            return File(stream, ".test");
+            var file = _fileRepository.Get(id);
+            
+            return File(file.FileContent, file.Extension, file.Name);
         }
     }
 }
