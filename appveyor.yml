@@ -1,21 +1,18 @@
 # appveyor file
 # http://www.appveyor.com/docs/appveyor-yml
 
-init:
-  - dnvm install 1.0.0-rc1-update1
-
 before_build:
-  - dnu restore Hunter6 --quiet
+  - dotnet restore
 
 build:
   parallel: true
   verbosity: minimal
 
 cache:
-  - c:\users\appveyor\.dnx\packages -> **\project.json
+  - c:\users\appveyor\.nuget\packages -> **\project.json
 
 test_script:
-  - cmd: for /d %%l in ("Hunter6\test\*") do (pushd %%l && dnx test && popd || exit 1)
+  - cmd: for /d %%l in ("Hunter6\test\*") do (pushd %%l && dotnet test && popd || exit 1)
 
 notifications:
   - provider: Slack
