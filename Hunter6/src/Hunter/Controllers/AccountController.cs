@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Hunter.Security.Model;
@@ -58,7 +57,17 @@ namespace Hunter.Controllers
             {
                 // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
-                var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, lockoutOnFailure: false);
+
+                var result = Microsoft.AspNetCore.Identity.SignInResult.Failed;
+                ApplicationUser aUser = await _userManager.FindByEmailAsync(model.Email);
+                if (aUser != null)
+                {
+                    result = await _signInManager.PasswordSignInAsync(
+                        aUser,
+                        model.Password,
+                        model.RememberMe,
+                        lockoutOnFailure: false);
+                }
                 if (result.Succeeded)
                 {
                     _logger.LogInformation(1, "User logged in.");
