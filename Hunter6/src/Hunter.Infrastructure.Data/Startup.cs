@@ -38,5 +38,6 @@ namespace Hunter.Infrastructure.Data
             services
                 .AddDbContext<DomainContext>(options => options.UseSqlServer(connectionString));
         }
+        
     }
 }

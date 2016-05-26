@@ -60,6 +60,7 @@ namespace Hunter
             services.AddTransient<ISmsSender, AuthMessageSender>();
             services.AddTransient<IRepository<Project>, ProjectRepository>();
             services.AddTransient<IRepository<Applicant>, ApplicantRepository>();
+            services.AddTransient<IRepository<Domain.Core.File>, FileRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
