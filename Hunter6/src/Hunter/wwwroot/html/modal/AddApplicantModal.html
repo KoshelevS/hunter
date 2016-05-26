@@ -4,13 +4,16 @@
     </div>
     <div class="modal-body">
         <div>
-            <input type="text" class="form-control" placeholder="Name" ng-model="applicant.Name" required />
+            <input type="text" class="form-control" placeholder="Name" ng-model="applicant.Name" required title="Name" />
         </div>
         <div>
-            <input type="text" class="form-control" placeholder="Address" ng-model="applicant.Address" required />
+            <input id="address" type="text" class="form-control" placeholder="Address" ng-model="applicant.Address" required title="Home Address" />
         </div>
         <div>
-            <input type="text" class="form-control" placeholder="Phone" ng-model="applicant.Phone" required />
+            <input id="email" type="email" class="form-control" placeholder="email" ng-model="applicant.Email" required title="Email" />
+        </div>
+        <div>
+            <input type="text" class="form-control" placeholder="Phone" ng-model="applicant.Phone" required title="Phone" />
         </div>
         <div>
             <input type="date"
@@ -19,7 +22,7 @@
                    ng-model="applicant.Birthday"
                    min="1926-01-01"
                    max="2013-12-31"
-                   value="{{applicant.Birthday | date: 'yyyy-MM-dd'}}"
+                   title="Birthday"
                    required />
         </div>
     </div>
@@ -27,5 +30,4 @@
         <button class="btn btn-primary active" type="button" ng-click="ok()">OK</button>
         <button class="btn btn-default" type="button" ng-click="cancel()">Cancel</button>
     </div>
-    <!--                   value="{{$filter('date')(applicant.Birthday,'yyyy-MM-dd')}}"-->
 </div>

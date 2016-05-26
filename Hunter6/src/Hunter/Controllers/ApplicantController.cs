@@ -42,6 +42,7 @@ namespace Hunter.Controllers
                     Address = p.Address,
                     Phone = p.Phone,
                     Birthday = p.Birthday,
+                    Email = p.Email,
                 };
         }
 

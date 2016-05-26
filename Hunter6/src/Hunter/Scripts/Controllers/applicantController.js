@@ -23,9 +23,13 @@
             function successCallback(data) {
                 $scope.applicant = data;
                 $scope.applicant.Birthday = new Date(data.Birthday);
+                $scope.title = $scope.title + " " + data.Name;
             });
 
         $scope.ok = function() {
+            var d = $scope.applicant.Birthday;
+            $scope.applicant.Birthday = new Date(d.getTime() - d.getTimezoneOffset() * 60000);
+            //console.log("$scope.applicant.Birthday = " + $scope.applicant.Birthday);
             applicantService.update({ id: id }, $scope.applicant,
                 function successCallback() {
                     $uibModalInstance.close();
@@ -70,6 +74,7 @@
 
             modalInstance.result.then(function () {
                 $scope.applicant = applicantService.query();
+                //$scope.gridOptions.data = applicantService.query();
             });
         };
 
@@ -93,7 +98,7 @@
                 { name: 'Name', field: 'Name' },
                 { name: 'Phone', field: 'Phone' },
                 { name: 'Birthday',field: 'Birthday', displayName: 'Birthday', type: 'date', cellFilter: 'date:\'yyyy-MM-dd\'' },
-                { name: 'B-day',field: 'Birthday', displayName: 'bd'},
+                { name: 'Email', field: 'Email', displayName: 'Email' },
                 {
                     name: 'Actions',
                     enableFiltering: false,

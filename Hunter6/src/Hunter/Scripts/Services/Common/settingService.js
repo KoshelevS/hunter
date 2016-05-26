@@ -1,7 +1,7 @@
 (function () {
     angular.module('common.SettingService', [])
         .factory('settingService', function () {
-            var settings = {"AlertDismissTimeoutInMilliseconds":5000};
+            var settings = {"AlertDismissTimeoutInMilliseconds":3000};
             var result = {};
 
             for (var settingName in settings) {
