@@ -6,6 +6,7 @@ using Hunter.Domain.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Hunter.Filters;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Hunter.Controllers
 {
@@ -17,6 +18,14 @@ namespace Hunter.Controllers
         public FileUploadController(IRepository<Domain.Core.File> fileRepository)
         {
             _fileRepository = fileRepository;
+        }
+
+        [HttpGet]
+        [Authorize]
+        [Route("[controller]")]
+        public IActionResult Index()
+        {
+            return View();
         }
 
         [Route("files")]
