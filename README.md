@@ -8,4 +8,4 @@ Build status
 
 Domain diagram
 --
-[![Domain diagram](http://yuml.me/d1cc26ad.svg)](http://yuml.me/edit/d1cc26ad)
+[![Domain diagram](http://yuml.me/8493398b.svg)](http://yuml.me/edit/8493398b)
