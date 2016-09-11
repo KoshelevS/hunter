@@ -1,9 +1,8 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
-using Hunter.Infrastructure.Data;
+using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace Hunter.Infrastructure.Data.Migrations
 {

@@ -3,8 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Hunter.Domain.Core;
 using Hunter.Domain.Interfaces;
-using Microsoft.Data.Entity;
-using EntityFrameworkQueryableExtensions = Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions;
+using Microsoft.EntityFrameworkCore;
 
 namespace Hunter.Infrastructure.Data
 {

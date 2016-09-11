@@ -12,11 +12,8 @@
         }
     },
 
-    "dependencies": {
-        "Hunter.Services.Interfaces": "1.0.0-*",
-        "Microsoft.NETCore.App": {
-            "version": "1.0.0-rc2-3002702",
-            "type": "platform"
-        }
-    }
+  "dependencies": {
+    "Hunter.Services.Interfaces": "1.0.0-*",
+    "Microsoft.NETCore.App": "1.0.0"
+  }
 }

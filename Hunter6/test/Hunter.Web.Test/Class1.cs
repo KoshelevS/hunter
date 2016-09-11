@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-//using Xunit;
+using Xunit;
 
 namespace Hunter.Web.Test
 {
@@ -10,12 +10,10 @@ namespace Hunter.Web.Test
     // To enable this option, right-click on the project and select the Properties menu item. In the Build tab select "Produce outputs on build".
     public class Class1
     {
-//todo restore
-//        [Fact]
-//        public void UniTest1()
-//        {
-//            Assert.True(true);
-//        }
-        
+        [Fact]
+        public void UniTest1()
+        {
+            Assert.True(true);
+        }
     }
 }

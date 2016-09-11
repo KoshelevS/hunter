@@ -1,5 +1,5 @@
 ﻿using System.Security.Claims;
-//using Microsoft.AspNet.Authorization;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 
 namespace Hunter.Security
@@ -21,7 +21,7 @@ namespace Hunter.Security
 
     internal sealed class RequirementBasedAuthorizationHandler : AuthorizationHandler<TestRequirement>
     {
-        protected override void Handle(AuthorizationContext context, TestRequirement requirement)
+        protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, TestRequirement requirement)
         {
             if (requirement.IsSatisfiedByUser(context.User))
             {
@@ -31,6 +31,8 @@ namespace Hunter.Security
             {
                 context.Fail();
             }
+
+            return Task.FromResult(0);
         }
     }
 }

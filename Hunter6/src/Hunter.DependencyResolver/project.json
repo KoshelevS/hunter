@@ -1,21 +1,19 @@
 {
-    "version": "1.0.0-*",
-    "description": "Hunter.DependencyResolver Class Library",
-    "authors": [ "Vladimir" ],
-    "frameworks": {
-        "netcoreapp1.0": {
-            "imports": [
-                "dotnet5.6",
-                "dnxcore50",
-                "portable-net45+win8"
-            ]
-        }
-    },
+  "version": "1.0.0-*",
+  "description": "Hunter.DependencyResolver Class Library",
+  "authors": [ "Vladimir" ],
 
-    "dependencies": {
-        "Microsoft.NETCore.App": {
-            "version": "1.0.0-rc2-3002702",
-            "type": "platform"
-        }
-    }
+  "frameworks": {
+      "netcoreapp1.0": {
+          "imports": [
+              "dotnet5.6",
+              "dnxcore50",
+              "portable-net45+win8"
+          ]
+      }
+  },
+
+  "dependencies": {
+    "Microsoft.NETCore.App": "1.0.0"
+  }
 }

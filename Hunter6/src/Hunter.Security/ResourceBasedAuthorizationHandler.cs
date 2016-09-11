@@ -1,6 +1,6 @@
-﻿using System.Security.Claims;
-//using Microsoft.AspNet.Authorization;
-//using Microsoft.AspNet.Authorization.Infrastructure;
+﻿using System;
+using System.Security.Claims;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authorization.Infrastructure;
 
@@ -14,8 +14,7 @@ namespace Hunter.Security
     internal sealed class ResourceBasedAuthorizationHandler
         : AuthorizationHandler<OperationAuthorizationRequirement, TestResource>
     {
-        protected override void Handle(
-            AuthorizationContext context, OperationAuthorizationRequirement requirement, TestResource resource)
+        protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, OperationAuthorizationRequirement requirement, TestResource resource)
         {
             if (CanOperate(context.User, resource, requirement))
             {
@@ -25,6 +24,8 @@ namespace Hunter.Security
             {
                 context.Fail();
             }
+
+            return Task.FromResult(0);
         }
 
         private bool CanOperate(ClaimsPrincipal user, TestResource resource, OperationAuthorizationRequirement requirement)
